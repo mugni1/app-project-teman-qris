@@ -1,16 +1,16 @@
 export const data = {
   images: [
     {
-      url: 'https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Fbanner%2Fweb-banner-m7passgranger-jan.webp&w=1920&q=100',
+      url: 'https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwebtopup%2Fslider%2Fpulsa-paket-data-74701.png&w=1920&q=75',
     },
     {
-      url: 'https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Fbanner%2Fbanner-new-year.webp&w=1920&q=100',
+      url: 'https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwebtopup%2Fslider%2Ftransaksi-aman-ebelanja-392926.png&w=1920&q=75',
     },
     {
-      url: 'https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Fbanner%2Fweb-banner-annualstarlight-mlbb.webp&w=1920&q=100',
+      url: 'https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwebtopup%2Fslider%2Ftop-up-e-wallet-935506.png&w=1920&q=75',
     },
     {
-      url: 'https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Fbanner%2Fxavier-bannner.webp&w=1920&q=100',
+      url: 'https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwebtopup%2Fslider%2Ftop-up-mobile-legends-182710.png&w=1920&q=75',
     },
-  ]
+  ],
 }

@@ -26,12 +26,12 @@
         disableOnInteraction: false,
       }"
       loop
-      class="rounded-md overflow-hidden shadow-md border border-base-300"
+      class="rounded-lg overflow-hidden shadow-md border border-base-300"
     >
       <!-- SLIDE  -->
       <SwiperSlide v-for="(image, index) in data.images" :key="index">
         <img
-          class="w-full aspect-[9/3.4] object-cover object-center"
+          class="w-full aspect-[9/4] object-cover object-center"
           loading="lazy"
           decoding="async"
           fetchpriority="low"
