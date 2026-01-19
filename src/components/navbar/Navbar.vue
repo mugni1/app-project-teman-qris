@@ -4,9 +4,9 @@ import { Menu } from 'lucide-vue-next';
 </script>
 
 <template>
-    <header class="w-full border-b border-base-300 py-2 bg-base-100">
+    <header class="w-full border-b border-base-300 py-4 bg-base-100">
         <nav class="container mx-auto px-4 flex items-center justify-between">
-            <b>MYBRAND</b>
+            <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-8">
             <div class="space-x-2">
                 <Thema />
                 <button class="btn btn-sm btn-square">
