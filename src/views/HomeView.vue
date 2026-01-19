@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Carousel from '@/components/carousel/Carousel.vue';
-import Content from '@/components/content/Content.vue';
+import Carousel from '@/components/carousel/Carousel.vue'
+import Content from '@/components/content/Content.vue'
+import Provider from '@/components/provider/Provider.vue'
 </script>
 
 <template>
   <Content>
-    <Carousel/>
-    <h1>Welcome ot app teman qris</h1>
-    <button class="btn btn-primary ">Minggir lu miskin</button>
+    <Carousel />
+    <Provider />
   </Content>
 </template>

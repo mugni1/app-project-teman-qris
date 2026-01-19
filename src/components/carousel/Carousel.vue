@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <section class="x-auto container">
+  <section class="x-auto container pb-4">
     <Swiper
       direction="horizontal"
       :navigation="navigation"
