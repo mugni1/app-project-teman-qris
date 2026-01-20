@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SmartphoneCharging } from 'lucide-vue-next'
 import { data } from './data'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -15,11 +16,13 @@ import { data } from './data'
         :key="item.title"
         class="rounded-lg overflow-hidden bg-white"
       >
-        <img
-          :src="item.image_url"
-          :alt="item.title"
-          class="w-full aspect-square object-cover object-center"
-        />
+        <RouterLink :to="`/top-up/${item.path_name}`">
+          <img
+            :src="item.image_url"
+            :alt="item.title"
+            class="w-full aspect-square object-cover object-center"
+          />
+        </RouterLink>
       </div>
     </div>
   </section>
