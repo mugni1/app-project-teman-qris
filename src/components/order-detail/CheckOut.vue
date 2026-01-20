@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { item } from '@/types/item.type'
-import { ShoppingBag } from 'lucide-vue-next'
+import { CheckCircle2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   phoneNumber: string | null
@@ -10,12 +10,45 @@ const props = defineProps<{
 </script>
 
 <template>
+  <dialog id="my_modal_3" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+        <ShoppingBag /> Detail Pesanan
+      </h3>
+      <p class="py-4 font-medium">Jangan lupa konfirmasi Nomor HP kamu dengan benar ya</p>
+      <div class="space-y-2 grid grid-cols-2">
+        <div class="space-y-2">
+          <p>Nomer Tujuan :</p>
+          <p>Harga :</p>
+          <p>Metode Pembayaran :</p>
+        </div>
+        <div class="font-bold space-y-2">
+          <p>{{ phoneNumber }}</p>
+          <p>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</p>
+          <p>{{ selectedPayment?.toUpperCase() || '' }}</p>
+        </div>
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn btn-soft"><XCircleIcon class="size-5" /> Batal</button>
+        </form>
+        <button class="btn btn-primary"><CheckCircle2 class="size-5" />Konfirmasi</button>
+      </div>
+    </div>
+  </dialog>
+
   <div class="card-checkout">
     <div class="col-span-1">
-      <p class="text-sm text-base-content/60">Pulsa 20K</p>
+      <p class="text-sm text-base-content/60 capitalize">
+        Produk {{ selectedItem?.title || '' }} - {{ selectedItem?.type || '' }}
+      </p>
       <b>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</b>
     </div>
-    <button class="btn btn-primary" :disabled="!selectedItem || !selectedPayment || !phoneNumber">
+    <button
+      class="btn btn-primary"
+      onclick="my_modal_3.showModal()"
+      :disabled="!selectedItem || !selectedPayment || !phoneNumber"
+    >
       <ShoppingBag class="size-5" /> Beli Sekarang
     </button>
   </div>
