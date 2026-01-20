@@ -11,11 +11,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="card">
+  <div class="card p-4 bg-base-200 border border-base-content/20 space-y-2">
     <h3 class="card-title">Pilih Pembayaran</h3>
     <div
       :role="'button'"
-      class="payment-card"
+      class="card grid grid-cols-2 px-4"
       :class="
         payment == 'qris'
           ? 'bg-primary border border-primary'
@@ -25,7 +25,7 @@ const props = defineProps<{
     >
       <img src="https://topup.ebelanja.id/payment-method/qris-left-light.svg" alt="" />
       <div class="py-4">
-        <p class="font-medium text-sm">Harga</p>
+        <p class="font-medium text-sm text-secondary-content">Harga</p>
         <p class="font-bold text-secondary-content">
           Rp {{ item?.price.toLocaleString('id-ID') || 0 }}
         </p>
@@ -33,19 +33,3 @@ const props = defineProps<{
     </div>
   </div>
 </template>
-
-<style scoped>
-@import '../../assets/main.css';
-
-.card {
-  @apply p-4 bg-base-200 rounded-lg space-y-4 shadow-lg flex flex-col border border-base-content/20;
-}
-
-.card-title {
-  @apply font-semibold;
-}
-
-.payment-card {
-  @apply px-4 rounded-lg grid grid-cols-2 items-center transition-all duration-300 select-none;
-}
-</style>

@@ -15,7 +15,7 @@ const props = defineProps<{
       <h3 class="text-lg font-bold text-primary flex items-center gap-2">
         <ShoppingBag /> Detail Pesanan
       </h3>
-      <p class="py-4 font-medium">Jangan lupa konfirmasi Nomor HP kamu dengan benar ya</p>
+      <p class="py-4 font-medium">Jangan lupa konfirmasi Nomor HP kamu dengan benar ya.</p>
       <div class="space-y-2 grid grid-cols-2">
         <div class="space-y-2">
           <p>Nomer Tujuan :</p>
@@ -37,7 +37,7 @@ const props = defineProps<{
     </div>
   </dialog>
 
-  <div class="card-checkout">
+  <div class="card bg-base-200 p-4 border border-base-content/20 grid grid-cols-2">
     <div class="col-span-1">
       <p class="text-sm text-base-content/60 capitalize">
         Produk {{ selectedItem?.title || '' }} - {{ selectedItem?.type || '' }}
@@ -53,11 +53,3 @@ const props = defineProps<{
     </button>
   </div>
 </template>
-
-<style scoped>
-@import '../../assets/main.css';
-
-.card-checkout {
-  @apply p-4 bg-base-200 border border-base-content/20 rounded-lg grid grid-cols-2 items-center;
-}
-</style>
