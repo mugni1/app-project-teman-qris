@@ -12,9 +12,9 @@ import { CloudLightning, LucideSquareSplitVertical } from 'lucide-vue-next'
           class="w-full aspect-square object-cover object-center"
         />
       </figure>
-      <div class="card-body grid grid-cols-2">
-        <span class="row"> <CloudLightning /> Proses Cepat </span>
-        <span class="row"> <LucideSquareSplitVertical /> Pembayaran Aman </span>
+      <div class="p-4 gap-4 flex items-center">
+        <span class="row"> <CloudLightning class="size-5" /> Proses Cepat </span>
+        <span class="row"> <LucideSquareSplitVertical class="size-5" /> Pembayaran Aman </span>
       </div>
     </div>
   </div>
@@ -24,6 +24,6 @@ import { CloudLightning, LucideSquareSplitVertical } from 'lucide-vue-next'
 @import '../../assets/main.css';
 
 .row {
-  @apply flex items-center gap-1 font-medium;
+  @apply flex items-center gap-1 font-medium text-sm;
 }
 </style>

@@ -35,30 +35,34 @@ const emits = defineEmits<{
         "
         v-if="item.type == 'promo'"
       >
-        <p class="flex items-center gap-2"><PercentCircle class="size-5" /> Promo</p>
+        <p class="flex items-center gap-2 text-sm lg:text-base">
+          <PercentCircle class="size-4 lg:size-5" /> Promo
+        </p>
       </div>
       <div
         class="p-2 px-4 text-base-content transition-all duration-300"
-        :class="selectedItem?.id == item.id ? 'bg-primary/20 text-primary' : 'bg-base-content/20'"
+        :class="selectedItem?.id == item.id ? 'bg-primary/20 text-primary' : 'bg-base-content/10'"
         v-if="item.type == 'regular'"
       >
-        <p class="flex items-center gap-2"><StarIcon class="size-5" /> Regular</p>
+        <p class="flex items-center gap-2 text-sm lg:text-base">
+          <StarIcon class="size-4 lg:size-5" /> Regular
+        </p>
       </div>
       <div
-        class="p-2 px-4 text-lg transition-all duration-300"
+        class="p-2 px-4 lg:text-lg transition-all duration-300 text-sm"
         :class="selectedItem?.id == item.id ? 'bg-primary text-secondary-content' : 'bg-base-200'"
       >
         <b>{{ item.title }} </b>
       </div>
       <div
-        class="pb-2 px-4 flex items-center justify-between transition-all duration-300"
+        class="pb-2 px-4 flex items-center justify-between transition-all duration-300 text-sm lg:text-base"
         :class="
           selectedItem?.id == item.id ? 'bg-primary text-secondary-content' : 'text-secondary'
         "
       >
         <b>Rp {{ item.price.toLocaleString('id-ID') }}</b>
         <div>
-          <Share2Icon class="size-4" />
+          <Share2Icon class="size-3 lg:size-4" />
         </div>
       </div>
     </div>

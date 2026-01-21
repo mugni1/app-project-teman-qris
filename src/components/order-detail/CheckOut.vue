@@ -1,12 +1,38 @@
 <script setup lang="ts">
+import { usePostPaymentQrisPw } from '@/hooks/usePostPaymentQrisPw'
 import type { item } from '@/types/item.type'
-import { CheckCircle2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
+import { CheckCircle2, Loader2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 
+// PROPS
 const props = defineProps<{
   phoneNumber: string | null
   selectedItem: item | null
   selectedPayment: string | null
 }>()
+
+// STATE
+const { mutateAsync, isPending } = usePostPaymentQrisPw()
+
+// METHODS
+const handleSubmit = async () => {
+  try {
+    const result = await mutateAsync({
+      amount: props.selectedItem?.price || 0,
+      customer_phone: props.phoneNumber || '',
+      callback_url: 'https://api.v2.mugni.my.id/webhook',
+    })
+    console.log(result)
+    if (result.success) {
+      toast.success('Order created please complete payment', { action: { label: 'cancel' } })
+    } else {
+      toast.error('Please try again later', { action: { label: 'cancel' } })
+    }
+  } catch (err: unknown) {
+    console.log(err)
+    toast.error('Please try again later', { action: { label: 'cancel' } })
+  }
+}
 </script>
 
 <template>
@@ -16,11 +42,11 @@ const props = defineProps<{
         <ShoppingBag /> Detail Pesanan
       </h3>
       <p class="py-4 font-medium">Jangan lupa konfirmasi Nomor HP kamu dengan benar ya.</p>
-      <div class="space-y-2 grid grid-cols-2">
+      <div class="space-y-2 grid grid-cols-2 text-base">
         <div class="space-y-2">
           <p>Nomer Tujuan :</p>
           <p>Harga :</p>
-          <p>Metode Pembayaran :</p>
+          <p>Metode :</p>
         </div>
         <div class="font-bold space-y-2">
           <p>{{ phoneNumber }}</p>
@@ -32,15 +58,22 @@ const props = defineProps<{
         <form method="dialog">
           <button class="btn btn-soft"><XCircleIcon class="size-5" /> Batal</button>
         </form>
-        <button class="btn btn-primary"><CheckCircle2 class="size-5" />Konfirmasi</button>
+        <button v-if="isPending" disabled class="btn btn-primary">
+          <Loader2 class="size-5 animate-spin" />Loading..
+        </button>
+        <button v-if="!isPending" @click="handleSubmit" class="btn btn-primary">
+          <CheckCircle2 class="size-5" />Konfirmasi
+        </button>
       </div>
     </div>
   </dialog>
 
-  <div class="card bg-base-200 p-4 border border-base-content/20 grid grid-cols-2">
+  <div
+    class="card bg-base-200 p-4 border border-base-content/20 gap-2 grid grid-cols-1 lg:grid-cols-2"
+  >
     <div class="col-span-1">
       <p class="text-sm text-base-content/60 capitalize">
-        Produk {{ selectedItem?.title || '' }} - {{ selectedItem?.type || '' }}
+        {{ selectedItem?.title || '' }} - {{ selectedItem?.type || '' }}
       </p>
       <b>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</b>
     </div>

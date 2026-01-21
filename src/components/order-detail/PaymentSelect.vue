@@ -15,7 +15,7 @@ const props = defineProps<{
     <h3 class="card-title">Pilih Pembayaran</h3>
     <div
       :role="'button'"
-      class="card grid grid-cols-2 px-4"
+      class="card grid grid-cols-2 px-4 items-center"
       :class="
         payment == 'qris'
           ? 'bg-primary border border-primary'
@@ -25,10 +25,8 @@ const props = defineProps<{
     >
       <img src="https://topup.ebelanja.id/payment-method/qris-left-light.svg" alt="" />
       <div class="py-4">
-        <p class="font-medium text-sm text-secondary-content">Harga</p>
-        <p class="font-bold text-secondary-content">
-          Rp {{ item?.price.toLocaleString('id-ID') || 0 }}
-        </p>
+        <p class="font-medium text-sm">Harga</p>
+        <p class="font-bold">Rp {{ item?.price.toLocaleString('id-ID') || 0 }}</p>
       </div>
     </div>
   </div>
