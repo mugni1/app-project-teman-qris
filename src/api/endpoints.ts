@@ -1,3 +1,4 @@
 export const ENDPOINT = {
   ORDER: `/order`,
+  LOGIN: `/auth/login`,
 }

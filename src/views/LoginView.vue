@@ -1,11 +1,25 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue'
+import Cookies from 'js-cookie'
+import { useLogin } from '@/hooks/useLogin'
 import { loginSchema } from '@/schema/login.schema'
-import { Eye, EyeOff, LockIcon, LogInIcon, MailIcon, XCircleIcon } from 'lucide-vue-next'
+import { HttpStatusCode } from 'axios'
+import {
+  Eye,
+  EyeOff,
+  Loader2Icon,
+  LockIcon,
+  LogInIcon,
+  MailIcon,
+  XCircleIcon,
+} from 'lucide-vue-next'
 import { reactive, ref, watch } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import { toast } from 'vue-sonner'
 
 // state
+const { mutateAsync, isPending, isSuccess } = useLogin()
+const router = useRouter()
 const isPassword = ref(true)
 const form = reactive({
   email: '',
@@ -17,25 +31,40 @@ const formError = reactive({
 })
 
 // methods
-const validate = () => {
+const resetFormError = () => {
   formError.email = null
   formError.password = null
+}
+const validate = () => {
+  resetFormError()
   const result = loginSchema.safeParse(form)
   if (!result.success) {
     result.error.issues.map((err) => {
-      const field = err.path[0] as keyof typeof formError
+      const field = err.path.join('_') as keyof typeof formError
       if (field in formError) {
         formError[field] = err.message
       }
     })
     return false
+  } else {
+    return true
   }
-  return true
 }
-const handleSubmit = () => {
+const handleSubmit = async () => {
   const isValid = validate()
   if (!isValid) return
-  console.log('sukses')
+  try {
+    const result = await mutateAsync({ email: form.email, password: form.password })
+    if (result.status == HttpStatusCode.Ok && result.data) {
+      toast.success(result.message, { action: { label: 'close' } })
+      Cookies.set('token', result.data.token)
+      router.push('/')
+    } else {
+      toast.error(result.message, { action: { label: 'close' } })
+    }
+  } catch {
+    toast.error('Internal server error, try again later.', { action: { label: 'close' } })
+  }
 }
 
 // watcher
@@ -90,15 +119,17 @@ watch(form, () => {
               </label>
 
               <!-- btn submit  -->
-              <button type="submit" class="btn btn-primary my-2">
-                <LogInIcon class="size-4" /> Masuk
+              <button type="submit" :disabled="isPending" class="btn btn-primary my-2">
+                <Loader2Icon v-if="isPending" class="size-4 animate-spin" />
+                <LogInIcon v-else class="size-4" />
+                <span>Login</span>
               </button>
 
               <!-- text register  -->
-              <p class="text-center">
-                Tidak punya akun?
+              <div class="text-center">
+                <span>Tidak punya akun? </span>
                 <RouterLink class="link link-hover" to="/register">Daftar</RouterLink>
-              </p>
+              </div>
             </form>
           </div>
         </div>
