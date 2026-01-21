@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { usePostPaymentQrisPw } from '@/hooks/usePostPaymentQrisPw'
+import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
 import type { item } from '@/types/item.type'
+import type { CreateOrderResponse } from '@/types/order.type'
+import { HttpStatusCode } from 'axios'
 import { CheckCircle2, Loader2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
@@ -18,19 +20,20 @@ const { mutateAsync, isPending } = usePostPaymentQrisPw()
 const handleSubmit = async () => {
   try {
     const result = await mutateAsync({
+      item_id: props.selectedItem?.id || '',
       amount: props.selectedItem?.price || 0,
       customer_phone: props.phoneNumber || '',
-      callback_url: 'https://api.v2.mugni.my.id/webhook',
+      destination: props.phoneNumber || '',
     })
     console.log(result)
-    if (result.success) {
-      toast.success('Order created please complete payment', { action: { label: 'cancel' } })
+    if (result.status == HttpStatusCode.Created) {
+      toast.success(result.message, { action: { label: 'close' } })
     } else {
-      toast.error('Please try again later', { action: { label: 'cancel' } })
+      toast.error(result.message, { action: { label: 'close' } })
     }
   } catch (err: unknown) {
-    console.log(err)
-    toast.error('Please try again later', { action: { label: 'cancel' } })
+    const error = err as CreateOrderResponse
+    toast.error(`${error.message}, try again later`, { action: { label: 'close' } })
   }
 }
 </script>
