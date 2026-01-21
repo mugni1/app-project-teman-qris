@@ -35,7 +35,13 @@ const handleSelectPayment = (value: string) => {
         <div class="card p-4 bg-base-200 border border-base-content/20">
           <div class="space-y-2">
             <label for="phone" class="card-title">Masukan Nomer Ponsel</label>
-            <input type="text" id="phone" class="input" v-model="phone" placeholder="0838 - 0831" />
+            <input
+              type="text"
+              id="phone"
+              class="input outline-none focus:border-primary"
+              v-model="phone"
+              placeholder="0838 - 0831"
+            />
           </div>
         </div>
         <div class="card p-4 bg-base-200 border border-base-content/20 space-y-2">

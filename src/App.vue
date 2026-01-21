@@ -7,6 +7,6 @@ import 'vue-sonner/style.css'
 
 <template>
   <Toaster :position="'top-right'" rich-colors />
-  <Navbar />
+  <Navbar v-if="$route.name != 'login'" />
   <RouterView />
 </template>
