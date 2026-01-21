@@ -2,7 +2,7 @@ import type { AxiosResponse } from 'axios'
 import { ENDPOINT } from './endpoints'
 import { httpClient } from './http-client'
 import type { CreateOrderPayload, CreateOrderResponse } from '@/types/order.type'
-import type { LoginPayload, LoginResponse } from '@/types/auth.type'
+import type { LoginPayload, LoginResponse, RegisterPayload } from '@/types/auth.type'
 
 export const createPaymentQrisPwService = async (
   payload: CreateOrderPayload,
@@ -14,4 +14,10 @@ export const loginService = async (
   payload: LoginPayload,
 ): Promise<AxiosResponse<LoginResponse>> => {
   return httpClient.post(ENDPOINT.LOGIN, payload)
+}
+
+export const registerService = async (
+  payload: RegisterPayload,
+): Promise<AxiosResponse<RegisterPayload>> => {
+  return httpClient.post(ENDPOINT.REGISTER, payload)
 }

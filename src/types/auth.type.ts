@@ -26,3 +26,28 @@ export interface LoginResponse {
   meta: null
   errors: null
 }
+
+export interface RegisterPayload {
+  email: string
+  password: string
+  firstname: string
+  lastname: string
+}
+
+export interface RegisterResponse {
+  status: HttpStatusCode
+  message: string
+  data: {
+    id: string
+    email: string
+    firstname: string
+    lastname: string
+    fullname: string
+    provider: string | null
+    role: 'user' | 'super_user'
+    created_at: string
+    updated_at: string
+  } | null
+  meta: null
+  errors: null
+}
