@@ -18,7 +18,7 @@ import { RouterLink, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
 
 // state
-const { mutateAsync, isPending, isSuccess } = useLogin()
+const { mutateAsync, isPending } = useLogin()
 const router = useRouter()
 const isPassword = ref(true)
 const form = reactive({
@@ -82,44 +82,48 @@ watch(form, () => {
     <div class="hero">
       <div class="hero-content flex-col lg:flex-row-reverse">
         <div class="card bg-base-200 w-full shrink-0 shadow-2xl border border-base-content/20">
-          <div class="card-body">
-            <form @submit.prevent="handleSubmit" class="fieldset w-auto">
+          <div class="card-body lg:w-sm">
+            <form @submit.prevent="handleSubmit" class="fieldset w-auto space-y-2">
               <!-- input email  -->
-              <label class="label"><MailIcon class="size-4" /> Email</label>
-              <input
-                type="email"
-                v-model="form.email"
-                class="input focus:border-primary outline-0"
-                placeholder="johndoe@gmail.com"
-              />
-              <label v-if="formError.email" class="label text-error">
-                <XCircleIcon class="size-4" /> {{ formError.email }}
-              </label>
+              <div class="flex flex-col gap-1">
+                <label class="label"><MailIcon class="size-4" /> Email</label>
+                <input
+                  type="email"
+                  v-model="form.email"
+                  class="input w-full focus:border-primary outline-0"
+                  placeholder="johndoe@gmail.com"
+                />
+                <label v-if="formError.email" class="label text-error">
+                  <XCircleIcon class="size-4" /> {{ formError.email }}
+                </label>
+              </div>
 
               <!-- input password  -->
-              <label class="label mt-2"> <LockIcon class="size-4" />Kata Sandi </label>
-              <div class="join">
-                <input
-                  class="input focus:border-primary outline-0 join-item"
-                  v-model="form.password"
-                  :type="isPassword ? 'password' : 'text'"
-                  :placeholder="isPassword ? '•••••••••••••••' : 'yourpassword'"
-                />
-                <button
-                  class="btn btn-square btn-primary join-item"
-                  type="button"
-                  @click="isPassword = !isPassword"
-                >
-                  <Eye v-if="isPassword" class="size-5" />
-                  <EyeOff v-if="!isPassword" class="size-5" />
-                </button>
+              <div class="flex flex-col gap-1">
+                <label class="label"> <LockIcon class="size-4" />Kata Sandi </label>
+                <div class="join">
+                  <input
+                    class="input w-full focus:border-primary outline-0 join-item"
+                    v-model="form.password"
+                    :type="isPassword ? 'password' : 'text'"
+                    :placeholder="isPassword ? '•••••••••••••••' : 'yourpassword'"
+                  />
+                  <button
+                    class="btn btn-square btn-primary join-item"
+                    type="button"
+                    @click="isPassword = !isPassword"
+                  >
+                    <Eye v-if="isPassword" class="size-5" />
+                    <EyeOff v-if="!isPassword" class="size-5" />
+                  </button>
+                </div>
+                <label v-if="formError.password" class="label text-error">
+                  <XCircleIcon class="size-4" /> {{ formError.password }}
+                </label>
               </div>
-              <label v-if="formError.password" class="label text-error">
-                <XCircleIcon class="size-4" /> {{ formError.password }}
-              </label>
 
               <!-- btn submit  -->
-              <button type="submit" :disabled="isPending" class="btn btn-primary my-2">
+              <button type="submit" :disabled="isPending" class="btn btn-primary">
                 <Loader2Icon v-if="isPending" class="size-4 animate-spin" />
                 <LogInIcon v-else class="size-4" />
                 <span>Login</span>
