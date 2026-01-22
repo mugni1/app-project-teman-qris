@@ -126,7 +126,7 @@ watch(form, () => {
               <button type="submit" :disabled="isPending" class="btn btn-primary">
                 <Loader2Icon v-if="isPending" class="size-4 animate-spin" />
                 <LogInIcon v-else class="size-4" />
-                <span>Login</span>
+                <span>Masuk</span>
               </button>
 
               <!-- text register  -->
