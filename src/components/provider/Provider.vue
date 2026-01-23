@@ -6,9 +6,9 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <section class="py-4 space-y-2">
-    <h1 class="font-bold text-xl flex items-center gap-2">
-      <SmartphoneCharging />
-      TopUp Pulsa / Paket Data
+    <h1 class="font-bold text-base lg:text-xl flex items-center gap-1">
+      <SmartphoneCharging class="size-5 lg:size-7" />
+      TOPUP PULSA / KUOTA
     </h1>
     <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
       <div

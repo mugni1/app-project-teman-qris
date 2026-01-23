@@ -4,7 +4,7 @@ import { Menu } from 'lucide-vue-next'
 </script>
 
 <template>
-  <header class="w-full border-b border-base-300 py-4 bg-base-200 sticky top-0 z-50 shadow-md">
+  <header class="w-full border-b border-base-300 py-4 bg-base-100 sticky top-0 z-50 shadow-md">
     <nav class="container mx-auto px-4 flex items-center justify-between">
       <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-8" />
       <div class="space-x-2">
