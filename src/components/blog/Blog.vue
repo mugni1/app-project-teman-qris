@@ -8,7 +8,7 @@ import { Newspaper } from 'lucide-vue-next'
       <Newspaper class="size-5 lg:size-7" />
       BLOG DAN BERITA
     </h1>
-    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <div v-for="_ in 4" class="card overflow-hidden border border-base-content/20 shadow-md">
         <img
           src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwujudkan-bangun-kota-impian-di-game-theotown-880676.png&w=384&q=75"
