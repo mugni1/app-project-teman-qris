@@ -4,7 +4,6 @@ import Content from '@/components/content/Content.vue'
 
 <template>
   <Content>
-    <h1>Welcome Anjing</h1>
-    <p>Anjay mabar guys</p>
+    <h1>Not Found Page</h1>
   </Content>
 </template>
