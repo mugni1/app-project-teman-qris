@@ -41,6 +41,8 @@ const handleChangeTab = (value: 'credit' | 'quota') => {
   <Content>
     <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Header />
+      {{ error }}
+      {{ data }}
       <div class="col-span-1 lg:col-span-2 space-y-4">
         <div class="card p-4 bg-base-200 border border-base-content/20">
           <div class="space-y-2">
