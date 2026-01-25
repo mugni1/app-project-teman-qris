@@ -8,6 +8,7 @@ import type {
   RegisterPayload,
   RegisterResponse,
 } from '@/types/auth.type'
+import type { GetItemParams, GetItemResponse } from '@/types/item'
 
 export const createPaymentQrisPwService = async (
   payload: CreateOrderPayload,
@@ -25,4 +26,8 @@ export const registerService = async (
   payload: RegisterPayload,
 ): Promise<AxiosResponse<RegisterResponse>> => {
   return httpClient.post(ENDPOINT.REGISTER, payload)
+}
+
+export const getItems = async (params?: GetItemParams): Promise<AxiosResponse<GetItemResponse>> => {
+  return httpClient.get(ENDPOINT.ITEM, { params })
 }

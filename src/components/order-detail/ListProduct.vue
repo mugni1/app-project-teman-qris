@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { item } from '@/types/item.type'
+import type { Item } from '@/types/item'
 import { PercentCircle, Share2Icon, StarIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
-  selectedItem: item | null
-  items: item[]
+  selectedItem: Item | null
+  items: Item[]
 }>()
 const emits = defineEmits<{
-  (e: 'onSelect', value: item): void
+  (e: 'onSelect', value: Item): void
 }>()
 </script>
 
@@ -16,10 +16,12 @@ const emits = defineEmits<{
     <div
       class="rounded-lg overflow-hidden font-medium transition-all duration-300 select-none"
       :class="[
-        selectedItem?.id == item.id && item.type == 'regular' && 'border border-primary',
-        selectedItem?.id == item.id && item.type == 'promo' && 'border border-primary',
-        item.type == 'promo' && selectedItem?.id != item.id && 'border border-secondary/20',
-        item.type == 'regular' && selectedItem?.id != item.id && 'border border-base-content/20',
+        selectedItem?.id == item.id && item.type_status == 'regular' && 'border border-primary',
+        selectedItem?.id == item.id && item.type_status == 'promo' && 'border border-primary',
+        item.type_status == 'promo' && selectedItem?.id != item.id && 'border border-secondary/20',
+        item.type_status == 'regular' &&
+          selectedItem?.id != item.id &&
+          'border border-base-content/20',
       ]"
       role="button"
       v-for="(item, i) in items"
@@ -33,7 +35,7 @@ const emits = defineEmits<{
             ? 'bg-primary/20 text-primary'
             : 'bg-secondary/20 text-secondary'
         "
-        v-if="item.type == 'promo'"
+        v-if="item.type_status == 'promo'"
       >
         <p class="flex items-center gap-2 text-sm lg:text-base">
           <PercentCircle class="size-4 lg:size-5" /> Promo
@@ -42,7 +44,7 @@ const emits = defineEmits<{
       <div
         class="p-2 px-4 text-base-content transition-all duration-300"
         :class="selectedItem?.id == item.id ? 'bg-primary/20 text-primary' : 'bg-base-content/10'"
-        v-if="item.type == 'regular'"
+        v-if="item.type_status == 'regular'"
       >
         <p class="flex items-center gap-2 text-sm lg:text-base">
           <StarIcon class="size-4 lg:size-5" /> Regular

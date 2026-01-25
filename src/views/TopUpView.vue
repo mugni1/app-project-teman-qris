@@ -4,17 +4,24 @@ import ListProduct from '@/components/order-detail/ListProduct.vue'
 import CheckOut from '@/components/order-detail/CheckOut.vue'
 import Header from '@/components/order-detail/Header.vue'
 import PaymentSelect from '@/components/order-detail/PaymentSelect.vue'
-import type { item } from '@/types/item.type'
-import { ref } from 'vue'
-import { data } from '../components/order-detail/data'
+import { computed, ref } from 'vue'
+import { useGetItem } from '@/hooks/useGetItems'
+import type { GetItemParams, Item } from '@/types/item'
+import { useRoute } from 'vue-router'
 
 // state
 const phone = ref('')
-const selectedItem = ref<null | item>(null)
+const selectedItem = ref<null | Item>(null)
 const selectedPayment = ref<null | string>(null)
+const route = useRoute()
+const provider = route.params.slug
+const params = computed<GetItemParams>(() => ({
+  filter_by_provider: provider,
+}))
+const { data, isPending, isFetching, refetch } = useGetItem(params)
 
 // methods
-const handleSelectItem = (value: item) => {
+const handleSelectItem = (value: Item) => {
   selectedItem.value = value
 }
 const handleSelectPayment = (value: string) => {
@@ -24,11 +31,6 @@ const handleSelectPayment = (value: string) => {
 
 <template>
   <Content>
-    <img
-      src="https://refrez.com/wp-content/uploads/2018/12/axis-data-owsem.jpg"
-      alt="banner"
-      class="w-full card aspect-10/3 object-cover object-center rounded-lg mb-4 shadow-lg"
-    />
     <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Header />
       <div class="col-span-1 lg:col-span-2 space-y-4">
@@ -51,7 +53,7 @@ const handleSelectPayment = (value: string) => {
             <button class="btn btn-soft btn-primary">Kuota</button>
           </div>
           <ListProduct
-            :items="data.products"
+            :items="data?.data || []"
             :selected-item="selectedItem"
             @on-select="handleSelectItem"
           />

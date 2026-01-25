@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { item } from '@/types/item.type'
+import type { Item } from '@/types/item'
 
 const emits = defineEmits<{
   (e: 'onSelect', value: string): void
 }>()
 const props = defineProps<{
   payment: string | null
-  item: item | null
+  item: Item | null
 }>()
 </script>
 
