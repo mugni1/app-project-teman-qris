@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Item } from '@/types/item'
-import { PercentCircle, Share2Icon, StarIcon } from 'lucide-vue-next'
+import { Info, PercentCircle, Share2Icon, StarIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   selectedItem: Item | null
@@ -12,7 +12,7 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+  <div v-if="items.length > 1" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div
       class="rounded-lg overflow-hidden font-medium transition-all duration-300 select-none"
       :class="[
@@ -30,11 +30,7 @@ const emits = defineEmits<{
     >
       <div
         class="p-2 px-4 text-base-content transition-all duration-300"
-        :class="
-          selectedItem?.id == item.id
-            ? 'bg-primary/20 text-primary'
-            : 'bg-secondary/20 text-secondary'
-        "
+        :class="[selectedItem?.id == item.id? 'bg-primary/20 text-primary' : 'bg-secondary/20 text-secondary']"
         v-if="item.type_status == 'promo'"
       >
         <p class="flex items-center gap-2 text-sm lg:text-base">
@@ -68,5 +64,8 @@ const emits = defineEmits<{
         </div>
       </div>
     </div>
+  </div>
+  <div v-else class="w-full flex items-center justify-center flex-col card border py-4 border-base-content/20">
+     <h2 class="font-medium text-base flex items-center gap-2"><Info class="size-5"/> Produk belum tersedia</h2>
   </div>
 </template>

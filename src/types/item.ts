@@ -1,7 +1,7 @@
 import type { HttpStatusCode } from 'axios'
 
 export interface GetItemParams {
-  filter_by_provider?: 'axis' | 'xl' | 'indosat' | 'telkomsel' | 'smartfren' | 'byu'
+  filter_by_provider?: 'axis' | 'xl' | 'indosat' | 'telkomsel' | 'smartfren' | 'byu' | string
   filter_by_status?: 'promo' | 'regular'
   filter_by_credit?: 'quota' | 'credit'
   order_by?: string
