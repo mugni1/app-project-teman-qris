@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue';
+import IconCreditCard from '@/icons/IconCreditCard.vue';
 import { CheckCircle, CreditCard, Info, Loader, SearchCheckIcon, ShoppingBag } from 'lucide-vue-next';
-import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 const route = useRoute()
 const id = route.params.id as string
@@ -10,6 +11,11 @@ const checked = ref(false)
 </script>
 
 <template>
+    <div class="w-full py-8 px-4 bg-warning mb-4 flex flex-col items-center justify-center">
+        <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12"/> 
+        <h1 class="text-center font-bold text-2xl md:text-3xl lg:text-4xl">Harap Selesaikan Pembayaran</h1>
+        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?</p>
+    </div>
     <Content>
         <div class="space-y-8">
             <ul class="steps w-full steps-horizontal">
@@ -44,11 +50,11 @@ const checked = ref(false)
             </ul>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <section class="space-y-4">
-                    <div class="card bg-base-200 border border-base-300 p-4 grid grid-cols-5 gap-4">
-                        <div class="aspect-square bg-white overflow-hidden card">
-                        <img src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-799858.png&w=1920&q=75" alt="">
+                    <div class="card bg-base-200 border border-base-300 p-4 grid grid-cols-12 gap-4">
+                        <div class="col-span-3 aspect-square bg-white overflow-hidden card">
+                            <img src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-799858.png&w=1920&q=75" alt="">
                         </div>
-                        <div class="col-span-4 space-y-2">
+                        <div class="col-span-9 space-y-2">
                         <h3 class="font-semibold">Informasi Transaksi</h3>
                         <table class="w-full text-sm">
                             <tr>
