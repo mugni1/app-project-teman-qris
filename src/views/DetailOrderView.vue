@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue';
 import IconCreditCard from '@/icons/IconCreditCard.vue';
-import { CheckCircle, CreditCard, Info, Loader, SearchCheckIcon, ShoppingBag } from 'lucide-vue-next';
+import { CheckCircle, CreditCard, DownloadCloud, Info, Loader, SearchCheckIcon, ShoppingBag } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 
@@ -106,7 +106,7 @@ const checked = ref(false)
                     <div class="card">
                         <table>
                             <tr>
-                                <td class="w-4/12">ID Transaksi</td>
+                                <td class="w-5/12">ID Transaksi</td>
                                 <td>: MUGN-39787IIHUA77</td>
                             </tr>
                             <tr>
@@ -124,7 +124,17 @@ const checked = ref(false)
                         <img src="https://qris.pw/public/qr/qr_1769777958_16000.png" class="w-6/12 lg:w-4/12" alt="">
                         <i class="text-xs text-info flex items-center gap-1"><Info class="size-4"/> Scan QRIS for complete payment</i>
                     </div>
-                    <button class="btn btn-primary w-full">Cek Transaksi <SearchCheckIcon class="size-5"/> </button>
+                    <div class="card space-y-4">
+                        <a
+                            href="https://qris.pw/public/qr/qr_1769777958_16000.png"
+                            target="_blank"
+                            download="QRIS.png"
+                            class="btn btn-secondary w-full"
+                        >
+                            <DownloadCloud class="size-5" /> Unduh QRIS
+                        </a>
+                        <button class="btn btn-primary w-full"><SearchCheckIcon class="size-5"/> Cek Transaksi</button>
+                    </div>
                 </section>
             </div>
         </div>
