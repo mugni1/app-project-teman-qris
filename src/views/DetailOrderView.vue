@@ -75,7 +75,7 @@ const checked = ref(false)
                     <div class="collapse collapse-arrow overflow-visible space-y-2" @click="checked = !checked">
                         <input type="radio" name="my-accordion-2" :checked="checked" />
                         <div class="collapse-title font-semibold bg-base-200 border border-base-300 card">Rincian Pembayaran</div>
-                        <div v-show="checked" class="collapse-content text-sm bg-base-200 border border-base-300 card pt-4 space-y-4">
+                        <div v-if="checked" class="collapse-content text-sm bg-base-200 border border-base-300 card pt-4 space-y-4">
                             <div class="flex justify-between">
                                 <span>Harga</span>
                                 <span>Rp 1.150</span>
@@ -121,8 +121,7 @@ const checked = ref(false)
                         </table>
                     </div>
                     <div class="card space-y-1">
-                        <img src="https://qris.pw/public/qr/qr_1769777958_16000.png" class="w-6/12 lg:w-4/12" alt="">
-                        <i class="text-xs text-info flex items-center gap-1"><Info class="size-4"/> Scan QRIS for complete payment</i>
+                        <img src="https://qris.pw/public/qr/qr_1769777958_16000.png" class="w-6/12 lg:w-4/12 border-2" alt="qris">
                     </div>
                     <div class="card space-y-4">
                         <a
