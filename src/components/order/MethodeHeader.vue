@@ -29,6 +29,7 @@ const props = defineProps<{
             <span v-if="status == 'pending'" class="badge-sm badge badge-warning">Pending</span>
             <span v-if="status == 'cancelled'" class="badge-sm badge badge-error">Cancelled</span>
             <span v-if="status == 'failed'" class="badge-sm badge badge-error">Failed</span>
+            <span v-if="status == 'expired'" class="badge-sm badge badge-error">Expired</span>
             <span v-if="status == 'paid'" class="badge-sm badge badge-success">Paid</span>
           </td>
           <td v-else class="flex items-center gap-2">

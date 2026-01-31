@@ -72,9 +72,14 @@ watch(data, (value) => {
               :trx-id="data?.data?.transaction_id || ''"
               :status="data?.data?.status || ''"
             />
-            <QrisImage :pending="isPending" :image-url="data?.data?.qris_url || ''" />
+            <QrisImage
+              :pending="isPending"
+              :status="data?.data?.status || ''"
+              :image-url="data?.data?.qris_url || ''"
+            />
             <MethodeFooter
               :id="data?.data?.id || ''"
+              :status="data?.data?.status || ''"
               :trx_id="data?.data?.transaction_id || ''"
               :qris_url="data?.data?.qris_url || ''"
               :pending="isPending"

@@ -4,6 +4,7 @@ import { DownloadCloud, SearchCheck } from 'lucide-vue-next'
 const props = defineProps<{
   qris_url: string
   pending: boolean
+  status: string
   trx_id: string
   id: string
 }>()
@@ -11,7 +12,13 @@ const props = defineProps<{
 
 <template>
   <div v-if="!pending" class="card space-y-4">
-    <a :href="qris_url" target="_blank" download="QRIS.png" class="btn btn-secondary w-full">
+    <a
+      v-if="status != 'cancelled' && status != 'failed' && status != 'expired'"
+      :href="qris_url"
+      target="_blank"
+      download="QRIS.png"
+      class="btn btn-secondary w-full"
+    >
       <DownloadCloud class="size-5" /> Unduh QRIS
     </a>
     <button class="btn btn-primary w-full">
