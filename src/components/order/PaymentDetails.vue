@@ -22,18 +22,18 @@ const props = defineProps<{
       <div class="flex justify-between">
         <span>Harga</span>
         <span v-if="!pending">Rp {{ price.toLocaleString('id-ID') }}</span>
-        <span v-else class="skeleton h-4 w-30"></span>
+        <span v-else class="skeleton h-4 md:h-5 w-30"></span>
       </div>
       <div class="flex justify-between">
         <span>Jumlah</span>
         <span v-if="!pending">x1</span>
-        <span v-else class="skeleton h-4 w-10"></span>
+        <span v-else class="skeleton h-4 md:h-5 w-10"></span>
       </div>
       <div class="w-full bg-base-300 h-[2px]"></div>
       <div class="flex justify-between">
         <span>Subtotal</span>
         <span v-if="!pending">Rp {{ totalPrice.toLocaleString('id-ID') }}</span>
-        <span v-else class="skeleton h-4 w-30"></span>
+        <span v-else class="skeleton h-4 md:h-5 w-30"></span>
       </div>
     </div>
   </div>

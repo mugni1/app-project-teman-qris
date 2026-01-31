@@ -25,7 +25,7 @@ const props = defineProps<{
             <td v-if="!pending" class="line-clamp-1">: {{ product ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
-              <div class="skeleton h-5 w-full"></div>
+              <div class="skeleton h-4 md:h-5 w-full"></div>
             </td>
           </tr>
           <tr>
@@ -33,7 +33,7 @@ const props = defineProps<{
             <td v-if="!pending" class="line-clamp-1">: {{ phone ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
-              <div class="skeleton h-5 w-full"></div>
+              <div class="skeleton h-4 md:h-5 w-full"></div>
             </td>
           </tr>
           <tr>
@@ -41,7 +41,7 @@ const props = defineProps<{
             <td v-if="!pending" class="line-clamp-1">: {{ fullname ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
-              <div class="skeleton h-5 w-full"></div>
+              <div class="skeleton h-4 md:h-5 w-full"></div>
             </td>
           </tr>
           <tr>
@@ -49,7 +49,7 @@ const props = defineProps<{
             <td v-if="!pending" class="line-clamp-1">: {{ email ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
-              <div class="skeleton h-5 w-full"></div>
+              <div class="skeleton h-4 md:h-5 w-full"></div>
             </td>
           </tr>
         </tbody>
