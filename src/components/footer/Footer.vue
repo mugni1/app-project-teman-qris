@@ -4,7 +4,7 @@ import IconOmbak from '@/icons/IconOmbak.vue'
 
 <template>
   <IconOmbak class="text-base-300" />
-  <footer class="bg-base-300 w-full">
+  <footer class="bg-base-300 w-full transition-all delay-150 duration-300 ease-in-out">
     <section class="container mx-auto p-4 pb-8 space-y-8">
       <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-12" />
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -32,7 +32,7 @@ import IconOmbak from '@/icons/IconOmbak.vue'
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
-          <p class="font-semibold text-lg">Kontak Saya</p>
+          <p class="font-semibold text-lg text-primary">Kontak Saya</p>
           <div class="flex flex-col font-normal text-base-content/80">
             <a href="">Email</a>
             <a href="">Telegram</a>
@@ -40,7 +40,7 @@ import IconOmbak from '@/icons/IconOmbak.vue'
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
-          <p class="font-semibold text-lg">Site Map</p>
+          <p class="font-semibold text-lg text-primary">Site Map</p>
           <div class="flex flex-col font-normal text-base-content/80">
             <a href="">Contact Us</a>
             <a href="">Reviews</a>
@@ -49,7 +49,7 @@ import IconOmbak from '@/icons/IconOmbak.vue'
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
-          <p class="font-semibold text-lg">Support</p>
+          <p class="font-semibold text-lg text-primary">Support</p>
           <div class="flex flex-col font-normal text-base-content/80">
             <a href="">Email</a>
             <a href="">Telegram</a>
