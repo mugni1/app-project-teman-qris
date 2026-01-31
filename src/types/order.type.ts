@@ -53,13 +53,8 @@ export interface GetOrderDetailResponse {
       id: string
       email: string
       firstname: string
-      password: null | string
       lastname: string
       fullname: string
-      provider: null | string
-      role: string
-      created_at: string
-      updated_at: string
     }
     item: {
       id: string
@@ -69,8 +64,6 @@ export interface GetOrderDetailResponse {
       type_credit: string
       type_status: string
       provider: string
-      created_at: string
-      updated_at: string
     }
   } | null
   meta: null
