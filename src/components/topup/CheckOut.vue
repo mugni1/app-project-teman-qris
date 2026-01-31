@@ -4,6 +4,7 @@ import type { Item } from '@/types/item'
 import type { CreateOrderResponse } from '@/types/order.type'
 import { HttpStatusCode } from 'axios'
 import { CheckCircle2, Loader2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
 
 // PROPS
@@ -15,6 +16,7 @@ const props = defineProps<{
 
 // STATE
 const { mutateAsync, isPending } = usePostPaymentQrisPw()
+const router = useRouter()
 
 // METHODS
 const handleSubmit = async () => {
@@ -25,15 +27,20 @@ const handleSubmit = async () => {
       customer_phone: props.phoneNumber || '',
       destination: props.phoneNumber || '',
     })
-    console.log(result)
     if (result.status == HttpStatusCode.Created) {
-      toast.success(result.message, { action: { label: 'close' } })
+      toast.success(result.message, { action: { label: 'Close' } })
+      router.push('/detail/' + result.data?.id || '')
     } else {
-      toast.error(result.message, { action: { label: 'close' } })
+      console.log(result)
+      if (result.status == 403 || result.status == 401) {
+        toast.error('Please login to continue', { action: { label: 'Close' } })
+      } else {
+        toast.error(result.message, { action: { label: 'Close' } })
+      }
     }
   } catch (err: unknown) {
     const error = err as CreateOrderResponse
-    toast.error(`${error.message}, try again later`, { action: { label: 'close' } })
+    toast.error(`${error.message}, try again later`, { action: { label: 'Close' } })
   }
 }
 </script>
