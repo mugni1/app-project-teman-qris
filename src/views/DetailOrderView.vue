@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DownloadCloud, Home, Loader2, SearchCheckIcon } from 'lucide-vue-next'
+import { Home, Loader2 } from 'lucide-vue-next'
 import { useRoute, useRouter } from 'vue-router'
 import { useGetOrderDetail } from '@/hooks/useGetOrderDetail'
 import { watch } from 'vue'
@@ -11,6 +11,7 @@ import PaymentDetails from '@/components/order/PaymentDetails.vue'
 import TotalPayment from '@/components/order/TotalPayment.vue'
 import MethodeHeader from '@/components/order/MethodeHeader.vue'
 import QrisImage from '@/components/order/QrisImage.vue'
+import MethodeFooter from '@/components/order/MethodeFooter.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -72,19 +73,12 @@ watch(data, (value) => {
               :status="data?.data?.status || ''"
             />
             <QrisImage :pending="isPending" :image-url="data?.data?.qris_url || ''" />
-            <div class="card space-y-4">
-              <a
-                :href="data?.data?.qris_url"
-                target="_blank"
-                download="QRIS.png"
-                class="btn btn-secondary w-full"
-              >
-                <DownloadCloud class="size-5" /> Unduh QRIS
-              </a>
-              <button class="btn btn-primary w-full">
-                <SearchCheckIcon class="size-5" /> Perbarui Transaksi
-              </button>
-            </div>
+            <MethodeFooter
+              :id="data?.data?.id || ''"
+              :trx_id="data?.data?.transaction_id || ''"
+              :qris_url="data?.data?.qris_url || ''"
+              :pending="isPending"
+            />
           </section>
         </div>
       </div>
