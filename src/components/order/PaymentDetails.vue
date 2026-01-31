@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 
 const checked = ref(false)
+const props = defineProps<{
+  pending: boolean
+  price: number
+  totalPrice: number
+}>()
 </script>
 
 <template>
@@ -16,16 +21,19 @@ const checked = ref(false)
     >
       <div class="flex justify-between">
         <span>Harga</span>
-        <span>Rp 1.150</span>
+        <span v-if="!pending">Rp {{ price.toLocaleString('id-ID') }}</span>
+        <span v-else class="skeleton h-4 w-30"></span>
       </div>
       <div class="flex justify-between">
         <span>Jumlah</span>
-        <span>x1</span>
+        <span v-if="!pending">x1</span>
+        <span v-else class="skeleton h-4 w-10"></span>
       </div>
       <div class="w-full bg-base-300 h-[2px]"></div>
       <div class="flex justify-between">
         <span>Subtotal</span>
-        <span>Rp 1.150</span>
+        <span v-if="!pending">Rp {{ totalPrice.toLocaleString('id-ID') }}</span>
+        <span v-else class="skeleton h-4 w-30"></span>
       </div>
     </div>
   </div>

@@ -31,7 +31,6 @@ const handleSubmit = async () => {
       toast.success(result.message, { action: { label: 'Close' } })
       router.push('/detail/' + result.data?.id || '')
     } else {
-      console.log(result)
       if (result.status == 403 || result.status == 401) {
         toast.error('Please login to continue', { action: { label: 'Close' } })
       } else {

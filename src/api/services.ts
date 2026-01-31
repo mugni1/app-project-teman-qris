@@ -1,7 +1,12 @@
 import type { AxiosResponse } from 'axios'
 import { ENDPOINT } from './endpoints'
 import { httpClient } from './http-client'
-import type { CreateOrderPayload, CreateOrderResponse } from '@/types/order.type'
+import type {
+  CreateOrderPayload,
+  CreateOrderResponse,
+  GetOrderDetailParams,
+  GetOrderDetailResponse,
+} from '@/types/order.type'
 import type {
   LoginPayload,
   LoginResponse,
@@ -30,4 +35,10 @@ export const registerService = async (
 
 export const getItems = async (params?: GetItemParams): Promise<AxiosResponse<GetItemResponse>> => {
   return httpClient.get(ENDPOINT.ITEM, { params })
+}
+
+export const getOrderDetail = async (
+  params: GetOrderDetailParams,
+): Promise<AxiosResponse<GetOrderDetailResponse>> => {
+  return httpClient.get(`${ENDPOINT.ORDER}/${params.id}`)
 }
