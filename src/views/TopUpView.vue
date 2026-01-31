@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { GetItemParams, Item } from '@/types/item'
 import Content from '@/components/content/Content.vue'
-import ListProduct from '@/components/order-detail/ListProduct.vue'
-import CheckOut from '@/components/order-detail/CheckOut.vue'
-import Header from '@/components/order-detail/Header.vue'
-import PaymentSelect from '@/components/order-detail/PaymentSelect.vue'
+import ListProduct from '@/components/topup/ListProduct.vue'
+import CheckOut from '@/components/topup/CheckOut.vue'
+import Header from '@/components/topup/Header.vue'
+import PaymentSelect from '@/components/topup/PaymentSelect.vue'
 import { computed, ref } from 'vue'
 import { useGetItem } from '@/hooks/useGetItems'
 import { useRoute } from 'vue-router'
-import PendingListProduct from '@/components/order-detail/PendingListProduct.vue'
-import ErrorListProduct from '@/components/order-detail/ErrorListProduct.vue'
+import PendingListProduct from '@/components/topup/PendingListProduct.vue'
+import ErrorListProduct from '@/components/topup/ErrorListProduct.vue'
 
 // state
 const route = useRoute()
@@ -21,7 +21,7 @@ const selectedTab = ref<'credit' | 'quota'>('credit')
 const params = computed<GetItemParams>(() => ({
   filter_by_provider: provider,
   filter_by_credit: selectedTab.value,
-  limit: "1000",
+  limit: '1000',
 }))
 const { data, isPending, isError, error, isFetching, refetch } = useGetItem(params)
 
@@ -57,11 +57,23 @@ const handleChangeTab = (value: 'credit' | 'quota') => {
         <div class="card p-4 bg-base-200 border border-base-content/20 space-y-2">
           <h3 class="card-title">Pilih Produk</h3>
           <div class="space-x-4 mb-4">
-            <button @click="handleChangeTab('credit')" class="btn btn-soft btn-primary" :class="[selectedTab == 'credit' && 'btn-active']">Pulsa</button>
-            <button @click="handleChangeTab('quota')" class="btn btn-soft btn-primary" :class="[selectedTab == 'quota' && 'btn-active']">Kuota</button>
+            <button
+              @click="handleChangeTab('credit')"
+              class="btn btn-soft btn-primary"
+              :class="[selectedTab == 'credit' && 'btn-active']"
+            >
+              Pulsa
+            </button>
+            <button
+              @click="handleChangeTab('quota')"
+              class="btn btn-soft btn-primary"
+              :class="[selectedTab == 'quota' && 'btn-active']"
+            >
+              Kuota
+            </button>
           </div>
-          <PendingListProduct v-if="isPending"/>
-          <ErrorListProduct 
+          <PendingListProduct v-if="isPending" />
+          <ErrorListProduct
             v-else-if="isError || data?.status != 200"
             :error="error"
             :is-fetching="isFetching"
