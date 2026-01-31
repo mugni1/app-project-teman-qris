@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Home, Loader2 } from 'lucide-vue-next'
+import { AlarmClock, Home, Loader2 } from 'lucide-vue-next'
 import { useRoute, useRouter } from 'vue-router'
 import { useGetOrderDetail } from '@/hooks/useGetOrderDetail'
-import { watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useCountdown } from '@vueuse/core'
 import Header from '@/components/order/Header.vue'
 import Content from '@/components/content/Content.vue'
 import Steps from '@/components/order/Steps.vue'
@@ -17,8 +18,30 @@ const route = useRoute()
 const router = useRouter()
 const id = route.params.id as string
 const { data, isPending, refetch, isFetching } = useGetOrderDetail({ id })
+const expiredCount = ref(0)
+const { remaining, start } = useCountdown(expiredCount, {
+  interval: 1000,
+  onComplete() {
+    // toast.success('selesai')
+  },
+})
+const formattedTime = computed(() => {
+  const totalSeconds = remaining.value
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+  return `${hours} Hour ${minutes} Minutes ${seconds} Second`
+})
 
 watch(data, (value) => {
+  if (value && value?.data?.expires_at) {
+    const expiredTime = new Date(value.data.expires_at).getTime()
+    const dateNow = new Date().getTime()
+    if (expiredTime - dateNow > 1) {
+      expiredCount.value = Math.floor((expiredTime - dateNow) / 1000)
+      start()
+    }
+  }
   if (value && value.status == 404) {
     router.push({ name: 'not_found' })
   }
@@ -52,6 +75,10 @@ watch(data, (value) => {
         <Steps :status="data?.data?.status || ''" :pending="isPending" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section class="space-y-4">
+            <div class="badge badge-soft badge-error font-bold">
+              <AlarmClock class="size-4" />
+              {{ formattedTime }}
+            </div>
             <Information
               :pending="isPending"
               :product="data?.data?.item.title"
