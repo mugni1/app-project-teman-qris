@@ -61,7 +61,7 @@ import { RouterLink } from 'vue-router'
         </div>
       </div>
       <div class="h-px w-full bg-base-content/70"></div>
-      <p class="text-center text-base-content/70">
+      <p class="text-center text-sm md:text-base text-base-content/70">
         Copyright &copy; {{ new Date().getFullYear() }}. All Rights Reserved.
       </p>
     </section>
