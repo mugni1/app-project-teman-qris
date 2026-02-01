@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  fullname: string | undefined
+  firstname: string | undefined
   phone: string | undefined
-  email: string | undefined
   pending: boolean
   product: string | undefined
 }>()
@@ -21,7 +20,7 @@ const props = defineProps<{
       <table class="w-full text-xs md:text-sm border-separate border-spacing-y-1">
         <tbody>
           <tr>
-            <td class="w-4/12">Produk</td>
+            <td class="w-5/12">Produk</td>
             <td v-if="!pending" class="line-clamp-1">: {{ product ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
@@ -38,15 +37,7 @@ const props = defineProps<{
           </tr>
           <tr>
             <td class="w-4/12">Nama</td>
-            <td v-if="!pending" class="line-clamp-1">: {{ fullname ?? '' }}</td>
-            <td v-else class="flex items-center gap-2">
-              :
-              <div class="skeleton h-4 md:h-5 w-full"></div>
-            </td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td v-if="!pending" class="line-clamp-1">: {{ email ?? '' }}</td>
+            <td v-if="!pending" class="line-clamp-1">: {{ firstname ?? '' }}</td>
             <td v-else class="flex items-center gap-2">
               :
               <div class="skeleton h-4 md:h-5 w-full"></div>
