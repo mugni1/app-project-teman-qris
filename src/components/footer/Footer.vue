@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import IconOmbak from '@/icons/IconOmbak.vue'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <IconOmbak class="text-base-300" />
   <footer class="bg-base-300 w-full transition-all delay-150 duration-300 ease-in-out">
     <section class="container mx-auto p-4 pb-8 space-y-8">
-      <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-12" />
+      <RouterLink to="/">
+        <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-12" />
+      </RouterLink>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         <div class="space-y-4 col-span-2 md:col-span-3 lg:col-span-2 w-full">
           <p class="text-base text-base-content/80">
