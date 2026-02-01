@@ -111,7 +111,7 @@ watch(data, (value) => {
               :pending="isPendingGetOrder"
               :product="data?.data?.item.title"
               :phone="data?.data?.phone_number"
-              :firstname="data?.data?.user.fullname"
+              :firstname="data?.data?.user.firstname"
             />
             <PaymentDetails
               :pending="isPendingGetOrder"
