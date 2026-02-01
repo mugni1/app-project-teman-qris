@@ -12,7 +12,7 @@ import { RouterLink } from 'vue-router'
       </RouterLink>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         <div class="space-y-4 col-span-2 md:col-span-3 lg:col-span-2 w-full">
-          <p class="text-base text-base-content/80">
+          <p class="text-sm md:text-base text-base-content/80">
             No #1 supplier top up game & voucher terlaris, murah, aman legal 100% buka 24 Jam dengan
             channel pembayaran terlengkap Indonesia
           </p>
