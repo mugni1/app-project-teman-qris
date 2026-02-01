@@ -84,25 +84,30 @@ onMounted(() => {
 </script>
 
 <template>
-  <Content class="min-h-screen items-center flex flex-col justify-center">
-    <div class="w-full flex justify-center flex-col items-center">
-      <b class="card-title">Selamat Datang</b>
-      <p class="text-xs text-primary-content">Silakan masuk untuk dapat menikmati layanan</p>
-    </div>
-    <div class="hero">
-      <div class="hero-content flex-col lg:flex-row-reverse">
-        <div class="card bg-base-200 w-full shrink-0 shadow-2xl border border-base-content/20">
+  <section class="min-h-screen items-center flex flex-col justify-center">
+    <div class="hero w-full">
+      <div class="hero-content xs:min-w-xs sm:min-w-sm flex-col">
+        <div class="w-full">
+          <b class="card-title">Selamat Datang</b>
+          <p class="text-xs md:text-sm text-primary-content">
+            Silakan masuk untuk dapat menikmati layanan
+          </p>
+        </div>
+        <div class="w-full card bg-base-200 shrink-0 shadow-xl border border-base-content/20">
           <div class="card-body lg:w-sm">
+            <!-- login with google  -->
             <div>
               <button @click="handleAuthGoogle" class="btn btn-soft btn-primary w-full">
                 <IconGoogle class="size-5" /> Login dengan Google
               </button>
             </div>
+            <!-- atau  -->
             <div class="flex justify-center items-center gap-2">
               <span class="flex flex-1 h-px bg-base-content/50"></span>
               <span class="text-base-content/70">Atau</span>
               <span class="flex flex-1 h-px bg-base-content/50"></span>
             </div>
+            <!-- form  -->
             <form @submit.prevent="handleSubmit" class="fieldset w-auto space-y-2">
               <!-- input email  -->
               <div class="flex flex-col gap-1">
@@ -158,5 +163,5 @@ onMounted(() => {
         </div>
       </div>
     </div>
-  </Content>
+  </section>
 </template>

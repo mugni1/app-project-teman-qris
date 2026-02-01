@@ -84,14 +84,14 @@ watch(form, () => {
 </script>
 
 <template>
-  <Content class="min-h-screen items-center flex flex-col justify-center">
-    <div class="w-full flex justify-center flex-col items-center">
-      <b class="card-title">Silahkan Daftar</b>
-      <p class="text-xs text-primary-content">Silakan daftar untuk dapat menikmati layanan</p>
-    </div>
-    <div class="hero">
-      <div class="hero-content flex-col lg:flex-row-reverse">
-        <div class="card bg-base-200 w-full shrink-0 shadow-2xl border border-base-content/20">
+  <section class="min-h-screen items-center flex flex-col justify-center">
+    <div class="hero w-full">
+      <div class="hero-content xs:min-w-xs sm:min-w-sm flex-col">
+        <div class="w-full">
+          <b class="card-title">Silahkan Daftar</b>
+          <p class="text-xs md:text-sm text-primary-content">Silakan lengkapi kolom dibawah ini</p>
+        </div>
+        <div class="card bg-base-200 w-full shrink-0 shadow-xl border border-base-content/20">
           <div class="card-body lg:w-sm">
             <form @submit.prevent="handleSubmit" class="fieldset w-auto space-y-2">
               <!-- input firstname  -->
@@ -177,5 +177,5 @@ watch(form, () => {
         </div>
       </div>
     </div>
-  </Content>
+  </section>
 </template>
