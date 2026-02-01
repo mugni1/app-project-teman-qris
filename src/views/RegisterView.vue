@@ -170,7 +170,7 @@ watch(form, () => {
               <!-- text register  -->
               <div class="text-center">
                 <span>Sudah punya akun? </span>
-                <RouterLink class="link link-hover" to="/login">login</RouterLink>
+                <RouterLink class="link link-hover" to="/login">Login</RouterLink>
               </div>
             </form>
           </div>

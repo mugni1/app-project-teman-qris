@@ -16,6 +16,7 @@ import {
 import { reactive, ref, watch } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
+import IconGoogle from '@/icons/IconGoogle.vue'
 
 // state
 const { mutateAsync, isPending } = useLogin()
@@ -83,6 +84,16 @@ watch(form, () => {
       <div class="hero-content flex-col lg:flex-row-reverse">
         <div class="card bg-base-200 w-full shrink-0 shadow-2xl border border-base-content/20">
           <div class="card-body lg:w-sm">
+            <div>
+              <button class="btn btn-soft btn-primary w-full">
+                <IconGoogle class="size-5" /> Login dengan Google
+              </button>
+            </div>
+            <div class="flex justify-center items-center gap-2">
+              <span class="flex flex-1 h-px bg-base-content/50"></span>
+              <span class="text-base-content/70">Atau</span>
+              <span class="flex flex-1 h-px bg-base-content/50"></span>
+            </div>
             <form @submit.prevent="handleSubmit" class="fieldset w-auto space-y-2">
               <!-- input email  -->
               <div class="flex flex-col gap-1">
@@ -128,13 +139,12 @@ watch(form, () => {
                 <LogInIcon v-else class="size-4" />
                 <span>Masuk</span>
               </button>
-
-              <!-- text register  -->
-              <div class="text-center">
-                <span>Tidak punya akun? </span>
-                <RouterLink class="link link-hover" to="/register">Daftar</RouterLink>
-              </div>
             </form>
+            <!-- text register  -->
+            <div class="text-center text-xs md:text-sm">
+              <span>Tidak punya akun? </span>
+              <RouterLink class="link link-hover" to="/register">Daftar</RouterLink>
+            </div>
           </div>
         </div>
       </div>
