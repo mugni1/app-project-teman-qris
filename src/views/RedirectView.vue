@@ -12,7 +12,9 @@ onMounted(() => {
   if (route.query && route.query.bb && route.query.message) {
     const token = atob(route.query.bb as string)
     Cookies.set('token', token)
-    toast.success(route.query.message, { action: { label: 'Tutup' } })
+    toast.success(route.query.message.toString().split('_').join(' '), {
+      action: { label: 'Tutup' },
+    })
     router.push('/')
   } else {
     router.push('/')
