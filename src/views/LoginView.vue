@@ -13,14 +13,15 @@ import {
   MailIcon,
   XCircleIcon,
 } from 'lucide-vue-next'
-import { reactive, ref, watch } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { onMounted, reactive, ref, watch } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
 import IconGoogle from '@/icons/IconGoogle.vue'
 
 // state
 const { mutateAsync, isPending } = useLogin()
 const router = useRouter()
+const route = useRoute()
 const isPassword = ref(true)
 const form = reactive({
   email: '',
@@ -74,6 +75,11 @@ const handleAuthGoogle = () => {
 // watcher
 watch(form, () => {
   validate()
+})
+onMounted(() => {
+  if (route.query && route.query.message) {
+    toast.error(route.query.message.toString().split('_').join(' '), { action: { label: 'Tutup' } })
+  }
 })
 </script>
 
