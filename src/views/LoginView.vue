@@ -67,6 +67,9 @@ const handleSubmit = async () => {
     toast.error('Internal server error, try again later.', { action: { label: 'close' } })
   }
 }
+const handleAuthGoogle = () => {
+  window.location.href = 'https://api.v2.mugni.my.id/auth/google'
+}
 
 // watcher
 watch(form, () => {
@@ -85,7 +88,7 @@ watch(form, () => {
         <div class="card bg-base-200 w-full shrink-0 shadow-2xl border border-base-content/20">
           <div class="card-body lg:w-sm">
             <div>
-              <button class="btn btn-soft btn-primary w-full">
+              <button @click="handleAuthGoogle" class="btn btn-soft btn-primary w-full">
                 <IconGoogle class="size-5" /> Login dengan Google
               </button>
             </div>
