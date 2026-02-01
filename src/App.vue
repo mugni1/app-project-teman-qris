@@ -7,7 +7,7 @@ import Footer from './components/footer/Footer.vue'
 </script>
 
 <template>
-  <Toaster :position="'top-right'" rich-colors />
+  <Toaster :position="'top-right'" rich-colors :toast-options="{ class: 'jetbrains-mono' }" />
   <Navbar v-if="!$route.name?.toString().startsWith('auth') && $route.name != 'not_found'" />
   <RouterView />
   <Footer v-if="!$route.name?.toString().startsWith('auth') && $route.name != 'not_found'" />
