@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Newspaper } from 'lucide-vue-next'
+import { data } from './data'
 </script>
 
 <template>
@@ -9,16 +10,19 @@ import { Newspaper } from 'lucide-vue-next'
       BLOG DAN BERITA
     </h1>
     <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div v-for="_ in 4" class="card overflow-hidden border border-base-content/20 shadow-md">
+      <div
+        v-for="item in data"
+        class="card overflow-hidden border border-base-content/20 shadow-md"
+      >
         <img
-          src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Fwujudkan-bangun-kota-impian-di-game-theotown-880676.png&w=384&q=75"
-          alt=""
+          :src="item.image"
+          alt="image"
           class="w-full h-full aspect-auto-5/6 lg:aspect-video object-cover object-center"
         />
         <div class="p-4">
           <span class="text-xs lg:text-base text-base-content/80">23 Jan 2026</span>
           <h1 class="font-medium text-sm lg:text-lg line-clamp-2">
-            Wujudkan Bangun Kota Impian di Game TheoTown
+            {{ item.title }}
           </h1>
         </div>
       </div>
