@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { DownloadCloud, SearchCheck } from 'lucide-vue-next'
+import { DownloadCloud, Loader2, SearchCheck } from 'lucide-vue-next'
 
 const props = defineProps<{
   qris_url: string
-  pending: boolean
+  get_order_pending: boolean
+  update_order_pending: boolean
   status: string
   trx_id: string
   id: string
 }>()
+
+const emits = defineEmits<{
+  (e: 'update'): void
+}>()
+
+const handleUpdate = () => {
+  emits('update')
+}
 </script>
 
 <template>
-  <div v-if="!pending" class="card space-y-4">
+  <div v-if="!get_order_pending" class="card space-y-4">
     <a
       v-if="status != 'cancelled' && status != 'failed' && status != 'expired'"
       :href="qris_url"
@@ -21,8 +30,10 @@ const props = defineProps<{
     >
       <DownloadCloud class="size-5" /> Unduh QRIS
     </a>
-    <button class="btn btn-primary w-full">
-      <SearchCheck class="size-5" /> Perbarui Transaksi
+    <button class="btn btn-primary w-full" @click="handleUpdate">
+      <Loader2 v-if="update_order_pending" class="size-5 animate-spin" />
+      <SearchCheck v-if="!update_order_pending" class="size-5" />
+      Perbarui Transaksi
     </button>
   </div>
   <div v-else class="card space-y-4">

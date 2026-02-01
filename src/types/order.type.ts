@@ -65,6 +65,34 @@ export interface GetOrderDetailResponse {
       type_status: string
       provider: string
     }
+    server_time: number
+    expired_time: number
+  } | null
+  meta: null
+  errors: null
+}
+
+export interface UpdateOrderDetailParams {
+  id: string
+}
+
+export interface UpdateOderDetailResponse {
+  status: HttpStatusCode
+  message: string
+  data: {
+    id: string
+    transaction_id: string
+    amount: number
+    phone_number: string
+    status: string
+    qris_url: string
+    qris_string: string
+    expires_at: string
+    paid_at: null | string
+    created_at: string
+    updated_at: string
+    user_id: string
+    item_id: string
   } | null
   meta: null
   errors: null

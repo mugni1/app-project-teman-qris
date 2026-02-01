@@ -4,6 +4,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { useGetOrderDetail } from '@/hooks/useGetOrderDetail'
 import { computed, ref, watch } from 'vue'
 import { useCountdown } from '@vueuse/core'
+import { toast } from 'vue-sonner'
+import { useUpdateOrderDetail } from '@/hooks/useUpdateOrderDetail'
+import { useQueryClient } from '@tanstack/vue-query'
 import Header from '@/components/order/Header.vue'
 import Content from '@/components/content/Content.vue'
 import Steps from '@/components/order/Steps.vue'
@@ -14,15 +17,20 @@ import MethodeHeader from '@/components/order/MethodeHeader.vue'
 import QrisImage from '@/components/order/QrisImage.vue'
 import MethodeFooter from '@/components/order/MethodeFooter.vue'
 
+// state
 const route = useRoute()
 const router = useRouter()
+const queryClient = useQueryClient()
 const id = route.params.id as string
-const { data, isPending, refetch, isFetching } = useGetOrderDetail({ id })
+const { data, isPending: isPendingGetOrder, refetch, isFetching } = useGetOrderDetail({ id })
+const { mutateAsync, isPending: isPendingUpdateOrder } = useUpdateOrderDetail()
 const expiredCount = ref(0)
 const { remaining, start } = useCountdown(expiredCount, {
   interval: 1000,
-  onComplete() {
-    // toast.success('selesai')
+  async onComplete() {
+    if (data.value && data.value.data?.status == 'pending') {
+      await updateOrderDetail()
+    }
   },
 })
 const formattedTime = computed(() => {
@@ -30,17 +38,37 @@ const formattedTime = computed(() => {
   const hours = Math.floor(totalSeconds / 3600)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
   const seconds = totalSeconds % 60
-  return `${hours} Hour ${minutes} Minutes ${seconds} Second`
+  return `${hours} Jam ${minutes} Menit ${seconds} Detik`
 })
 
-watch(data, (value) => {
-  if (value && value?.data?.expires_at) {
-    const expiredTime = new Date(value.data.expires_at).getTime()
-    const dateNow = new Date().getTime()
-    if (expiredTime - dateNow > 1) {
-      expiredCount.value = Math.floor((expiredTime - dateNow) / 1000)
-      start()
+// methods
+const updateOrderDetail = async () => {
+  try {
+    const res = await mutateAsync({ id: data.value?.data?.transaction_id || '' })
+    if (res.status != 200) {
+      toast.error(res.message, { action: { label: 'Close' } })
+    } else {
+      queryClient.refetchQueries({
+        queryKey: ['oder_detail', id],
+      })
+      toast.success(res.message, { action: { label: 'Close' } })
     }
+  } catch {
+    toast.error('Internal server error', { action: { label: 'Close' } })
+  }
+}
+
+// watchers
+watch(data, (value) => {
+  if (value && value?.data?.expired_time && value?.data?.server_time) {
+    const expiredTime = value.data.expired_time
+    const serverTime = value.data.server_time
+    if (expiredTime - serverTime > 1 && value.data.status == 'pending') {
+      expiredCount.value = Math.floor((expiredTime - serverTime) / 1000)
+    } else {
+      expiredCount.value = 0
+    }
+    start()
   }
   if (value && value.status == 404) {
     router.push({ name: 'not_found' })
@@ -50,7 +78,7 @@ watch(data, (value) => {
 
 <template>
   <Content
-    v-if="!isPending && data?.status != 200"
+    v-if="!isPendingGetOrder && data?.status != 200"
     class="min-h-dvh flex flex-col justify-center items-center pb-25 gap-8"
   >
     <h1 class="text-center capitalize font-bold mb-1 text-xl md:text-2xl">
@@ -69,10 +97,10 @@ watch(data, (value) => {
     </div>
   </Content>
   <section v-else>
-    <Header :status="data?.data?.status || ''" :pending="isPending" />
+    <Header :status="data?.data?.status || ''" :pending="isPendingGetOrder" />
     <Content>
       <div class="space-y-8">
-        <Steps :status="data?.data?.status || ''" :pending="isPending" />
+        <Steps :status="data?.data?.status || ''" :pending="isPendingGetOrder" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section class="space-y-4">
             <div class="badge badge-soft badge-error font-bold">
@@ -80,27 +108,27 @@ watch(data, (value) => {
               {{ formattedTime }}
             </div>
             <Information
-              :pending="isPending"
+              :pending="isPendingGetOrder"
               :product="data?.data?.item.title"
               :phone="data?.data?.phone_number"
               :fullname="data?.data?.user.fullname"
               :email="data?.data?.user.email"
             />
             <PaymentDetails
-              :pending="isPending"
+              :pending="isPendingGetOrder"
               :price="data?.data?.item.price || 0"
               :total-price="data?.data?.amount || 0"
             />
-            <TotalPayment :pending="isPending" :total-price="data?.data?.amount || 0" />
+            <TotalPayment :pending="isPendingGetOrder" :total-price="data?.data?.amount || 0" />
           </section>
           <section class="space-y-4">
             <MethodeHeader
-              :pending="isPending"
+              :pending="isPendingGetOrder"
               :trx-id="data?.data?.transaction_id || ''"
               :status="data?.data?.status || ''"
             />
             <QrisImage
-              :pending="isPending"
+              :pending="isPendingGetOrder"
               :status="data?.data?.status || ''"
               :image-url="data?.data?.qris_url || ''"
             />
@@ -109,7 +137,9 @@ watch(data, (value) => {
               :status="data?.data?.status || ''"
               :trx_id="data?.data?.transaction_id || ''"
               :qris_url="data?.data?.qris_url || ''"
-              :pending="isPending"
+              :get_order_pending="isPendingGetOrder"
+              :update_order_pending="isPendingUpdateOrder"
+              @update="updateOrderDetail"
             />
           </section>
         </div>
