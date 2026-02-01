@@ -22,7 +22,7 @@ const handleUpdate = () => {
 <template>
   <div v-if="!get_order_pending" class="card space-y-4">
     <a
-      v-if="status != 'cancelled' && status != 'failed' && status != 'expired'"
+      v-if="status != 'cancelled' && status != 'failed' && status != 'expired' && status != 'paid'"
       :href="qris_url"
       target="_blank"
       download="QRIS.png"
