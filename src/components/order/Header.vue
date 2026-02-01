@@ -23,7 +23,7 @@ const props = defineProps<{
   </div>
   <div
     v-if="!pending && status == 'paid'"
-    class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-warning mb-4 flex flex-col items-center justify-center"
+    class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-success mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
     <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Sukses Dibayar</h1>
