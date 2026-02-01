@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import DetailOrderView from '@/views/DetailOrderView.vue'
+import RedirectView from '@/views/RedirectView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,7 @@ const router = createRouter({
     { path: '/top-up/:slug', name: 'top_up', component: TopUpView },
     { path: '/login', name: 'auth_login', component: LoginView },
     { path: '/register', name: 'auth_register', component: RegisterView },
+    { path: '/redirect', name: 'auth_redirect', component: RedirectView },
     { path: '/detail/:id', name: 'detail_order', component: DetailOrderView },
     { path: '/:pathMatch(.*)*', name: 'not_found', component: NotFoundView },
   ],
