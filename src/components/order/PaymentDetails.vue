@@ -29,6 +29,11 @@ const props = defineProps<{
         <span v-if="!pending">x1</span>
         <span v-else class="skeleton h-4 md:h-5 w-10"></span>
       </div>
+      <div class="flex justify-between">
+        <span>Biaya</span>
+        <span v-if="!pending">Rp 0</span>
+        <span v-else class="skeleton h-4 md:h-5 w-10"></span>
+      </div>
       <div class="w-full bg-base-300 h-[2px]"></div>
       <div class="flex justify-between">
         <span>Subtotal</span>
