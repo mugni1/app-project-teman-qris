@@ -10,7 +10,13 @@ const props = defineProps<{
     <div class="skeleton w-6/12 lg:w-4/12 aspect-square"></div>
   </div>
   <div
-    v-if="!pending && status != 'expired' && status != 'failed' && status != 'cancelled'"
+    v-if="
+      !pending &&
+      status != 'expired' &&
+      status != 'failed' &&
+      status != 'cancelled' &&
+      status != 'paid'
+    "
     class="card space-y-1"
   >
     <img :src="imageUrl" loading="eager" class="w-6/12 lg:w-4/12 border-2" alt="qris" />
