@@ -36,7 +36,7 @@ import { RouterLink } from 'vue-router'
         </div>
         <div class="space-y-2 col-span-1 w-full">
           <p class="font-semibold text-lg text-primary">Kontak Saya</p>
-          <div class="flex flex-col text-sm md:text-base font-normal text-base-content/80">
+          <div class="flex flex-col gap-1 text-sm md:text-base font-normal text-base-content/80">
             <a href="">Email</a>
             <a href="">Telegram</a>
             <a href="">WhatsApp</a>
@@ -44,7 +44,7 @@ import { RouterLink } from 'vue-router'
         </div>
         <div class="space-y-2 col-span-1 w-full">
           <p class="font-semibold text-lg text-primary">Site Map</p>
-          <div class="flex flex-col text-sm md:text-base font-normal text-base-content/80">
+          <div class="flex flex-col gap-1 text-sm md:text-base font-normal text-base-content/80">
             <a href="">Contact Us</a>
             <a href="">Reviews</a>
             <a href="">Term & Conditions</a>
@@ -53,7 +53,7 @@ import { RouterLink } from 'vue-router'
         </div>
         <div class="space-y-2 col-span-1 w-full">
           <p class="font-semibold text-lg text-primary">Support</p>
-          <div class="flex flex-col text-sm md:text-base font-normal text-base-content/80">
+          <div class="flex flex-col gap-1 text-sm md:text-base font-normal text-base-content/80">
             <a href="">Email</a>
             <a href="">Telegram</a>
             <a href="">WhatsApp</a>
