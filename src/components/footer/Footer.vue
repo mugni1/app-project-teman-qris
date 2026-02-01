@@ -17,7 +17,7 @@ import { RouterLink } from 'vue-router'
             channel pembayaran terlengkap Indonesia
           </p>
           <div class="flex gap-8">
-            <img
+            <!-- <img
               class="size-8"
               src="https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Ff6a1857c-6ced-41ab-99fb-2340b2dbe09c.webp&w=32&q=75"
               alt="facebook"
@@ -31,7 +31,7 @@ import { RouterLink } from 'vue-router'
               class="size-8"
               src="https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Ff233c760-d50d-40f6-a425-800559888c18.webp&w=32&q=75"
               alt="telegram"
-            />
+            /> -->
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
