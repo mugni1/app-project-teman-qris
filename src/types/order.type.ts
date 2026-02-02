@@ -1,4 +1,5 @@
 import type { HttpStatusCode } from 'axios'
+import type { Meta } from './meta.type'
 
 export interface CreateOrderResponse {
   status: HttpStatusCode
@@ -96,4 +97,36 @@ export interface UpdateOderDetailResponse {
   } | null
   meta: null
   errors: null
+}
+
+export interface OrderByUserLogin {
+  message: string
+  id: string
+  transaction_id: string
+  amount: number
+  phone_number: string
+  status: 'expired' | 'cancelled' | 'paid' | 'pending' | 'failed'
+  expires_at: string
+  paid_at: string | null
+  created_at: string
+  item_id: string
+  item: {
+    title: string
+    provider: string
+  }
+}
+
+export interface GetOrderByUserLoginResponse {
+  status: HttpStatusCode
+  data: OrderByUserLogin[] | null
+  meta: Meta | null
+  errors: null
+}
+
+export interface GetOrderByUserLoginParams {
+  search?: string
+  limit?: string
+  page?: string
+  order_by?: string
+  sort_by?: string
 }
