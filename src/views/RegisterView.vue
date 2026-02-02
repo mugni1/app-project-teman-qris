@@ -1,16 +1,7 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue'
 import { HttpStatusCode } from 'axios'
-import {
-  Eye,
-  EyeOff,
-  Loader2Icon,
-  LockIcon,
-  LogInIcon,
-  MailIcon,
-  User2Icon,
-  XCircleIcon,
-} from 'lucide-vue-next'
+import { Eye, EyeOff, Loader2Icon, LockIcon, LogInIcon, MailIcon, User2Icon, XCircleIcon } from 'lucide-vue-next'
 import { reactive, ref, watch } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -88,8 +79,8 @@ watch(form, () => {
     <div class="hero w-full">
       <div class="hero-content xs:min-w-xs sm:min-w-sm flex-col">
         <div class="w-full">
-          <b class="card-title">Silahkan Daftar</b>
-          <p class="text-xs md:text-sm text-primary-content">Silakan lengkapi kolom dibawah ini</p>
+          <b class="card-title text-primary">Silahkan Daftar</b>
+          <p class="text-xs md:text-sm text-base-content">Silakan lengkapi kolom dibawah ini</p>
         </div>
         <div class="card bg-base-200 w-full shrink-0 shadow-xl border border-base-content/20">
           <div class="card-body lg:w-sm">
@@ -146,11 +137,7 @@ watch(form, () => {
                     :type="isPassword ? 'password' : 'text'"
                     :placeholder="isPassword ? '•••••••••••••••' : 'yourpassword'"
                   />
-                  <button
-                    class="btn btn-square btn-primary join-item"
-                    type="button"
-                    @click="isPassword = !isPassword"
-                  >
+                  <button class="btn btn-square btn-primary join-item" type="button" @click="isPassword = !isPassword">
                     <Eye v-if="isPassword" class="size-5" />
                     <EyeOff v-if="!isPassword" class="size-5" />
                   </button>

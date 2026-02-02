@@ -4,15 +4,7 @@ import Cookies from 'js-cookie'
 import { useLogin } from '@/hooks/useLogin'
 import { loginSchema } from '@/schema/login.schema'
 import { HttpStatusCode } from 'axios'
-import {
-  Eye,
-  EyeOff,
-  Loader2Icon,
-  LockIcon,
-  LogInIcon,
-  MailIcon,
-  XCircleIcon,
-} from 'lucide-vue-next'
+import { Eye, EyeOff, Loader2Icon, LockIcon, LogInIcon, MailIcon, XCircleIcon } from 'lucide-vue-next'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -88,10 +80,8 @@ onMounted(() => {
     <div class="hero w-full">
       <div class="hero-content xs:min-w-xs sm:min-w-sm flex-col">
         <div class="w-full">
-          <b class="card-title">Selamat Datang</b>
-          <p class="text-xs md:text-sm text-primary-content">
-            Silakan masuk untuk dapat menikmati layanan
-          </p>
+          <b class="card-title text-primary">Selamat Datang</b>
+          <p class="text-xs md:text-sm text-base-content">Silakan masuk untuk dapat menikmati layanan</p>
         </div>
         <div class="w-full card bg-base-200 shrink-0 shadow-xl border border-base-content/20">
           <div class="card-body lg:w-sm">
@@ -133,11 +123,7 @@ onMounted(() => {
                     :type="isPassword ? 'password' : 'text'"
                     :placeholder="isPassword ? '•••••••••••••••' : 'yourpassword'"
                   />
-                  <button
-                    class="btn btn-square btn-primary join-item"
-                    type="button"
-                    @click="isPassword = !isPassword"
-                  >
+                  <button class="btn btn-square btn-primary join-item" type="button" @click="isPassword = !isPassword">
                     <Eye v-if="isPassword" class="size-5" />
                     <EyeOff v-if="!isPassword" class="size-5" />
                   </button>
