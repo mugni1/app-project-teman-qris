@@ -8,6 +8,8 @@ import DetailOrderView from '@/views/DetailOrderView.vue'
 import RedirectView from '@/views/RedirectView.vue'
 import Cookies from 'js-cookie'
 import ProfileView from '@/views/ProfileView.vue'
+import TransactionView from '@/views/TransactionView.vue'
+import NewsView from '@/views/NewsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +27,9 @@ const router = createRouter({
     { path: '/login', name: 'auth_login', component: LoginView },
     { path: '/register', name: 'auth_register', component: RegisterView },
     { path: '/redirect', name: 'auth_redirect', component: RedirectView },
+    { path: '/news', name: 'news', component: NewsView },
     { path: '/profile', name: 'profile', component: ProfileView, meta: { requiresAuth: true } },
+    { path: '/transaction', name: 'transaction', component: TransactionView, meta: { requiresAuth: true } },
     { path: '/detail/:id', name: 'detail_order', component: DetailOrderView, meta: { requiresAuth: true } },
     { path: '/:pathMatch(.*)*', name: 'not_found', component: NotFoundView },
   ],
