@@ -10,6 +10,7 @@ import type {
   UpdateOrderDetailParams,
 } from '@/types/order.type'
 import type {
+  GetUserDetailResponse,
   LoginPayload,
   LoginResponse,
   RegisterPayload,
@@ -21,6 +22,10 @@ export const createPaymentQrisPwService = async (
   payload: CreateOrderPayload,
 ): Promise<AxiosResponse<CreateOrderResponse>> => {
   return httpClient.post(ENDPOINT.ORDER, payload)
+}
+
+export const getUserDetailService = async (): Promise<AxiosResponse<GetUserDetailResponse>> => {
+  return httpClient.get(ENDPOINT.ME)
 }
 
 export const loginService = async (

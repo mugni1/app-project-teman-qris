@@ -51,3 +51,22 @@ export interface RegisterResponse {
   meta: null
   errors: null
 }
+
+export interface GetUserDetailResponse {
+  status: HttpStatusCode
+  message: string
+  data: {
+    id: string
+    email: string
+    firstname: string | null
+    lastname: string | null
+    fullname: string
+    avatar: null | string
+    provider: string | null
+    role: 'super_user' | 'user'
+    created_at: string
+    updated_at: string
+  } | null
+  meta: null
+  errors: null
+}

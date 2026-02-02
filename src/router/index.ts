@@ -25,8 +25,8 @@ const router = createRouter({
     { path: '/login', name: 'auth_login', component: LoginView },
     { path: '/register', name: 'auth_register', component: RegisterView },
     { path: '/redirect', name: 'auth_redirect', component: RedirectView },
-    { path: '/profile', name: 'profile', component: ProfileView },
-    { path: '/detail/:id', name: 'detail_order', component: DetailOrderView },
+    { path: '/profile', name: 'profile', component: ProfileView, meta: { requiresAuth: true } },
+    { path: '/detail/:id', name: 'detail_order', component: DetailOrderView, meta: { requiresAuth: true } },
     { path: '/:pathMatch(.*)*', name: 'not_found', component: NotFoundView },
   ],
 })
