@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useAppStore } from '@/stores/app'
+
+const { setTheme, theme } = useAppStore()
 const themes = [
   'light',
   'dark',
@@ -57,20 +60,22 @@ const themes = [
         class="menu w-full [&_li>*:hover]:bg-transparent [&_li>*:active]:bg-transparent [&_li>*:focus]:bg-transparent"
       >
         <li class="menu-title text-xs">Tema</li>
-        <li v-for="theme in themes" :key="theme">
+        <li v-for="item in themes" :key="theme">
           <label class="flex items-center gap-3 px-2">
-            <div :data-theme="theme" class="bg-base-100 grid grid-cols-2 gap-0.5 rounded-md p-1 shadow">
-              <div class="bg-base-content size-1 rounded-full"></div>
-              <div class="bg-primary size-1 rounded-full"></div>
-              <div class="bg-secondary size-1 rounded-full"></div>
-              <div class="bg-accent size-1 rounded-full"></div>
+            <div :data-theme="item" class="bg-base-100 grid grid-cols-2 gap-0.5 rounded-md p-1 shadow">
+              <div class="bg-base-content size-2 rounded-full"></div>
+              <div class="bg-primary size-2 rounded-full"></div>
+              <div class="bg-secondary size-2 rounded-full"></div>
+              <div class="bg-accent size-2 rounded-full"></div>
             </div>
             <input
               type="radio"
               name="theme-dropdown"
               class="theme-controller btn btn-sm btn-ghost flex-1 justify-start capitalize"
-              :value="theme"
-              :aria-label="theme"
+              :value="item"
+              v-model="theme"
+              @change="setTheme(item)"
+              :aria-label="item"
             />
           </label>
         </li>
