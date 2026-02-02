@@ -153,13 +153,11 @@ watch(form, () => {
                 <LogInIcon v-else class="size-4" />
                 <span>Daftar</span>
               </button>
-
-              <!-- text register  -->
-              <div class="text-center">
-                <span>Sudah punya akun? </span>
-                <RouterLink class="link link-hover" to="/login">Login</RouterLink>
-              </div>
             </form>
+            <div class="text-center text-xs md:text-sm">
+              <span>Sudah punya akun? </span>
+              <RouterLink class="link link-hover" to="/login">Login</RouterLink>
+            </div>
           </div>
         </div>
       </div>
