@@ -45,20 +45,20 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <dialog id="my_modal_3" class="modal">
+  <dialog id="my_modal_3" class="modal backdrop-blur-sm transition-all">
     <div class="modal-box">
-      <h3 class="text-lg font-bold text-primary flex items-center gap-2">
-        <ShoppingBag /> Detail Pesanan
-      </h3>
+      <h3 class="text-lg font-bold text-primary flex items-center gap-2"><ShoppingBag /> Detail Pesanan</h3>
       <p class="py-4 font-medium">Jangan lupa konfirmasi Nomor HP kamu dengan benar ya.</p>
       <div class="space-y-2 grid grid-cols-2 text-base">
         <div class="space-y-2">
           <p>Nomer Tujuan :</p>
+          <p>Produk :</p>
           <p>Harga :</p>
           <p>Metode :</p>
         </div>
         <div class="font-bold space-y-2">
           <p>{{ phoneNumber }}</p>
+          <p>{{ selectedItem?.title || '' }}</p>
           <p>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</p>
           <p>{{ selectedPayment?.toUpperCase() || '' }}</p>
         </div>
@@ -77,9 +77,7 @@ const handleSubmit = async () => {
     </div>
   </dialog>
 
-  <div
-    class="card bg-base-200 p-4 border border-base-content/20 gap-2 grid grid-cols-1 lg:grid-cols-2"
-  >
+  <div class="card bg-base-200 p-4 border border-base-content/20 gap-2 grid grid-cols-1 lg:grid-cols-2">
     <div class="col-span-1">
       <p class="text-sm text-base-content/60 capitalize">
         {{ selectedItem?.title || '' }} - {{ selectedItem?.type_status || '' }}
