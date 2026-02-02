@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { data } from './data'
 import Cookies from 'js-cookie'
 
@@ -11,9 +11,17 @@ const emits = defineEmits<{
   (e: 'changeActive', value: boolean): void
 }>()
 
+// state
 const token = Cookies.get('token')
+const router = useRouter()
+
+// methods
 const handleChange = () => {
   emits('changeActive', !props.active)
+}
+const handleGo = (to: string) => {
+  router.push(to)
+  handleChange()
 }
 </script>
 
@@ -31,30 +39,30 @@ const handleChange = () => {
       :transition="{ duration: 0.2 }"
       class="container card bg-base-200 mt-20 text-accent border border-primary space-y-4 pt-4 px-4"
     >
-      <RouterLink
+      <button
         v-for="item in data"
         v-show="!item.requireAuth && item.name != 'login'"
-        :to="item.link"
+        @click="handleGo(item.link)"
         class="btn btn-ghost btn-primary btn-sm"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
-      </RouterLink>
-      <RouterLink
+      </button>
+      <button
         v-for="item in data"
         v-show="item.requireAuth && token"
-        :to="item.link"
+        @click="handleGo(item.link)"
         class="btn btn-ghost btn-primary btn-sm"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
-      </RouterLink>
-      <RouterLink
+      </button>
+      <button
         v-for="item in data"
         v-show="!item.requireAuth && item.name == 'login' && !token"
-        :to="item.link"
+        @click="handleGo(item.link)"
         class="btn btn-ghost btn-primary btn-sm"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
-      </RouterLink>
+      </button>
     </motion.div>
   </section>
 </template>
