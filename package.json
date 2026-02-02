@@ -20,6 +20,7 @@
     "axios": "^1.13.2",
     "js-cookie": "^3.0.5",
     "lucide-vue-next": "^0.562.0",
+    "motion-v": "^1.10.2",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
     "swiper": "^12.0.3",
