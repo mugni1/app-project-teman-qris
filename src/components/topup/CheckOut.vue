@@ -79,7 +79,7 @@ const handleSubmit = async () => {
 
   <div class="card bg-base-200 p-4 border border-base-content/20 gap-2 grid grid-cols-1 lg:grid-cols-2">
     <div class="col-span-1">
-      <p class="text-sm text-base-content/60 capitalize">
+      <p class="text-sm text-base-content/80 capitalize">
         {{ selectedItem?.title || '' }} - {{ selectedItem?.type_status || '' }}
       </p>
       <b>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</b>

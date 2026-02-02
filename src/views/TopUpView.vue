@@ -10,6 +10,7 @@ import { useGetItem } from '@/hooks/useGetItems'
 import { useRoute } from 'vue-router'
 import PendingListProduct from '@/components/topup/PendingListProduct.vue'
 import ErrorListProduct from '@/components/topup/ErrorListProduct.vue'
+import { Grid2x2CheckIcon, Phone } from 'lucide-vue-next'
 
 // state
 const route = useRoute()
@@ -44,18 +45,18 @@ const handleChangeTab = (value: 'credit' | 'quota') => {
       <div class="col-span-1 lg:col-span-2 space-y-4">
         <div class="card p-4 bg-base-200 border border-base-content/20">
           <div class="space-y-2">
-            <label for="phone" class="card-title">Masukan Nomer Ponsel</label>
+            <label for="phone" class="card-title"><Phone class="size-6" /> Masukan Nomer Ponsel</label>
             <input
               type="text"
               id="phone"
-              class="input outline-none focus:border-primary"
+              class="input outline-none focus:border-primary w-full md:max-w-sm"
               v-model="phone"
-              placeholder="0838 - 0831"
+              placeholder="088800077887"
             />
           </div>
         </div>
         <div class="card p-4 bg-base-200 border border-base-content/20 space-y-2">
-          <h3 class="card-title">Pilih Produk</h3>
+          <h3 class="card-title"><Grid2x2CheckIcon class="size-6" />Pilih Produk</h3>
           <div class="space-x-4 mb-4">
             <button
               @click="handleChangeTab('credit')"
@@ -86,16 +87,8 @@ const handleChangeTab = (value: 'credit' | 'quota') => {
             @on-select="handleSelectItem"
           />
         </div>
-        <PaymentSelect
-          @on-select="handleSelectPayment"
-          :item="selectedItem"
-          :payment="selectedPayment"
-        />
-        <CheckOut
-          :phone-number="phone"
-          :selected-payment="selectedPayment"
-          :selected-item="selectedItem"
-        />
+        <PaymentSelect @on-select="handleSelectPayment" :item="selectedItem" :payment="selectedPayment" />
+        <CheckOut :phone-number="phone" :selected-payment="selectedPayment" :selected-item="selectedItem" />
       </div>
     </section>
   </Content>
