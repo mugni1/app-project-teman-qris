@@ -7,6 +7,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import DetailOrderView from '@/views/DetailOrderView.vue'
 import RedirectView from '@/views/RedirectView.vue'
 import Cookies from 'js-cookie'
+import ProfileView from '@/views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,7 @@ const router = createRouter({
     { path: '/login', name: 'auth_login', component: LoginView },
     { path: '/register', name: 'auth_register', component: RegisterView },
     { path: '/redirect', name: 'auth_redirect', component: RedirectView },
+    { path: '/profile', name: 'profile', component: ProfileView },
     { path: '/detail/:id', name: 'detail_order', component: DetailOrderView },
     { path: '/:pathMatch(.*)*', name: 'not_found', component: NotFoundView },
   ],
