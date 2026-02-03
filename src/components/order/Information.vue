@@ -18,7 +18,9 @@ const props = defineProps<{
     <div v-else class="col-span-3 aspect-square overflow-hidden card skeleton"></div>
     <div class="col-span-9 md:space-y-2">
       <h3 v-if="!pending" class="font-semibold text-base">Informasi Transaksi</h3>
-      <h3 v-else class="font-semibold text-base skeleton w-6/12 text-transparent">Informasi Transaksi</h3>
+      <div v-else class="text-transparent">
+        <span class="skeleton">Informasi Transaksi</span>
+      </div>
       <table class="w-full text-xs md:text-sm border-separate border-spacing-y-1">
         <tbody v-if="!pending">
           <tr>
