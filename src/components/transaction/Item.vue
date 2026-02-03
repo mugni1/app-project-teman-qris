@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
+
 const props = defineProps<{
   title: string
   status: string
@@ -8,7 +10,7 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
+  <RouterLink :to="'/detail/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
     <div class="col-span-3 md:col-span-2 aspect-square bg-accent card overflow-hidden">
       <img
         src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-198257.png&w=384&q=75"
@@ -28,5 +30,5 @@ const props = defineProps<{
         <span class="text-sm mt-auto">{{ phone }}</span>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
