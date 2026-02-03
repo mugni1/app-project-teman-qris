@@ -37,7 +37,7 @@ const handleGo = (to: string) => {
       :initial="{ opacity: 0, y: 200 }"
       :animate="{ opacity: active ? 1 : 0, y: active ? 0 : 200 }"
       :transition="{ duration: 0.2 }"
-      class="container card bg-base-200 mt-20 text-accent border border-primary space-y-4 pt-4 px-4"
+      class="container card bg-base-100 mt-20 text-accent border border-base-300 space-y-4 pt-4 px-4"
     >
       <button
         v-for="item in data"
