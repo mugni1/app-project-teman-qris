@@ -101,10 +101,11 @@ watch(data, (value) => {
         <Steps :status="data?.data?.status || ''" :pending="isPendingGetOrder" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section class="space-y-4">
-            <div class="badge badge-error font-bold">
+            <div v-if="!isPendingGetOrder" class="badge badge-error font-bold">
               <AlarmClock class="size-4" />
               {{ formattedTime }}
             </div>
+            <div v-else class="badge skeleton text-transparent">Fotmated time time time time</div>
             <Information
               :pending="isPendingGetOrder"
               :product="data?.data?.item.title"

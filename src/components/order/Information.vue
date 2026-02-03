@@ -9,39 +9,40 @@ const props = defineProps<{
 
 <template>
   <div class="card bg-base-200 border border-base-300 p-4 grid grid-cols-12 gap-4">
-    <div class="col-span-3 aspect-square bg-white overflow-hidden card">
+    <div v-if="!pending" class="col-span-3 aspect-square bg-white overflow-hidden card">
       <img
         src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-799858.png&w=1920&q=75"
         alt=""
       />
     </div>
+    <div v-else class="col-span-3 aspect-square overflow-hidden card skeleton"></div>
     <div class="col-span-9 md:space-y-2">
-      <h3 class="font-semibold text-base">Informasi Transaksi</h3>
+      <h3 v-if="!pending" class="font-semibold text-base">Informasi Transaksi</h3>
+      <h3 v-else class="font-semibold text-base skeleton w-6/12 text-transparent">Informasi Transaksi</h3>
       <table class="w-full text-xs md:text-sm border-separate border-spacing-y-1">
-        <tbody>
+        <tbody v-if="!pending">
           <tr>
             <td class="w-5/12">Produk</td>
-            <td v-if="!pending" class="line-clamp-1">: {{ product ?? '' }}</td>
-            <td v-else class="flex items-center gap-2">
-              :
-              <div class="skeleton h-4 md:h-5 w-full"></div>
-            </td>
+            <td class="line-clamp-1">: {{ product ?? '' }}</td>
           </tr>
           <tr>
             <td>No. Telepon</td>
-            <td v-if="!pending" class="line-clamp-1">: {{ phone ?? '' }}</td>
-            <td v-else class="flex items-center gap-2">
-              :
-              <div class="skeleton h-4 md:h-5 w-full"></div>
-            </td>
+            <td class="line-clamp-1">: {{ phone ?? '' }}</td>
           </tr>
           <tr>
             <td class="w-4/12">Nama</td>
-            <td v-if="!pending" class="line-clamp-1">: {{ firstname ?? '' }}</td>
-            <td v-else class="flex items-center gap-2">
-              :
-              <div class="skeleton h-4 md:h-5 w-full"></div>
-            </td>
+            <td class="line-clamp-1">: {{ firstname ?? '' }}</td>
+          </tr>
+        </tbody>
+        <tbody v-else class="text-transparent">
+          <tr>
+            <td class="w-5/12 skeleton">Produk</td>
+          </tr>
+          <tr>
+            <td class="skeleton">No. Telepon</td>
+          </tr>
+          <tr>
+            <td class="w-4/12 skeleton">Nama</td>
           </tr>
         </tbody>
       </table>

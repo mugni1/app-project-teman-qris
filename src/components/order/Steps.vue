@@ -63,33 +63,33 @@ const props = defineProps<{
     </li>
   </ul>
 
-  <ul v-else class="steps w-full steps-horizontal">
+  <ul v-else class="steps w-full steps-horizontal text-transparent">
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton w-40 h-4"></p>
-        <p class="font-semibold text-base skeleton w-50 h-3"></p>
+        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton w-40 h-4"></p>
-        <p class="font-semibold text-base skeleton w-50 h-3"></p>
+        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton w-40 h-4"></p>
-        <p class="font-semibold text-base skeleton w-50 h-3"></p>
+        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton w-40 h-4"></p>
-        <p class="font-semibold text-base skeleton w-50 h-3"></p>
+        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
   </ul>
