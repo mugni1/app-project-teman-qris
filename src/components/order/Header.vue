@@ -14,10 +14,8 @@ const props = defineProps<{
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-warning mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
-    <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">
-      Harap Selesaikan Pembayaran
-    </h1>
-    <p class="text-center md:text-base text-sm">
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Harap Selesaikan Pembayaran</h1>
+    <p class="text-center text-white md:text-base text-sm">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
     </p>
   </div>
@@ -26,8 +24,8 @@ const props = defineProps<{
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-success mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
-    <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Sukses Dibayar</h1>
-    <p class="text-center md:text-base text-sm">
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Sukses Dibayar</h1>
+    <p class="text-center text-white md:text-base text-sm">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
     </p>
   </div>
@@ -36,10 +34,8 @@ const props = defineProps<{
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-error mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
-    <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">
-      Transaksi Dibatalkan Oleh Sistem
-    </h1>
-    <p class="text-center md:text-base text-sm">
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Dibatalkan Oleh Sistem</h1>
+    <p class="text-center text-white md:text-base text-sm">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
     </p>
   </div>
@@ -48,10 +44,8 @@ const props = defineProps<{
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-error mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
-    <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">
-      Transaksi Telah Kadaluwarsa
-    </h1>
-    <p class="text-center md:text-base text-sm">
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Telah Kadaluwarsa</h1>
+    <p class="text-center text-white md:text-base text-sm">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
     </p>
   </div>
@@ -60,8 +54,8 @@ const props = defineProps<{
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-error mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
-    <h1 class="text-center font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Gagal</h1>
-    <p class="text-center md:text-base text-sm">
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Transaksi Gagal</h1>
+    <p class="text-center text-white md:text-base text-sm">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
     </p>
   </div>

@@ -43,7 +43,7 @@ const handleGo = (to: string) => {
         v-for="item in data"
         v-show="!item.requireAuth && item.name != 'login'"
         @click="handleGo(item.link)"
-        class="btn btn-ghost btn-primary btn-sm"
+        class="btn btn-ghost btn-primary"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
       </button>
@@ -51,7 +51,7 @@ const handleGo = (to: string) => {
         v-for="item in data"
         v-show="item.requireAuth && token"
         @click="handleGo(item.link)"
-        class="btn btn-ghost btn-primary btn-sm"
+        class="btn btn-ghost btn-primary"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
       </button>
@@ -59,7 +59,7 @@ const handleGo = (to: string) => {
         v-for="item in data"
         v-show="!item.requireAuth && item.name == 'login' && !token"
         @click="handleGo(item.link)"
-        class="btn btn-ghost btn-primary btn-sm"
+        class="btn btn-ghost btn-primary"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
       </button>
