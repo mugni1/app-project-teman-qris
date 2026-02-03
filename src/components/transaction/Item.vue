@@ -18,16 +18,16 @@ const props = defineProps<{
       />
     </div>
     <div class="col-span-9 md:col-span-10 text-base flex flex-col justify-between">
-      <div class="space-y-1">
-        <h3 class="font-semibold line-clamp-1">{{ title }}</h3>
-        <div class="badge capitalize badge-success badge-sm" v-show="status == 'paid'">{{ status }}</div>
-        <div class="badge capitalize badge-error badge-sm" v-show="status == 'expired'">{{ status }}</div>
-        <div class="badge capitalize badge-error badge-sm" v-show="status == 'failed'">{{ status }}</div>
-        <div class="badge capitalize badge-warning badge-sm" v-show="status == 'pending'">{{ status }}</div>
+      <div class="md:space-y-1">
+        <h3 class="font-semibold line-clamp-1 text-sm md:text-base">{{ title }}</h3>
+        <div class="badge capitalize badge-success badge-xs md:badge-sm" v-show="status == 'paid'">{{ status }}</div>
+        <div class="badge capitalize badge-error badge-xs md:badge-sm" v-show="status == 'expired'">{{ status }}</div>
+        <div class="badge capitalize badge-error badge-xs md:badge-sm" v-show="status == 'failed'">{{ status }}</div>
+        <div class="badge capitalize badge-warning badge-xs md:badge-sm" v-show="status == 'pending'">{{ status }}</div>
       </div>
-      <div class="flex justify-between">
-        <span class="text-sm mt-auto">{{ trxId }}</span>
-        <span class="text-sm mt-auto">{{ phone }}</span>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs md:text-sm mt-auto line-clamp-1">{{ trxId }}</span>
+        <span class="text-xs md:text-sm mt-auto line-clamp-1">{{ phone }}</span>
       </div>
     </div>
   </RouterLink>
