@@ -16,11 +16,12 @@ const { data, isPending } = useGetOrderByUserLogin()
       <ListEndIcon class="size-6" />
       Riwayat Transaksi Anda
     </h1>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <ItemSkeleton v-if="isPending" v-for="_ in 10" />
       <Item
         v-else-if="!isPending && data && data.data && data.data.length > 1"
         v-for="item in data.data"
+        :provider="item.item.provider"
         :title="item.item.title"
         :status="item.status"
         :phone="item.phone_number"
