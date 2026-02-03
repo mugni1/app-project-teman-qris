@@ -67,28 +67,28 @@ const props = defineProps<{
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="font-semibold text-base skeleton">Transaksi Transak</p>
         <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="font-semibold text-base skeleton">Transaksi Transak</p>
         <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton">Transaksi</p>
-        <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
+        <p class="font-semibold text-base skeleton">Transaksi Transaksi</p>
+        <p class="text-xs skeleton">Transaksi gagal diselesaikannn</p>
       </div>
     </li>
     <li class="step">
       <span class="step-icon skeleton"></span>
       <div class="hidden md:flex items-center justify-center flex-col gap-1">
-        <p class="font-semibold text-base skeleton">Transaksi</p>
+        <p class="font-semibold text-base skeleton">Transaksi Transak</p>
         <p class="text-xs skeleton">Transaksi gagal diselesaikan</p>
       </div>
     </li>
