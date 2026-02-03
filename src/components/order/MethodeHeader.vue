@@ -15,7 +15,7 @@ const props = defineProps<{
     <table class="border-separate border-spacing-y-2">
       <tbody>
         <tr>
-          <td class="w-5/12">ID Transaksi</td>
+          <td class="w-4/12">ID Transaksi</td>
           <td v-if="!pending">: {{ trxId }}</td>
           <td v-else class="flex items-center gap-2">
             :
@@ -23,7 +23,7 @@ const props = defineProps<{
           </td>
         </tr>
         <tr>
-          <td>Status Transaksi</td>
+          <td>Status</td>
           <td v-if="!pending">
             :
             <span v-if="status == 'pending'" class="badge-sm badge badge-warning">Pending</span>

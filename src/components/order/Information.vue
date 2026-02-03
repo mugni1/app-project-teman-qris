@@ -15,7 +15,7 @@ const props = defineProps<{
         alt=""
       />
     </div>
-    <div class="col-span-9 space-y-2">
+    <div class="col-span-9 md:space-y-2">
       <h3 class="font-semibold text-base">Informasi Transaksi</h3>
       <table class="w-full text-xs md:text-sm border-separate border-spacing-y-1">
         <tbody>

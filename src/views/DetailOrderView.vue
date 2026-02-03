@@ -81,9 +81,7 @@ watch(data, (value) => {
     v-if="!isPendingGetOrder && data?.status != 200"
     class="min-h-dvh flex flex-col justify-center items-center pb-25 gap-8"
   >
-    <h1 class="text-center capitalize font-bold mb-1 text-xl md:text-2xl">
-      Oops, Sepertinya terjadi kesalahan
-    </h1>
+    <h1 class="text-center capitalize font-bold mb-1 text-xl md:text-2xl">Oops, Sepertinya terjadi kesalahan</h1>
     <h1 class="text-center capitalize font-semibold mb-4 text-sm md:text-base">
       {{ data?.message }}
     </h1>
@@ -103,7 +101,7 @@ watch(data, (value) => {
         <Steps :status="data?.data?.status || ''" :pending="isPendingGetOrder" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section class="space-y-4">
-            <div class="badge badge-soft badge-error font-bold">
+            <div class="badge badge-error font-bold">
               <AlarmClock class="size-4" />
               {{ formattedTime }}
             </div>

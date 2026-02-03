@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="border-2 border-primary bg-base-200 p-4 card">
+  <div class="bg-base-200 border border-base-300 p-4 card">
     <div class="flex justify-between w-full font-semibold text-base text-primary">
       <span>Total Pembayaran</span>
       <span v-if="!pending">Rp {{ totalPrice.toLocaleString('id-ID') }}</span>
