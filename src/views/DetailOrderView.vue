@@ -107,6 +107,7 @@ watch(data, (value) => {
             </div>
             <div v-else class="badge skeleton text-transparent">Fotmated time time time time</div>
             <Information
+              :provider="data?.data?.item.provider || 'axis'"
               :pending="isPendingGetOrder"
               :product="data?.data?.item.title"
               :phone="data?.data?.phone_number"

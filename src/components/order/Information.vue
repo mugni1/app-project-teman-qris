@@ -4,16 +4,20 @@ const props = defineProps<{
   phone: string | undefined
   pending: boolean
   product: string | undefined
+  provider: string
 }>()
 </script>
 
 <template>
   <div class="card bg-base-200 border border-base-300 p-4 grid grid-cols-12 gap-4">
     <div v-if="!pending" class="col-span-3 aspect-square bg-white overflow-hidden card">
-      <img
-        src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-799858.png&w=1920&q=75"
-        alt=""
-      />
+      <img v-if="provider == 'xl'" src="/images/xl.webp" alt="image" />
+      <img v-if="provider == 'axis'" src="/images/axis.webp" alt="image" />
+      <img v-if="provider == 'telkomsel'" src="/images/telkomsel.webp" alt="image" />
+      <img v-if="provider == 'byu'" src="/images/byu.webp" alt="image" />
+      <img v-if="provider == 'indosat'" src="/images/indosat.webp" alt="image" />
+      <img v-if="provider == 'three'" src="/images/three.webp" alt="image" />
+      <img v-if="provider == 'smartfren'" src="/images/smartfren.webp" alt="image" />
     </div>
     <div v-else class="col-span-3 aspect-square overflow-hidden card skeleton"></div>
     <div class="col-span-9 md:space-y-2">
