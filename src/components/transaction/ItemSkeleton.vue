@@ -6,9 +6,8 @@
         <h3 class="font-semibold line-clamp-1 text-transparent skeleton text-sm md:text-base">This Text for title</h3>
         <div class="badge badge-xs md:badge-sm text-transparent skeleton">This is badge</div>
       </div>
-      <div class="grid grid-cols-2 text-transparent gap-1">
+      <div class="grid grid-cols-1 text-transparent gap-1">
         <span class="text-xs md:text-sm mt-auto skeleton">Skeletonuuuuuuuuuuuu</span>
-        <span class="text-xs md:text-sm mt-auto skeleton">Skeletoniuuuuuu</span>
       </div>
     </div>
   </div>

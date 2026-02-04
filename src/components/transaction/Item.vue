@@ -11,7 +11,7 @@ const props = defineProps<{
 </script>
 <template>
   <RouterLink :to="'/detail/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
-    <div class="col-span-3 md:col-span-2 aspect-square bg-accent card overflow-hidden">
+    <div class="col-span-3 md:col-span-2 aspect-square bg-white card overflow-hidden">
       <img v-if="provider == 'axis'" src="/images/axis.webp" alt="image" />
       <img v-if="provider == 'byu'" src="/images/byu.webp" alt="image" />
       <img v-if="provider == 'telkomsel'" src="/images/telkomsel.webp" alt="image" />
@@ -28,9 +28,8 @@ const props = defineProps<{
         <div class="badge capitalize badge-error badge-xs md:badge-sm" v-show="status == 'failed'">{{ status }}</div>
         <div class="badge capitalize badge-warning badge-xs md:badge-sm" v-show="status == 'pending'">{{ status }}</div>
       </div>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-1 gap-1">
         <span class="text-xs md:text-sm mt-auto line-clamp-1">{{ trxId }}</span>
-        <span class="text-xs md:text-sm mt-auto line-clamp-1">{{ phone }}</span>
       </div>
     </div>
   </RouterLink>
