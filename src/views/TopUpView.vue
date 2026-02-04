@@ -25,6 +25,8 @@ const params = computed<GetItemParams>(() => ({
   limit: '1000',
 }))
 const { data, isPending, isError, error, isFetching, refetch } = useGetItem(params)
+console.log(data)
+console.log(params.value)
 
 // methods
 const handleSelectItem = (value: Item) => {

@@ -12,7 +12,7 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <div v-if="items.length > 1" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div v-if="items.length > 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div
       class="rounded-lg overflow-hidden font-medium transition-all duration-300 select-none"
       :class="[

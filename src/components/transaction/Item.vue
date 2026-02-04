@@ -12,10 +12,13 @@ const props = defineProps<{
 <template>
   <RouterLink :to="'/detail/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
     <div class="col-span-3 md:col-span-2 aspect-square bg-accent card overflow-hidden">
-      <img
-        src="https://topup.ebelanja.id/_next/image?url=https%3A%2F%2Fs3.belanjapasti.com%2Fmedia%2Fimage%2Faxis-198257.png&w=384&q=75"
-        alt="image"
-      />
+      <img v-if="provider == 'axis'" src="/images/axis.webp" alt="image" />
+      <img v-if="provider == 'byu'" src="/images/byu.webp" alt="image" />
+      <img v-if="provider == 'telkomsel'" src="/images/telkomsel.webp" alt="image" />
+      <img v-if="provider == 'xl'" src="/images/xl.webp" alt="image" />
+      <img v-if="provider == 'indosat'" src="/images/indosat.webp" alt="image" />
+      <img v-if="provider == 'three'" src="/images/three.webp" alt="image" />
+      <img v-if="provider == 'smartfren'" src="/images/smartfren.webp" alt="image" />
     </div>
     <div class="col-span-9 md:col-span-10 text-base flex flex-col justify-between">
       <div class="md:space-y-1">
