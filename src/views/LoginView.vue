@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Content from '@/components/content/Content.vue'
 import Cookies from 'js-cookie'
 import { useLogin } from '@/hooks/useLogin'
 import { loginSchema } from '@/schema/login.schema'
@@ -61,7 +60,7 @@ const handleSubmit = async () => {
   }
 }
 const handleAuthGoogle = () => {
-  window.location.href = import.meta.env.VITE_BASE_API_URL + '/auth/google'
+  window.location.href = `${import.meta.env.VITE_BASE_API_URL}/auth/google`
 }
 
 // watcher
