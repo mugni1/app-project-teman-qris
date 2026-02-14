@@ -28,7 +28,7 @@ const props = defineProps<{
       <span class="flex items-center gap-2"><ScanTextIcon class="size-4" /> Mudah</span>
       <span class="flex items-center gap-2"><Headphones class="size-4" /> CS 24 Jam</span>
     </div>
-    <div class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-12 md:bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square">
+    <div class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square">
       <img
         :src="imageUrl"
         alt="image"
