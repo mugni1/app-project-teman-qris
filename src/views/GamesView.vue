@@ -1,46 +1,53 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue'
-import { Cloud, CloudLightning, Headphones, ScanTextIcon } from 'lucide-vue-next'
+import Checkout from '@/components/games/Checkout.vue'
+import CS from '@/components/games/CS.vue'
+import Header from '@/components/games/Header.vue'
+import Info from '@/components/games/Info.vue'
+import Item, { type ItemNew } from '@/components/games/Item.vue'
+import Payment from '@/components/games/Payment.vue'
+import { ShoppingBag } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { data } from '@/components/games/data'
 import { useRoute } from 'vue-router'
 
 // state
 const route = useRoute()
 const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : route.params.slug
+const column1 = ref<undefined | string>()
+const column2 = ref<undefined | string>()
+const selectedPayment = ref<undefined | string>()
+const selectedItem = ref<undefined | ItemNew>()
+
+// methods
+const handleChangeColumn1 = (value: string | undefined) => {
+  column1.value = value
+}
+const handleChangeColumn2 = (value: string | undefined) => {
+  column2.value = value
+}
+const handleChangePayment = (value: string | undefined) => {
+  selectedPayment.value = value
+}
+const handleChangeItem = (value: ItemNew | undefined) => {
+  selectedItem.value = value
+}
 </script>
 
 <template>
-  <Content>
-    <section class="relative card overflow-hidden bg-base-200 border-2 border-base-300">
-      <img
-        src="https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2Fproduct%2FBanner-MLBB.webp&w=1920&q=100"
-        alt="banner"
-        loading="lazy"
-        class="h-45 lg:h-80 object-cover object-center"
-      />
-      <div class="gap-12 flex items-center p-4 lg:p-8">
-        <div class="ms-auto w-7/12 lg:w-10/12 lg:ps-10">
-          <h1 class="card-title text-base lg:text-xl line-clamp-1 truncate">Mobile Legend Bang Bang</h1>
-          <p class="stat-title lg:text-base">Moontoon</p>
-          <div class="hidden lg:flex items-center gap-4 mt-4 card-title text-xs lg:text-sm">
-            <span class="flex items-center gap-2"><CloudLightning class="size-5" /> Proses Cepat</span>
-            <span class="flex items-center gap-2"><ScanTextIcon class="size-5" /> Pembayaran Mudah</span>
-            <span class="flex items-center gap-2"><Headphones class="size-5" /> CS 24 Jam</span>
-          </div>
-        </div>
-      </div>
-      <div class="flex lg:hidden items-center gap-4 card-title text-xs lg:text-sm p-4 pt-0">
-        <span class="flex items-center gap-2"><CloudLightning class="size-4" /> Cepat</span>
-        <span class="flex items-center gap-2"><ScanTextIcon class="size-4" /> Mudah</span>
-        <span class="flex items-center gap-2"><Headphones class="size-4" /> CS 24 Jam</span>
-      </div>
-      <div class="w-4/12 lg:w-2/12 absolute bottom-12 lg:bottom-8 left-4 lg:left-8">
-        <img
-          src="https://www.bangjeff.com/_next/image?url=https%3A%2F%2Fcdn.bangjeff.com%2F87379964-51d0-4baa-a8d6-69ec2aebee85.webp&w=1920&q=75"
-          alt="image"
-          loading="lazy"
-          class="card border border-base-300"
-        />
-      </div>
-    </section>
+  <Content class="space-y-4">
+    <Header :title="data.title" :studio="data.studio" :cover-url="data.cover_url" :image-url="data.image_url" />
+    <form action="" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
+      <section class="space-y-4 lg:col-span-2">
+        <Info @change-column1="handleChangeColumn1" @change-column2="handleChangeColumn2" />
+        <Item @change-item="handleChangeItem" />
+        <Payment @change-payment="handleChangePayment" />
+      </section>
+      <section class="space-y-4">
+        <CS />
+        <Checkout :item="selectedItem" />
+        <button type="submit" class="btn btn-primary w-full"><ShoppingBag class="size-5" /> Pesan Sekarang</button>
+      </section>
+    </form>
   </Content>
 </template>
