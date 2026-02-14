@@ -2,8 +2,12 @@
 import { ref, watch } from 'vue'
 import IconQris from '@/icons/IconQris.vue'
 import { data } from './data'
+import { XCircleIcon } from 'lucide-vue-next'
 
 // state
+const props = defineProps<{
+  error: string | null
+}>()
 const emits = defineEmits<{
   (e: 'changePayment', value: undefined | string): void
 }>()
@@ -38,6 +42,7 @@ watch(selectedPayment, (newValue) => {
         </div>
       </label>
     </div>
+    <p v-show="error" class="text-xs label text-error"><XCircleIcon class="size-3" /> {{ error }}</p>
   </div>
 </template>
 

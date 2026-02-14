@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { data } from './data'
+import { XCircleIcon } from 'lucide-vue-next'
 
+const props = defineProps<{
+  error: string | null
+}>()
 const emits = defineEmits<{
   (e: 'changeColumn1', value: string | undefined): void
   (e: 'changeColumn2', value: string | undefined): void
@@ -33,7 +37,7 @@ if (data.column2) {
           class="input focus:outline-none focus:border-primary w-full"
           :placeholder="`Masukan ${data.column1_title}`"
         />
-        <p class="label hidden">Optional</p>
+        <p v-show="error" class="label text-error"><XCircleIcon class="size-3" /> {{ error }}</p>
       </fieldset>
       <fieldset class="fieldset" v-if="data.column2">
         <legend class="fieldset-legend">{{ data.column2_title }}</legend>
@@ -43,7 +47,6 @@ if (data.column2) {
           class="input focus:outline-none focus:border-primary w-full"
           :placeholder="`Masukan ${data.column2_title}`"
         />
-        <p class="label hidden">Optional</p>
       </fieldset>
     </div>
   </div>

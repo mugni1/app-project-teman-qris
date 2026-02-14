@@ -2,6 +2,7 @@
 import IconInstant from '@/icons/IconInstant.vue'
 import { ref, watch } from 'vue'
 import { data } from './data'
+import { XCircleIcon } from 'lucide-vue-next'
 
 export interface ItemNew {
   id: string
@@ -11,6 +12,9 @@ export interface ItemNew {
 }
 
 // state
+const props = defineProps<{
+  error: string | null
+}>()
 const emits = defineEmits<{
   (e: 'changeItem', value: ItemNew | undefined): void
 }>()
@@ -43,6 +47,7 @@ watch(selectedItem, (newValue) => {
         </div>
       </label>
     </div>
+    <p v-show="error" class="text-xs label text-error"><XCircleIcon class="size-3" /> {{ error }}</p>
   </div>
 </template>
 
