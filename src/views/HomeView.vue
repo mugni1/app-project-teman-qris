@@ -3,11 +3,11 @@ import Blog from '@/components/blog/Blog.vue'
 import Carousel from '@/components/carousel/Carousel.vue'
 import Content from '@/components/content/Content.vue'
 import Description from '@/components/description/Description.vue'
-import Games from '@/components/home/Games.vue'
+import ListItem from '@/components/home/ListItem.vue'
 import { useGetCategories } from '@/hooks/useGetCategories'
 import { onMounted, ref, watch } from 'vue'
+import { JoystickIcon, SmartphoneChargingIcon } from 'lucide-vue-next'
 import type { Category } from '@/types/category'
-import SimCard from '@/components/home/SimCard.vue'
 
 // state
 const { data, refetch, isPending, isRefetching } = useGetCategories()
@@ -37,7 +37,9 @@ onMounted(() => {
 <template>
   <Content class="space-y-8">
     <Carousel />
-    <SimCard
+    <ListItem
+      title="TOPUP PULSA & KUOTA"
+      :icon="SmartphoneChargingIcon"
       @refetch="refetch"
       :data="simCard"
       :is-pending="isPending"
@@ -45,7 +47,9 @@ onMounted(() => {
       :status="data?.status || 500"
       :message="data?.message || 'Internal server error'"
     />
-    <Games
+    <ListItem
+      title="TOPUP GAMES"
+      :icon="JoystickIcon"
       @refetch="refetch"
       :data="games"
       :is-pending="isPending"

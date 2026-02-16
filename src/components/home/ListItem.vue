@@ -2,9 +2,12 @@
 import { computed } from 'vue'
 import type { Category } from '@/types/category'
 import type { HttpStatusCode } from 'axios'
-import { Gamepad2, InfoIcon, Loader } from 'lucide-vue-next'
+import { InfoIcon, Loader } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
+  title: string
+  icon: unknown
   data: Category[] | undefined
   isPending: boolean
   isRefetching: boolean
@@ -26,8 +29,8 @@ const handleRefetch = () => {
 
 <template>
   <h1 class="font-bold text-base lg:text-2xl flex items-center gap-2 mb-2">
-    <Gamepad2 class="size-5 lg:size-7" />
-    TOPUP GAMES
+    <component :is="icon" class="size-5 lg:size-7" />
+    {{ title }}
   </h1>
   <div v-if="isPending" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
     <div
@@ -45,11 +48,13 @@ const handleRefetch = () => {
   </div>
   <div v-else-if="hasData" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
     <div v-for="item in data" :key="item.id">
-      <img
-        :src="item.image_url"
-        alt="image"
-        class="card bg-base-300 border border-base-300 aspect-square w-full h-full object-cover origin-center"
-      />
+      <RouterLink :to="`/games/${item.id}`">
+        <img
+          :src="item.image_url"
+          alt="image"
+          class="card bg-base-300 border border-base-300 aspect-square w-full h-full object-cover origin-center"
+        />
+      </RouterLink>
     </div>
   </div>
   <div v-else-if="isEmpty">
