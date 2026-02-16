@@ -1,10 +1,11 @@
 import { getItems } from '@/api/services'
 import { handleErrorResponse } from '@/libs/response'
-import type { GetItemParams, GetItemResponse } from '@/types/item'
+import type { Params } from '@/types/global.type'
+import type { GetItemResponse } from '@/types/item.type'
 import { useQuery } from '@tanstack/vue-query'
 import { unref, type Ref } from 'vue'
 
-const fetch = async (params?: GetItemParams): Promise<GetItemResponse> => {
+const fetch = async (params?: Params): Promise<GetItemResponse> => {
   try {
     const result = await getItems(params)
     return result.data
@@ -13,7 +14,7 @@ const fetch = async (params?: GetItemParams): Promise<GetItemResponse> => {
   }
 }
 
-export const useGetItem = (params?: Ref<GetItemParams>) => {
+export const useGetItem = (params?: Ref<Params>) => {
   return useQuery({
     queryKey: ['items', params],
     queryFn: (): Promise<GetItemResponse> => fetch(unref(params)),

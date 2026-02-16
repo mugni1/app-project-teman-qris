@@ -12,10 +12,12 @@ import { data } from '@/components/games/data'
 import { useRoute } from 'vue-router'
 import { checkoutSchema, type CheckoutInput } from '@/schema/checkout.schema'
 import { toast } from 'vue-sonner'
+import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
 
 // state
 const route = useRoute()
 const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : route.params.slug
+const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetail(slug ?? '')
 const column1 = ref<undefined | string>()
 const column2 = ref<undefined | string>()
 const selectedPayment = ref<undefined | string>()
@@ -89,7 +91,12 @@ const handleChangeItem = (value: ItemNew | undefined) => {
 
 <template>
   <Content class="space-y-4">
-    <Header :title="data.title" :studio="data.studio" :cover-url="data.cover_url" :image-url="data.image_url" />
+    <Header
+      :title="category?.data?.title || ''"
+      :studio="data.studio"
+      :cover-url="category?.data?.cover_url || ''"
+      :image-url="category?.data?.image_url || ''"
+    />
     <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
       <section class="space-y-4 lg:col-span-2">
         <Info
