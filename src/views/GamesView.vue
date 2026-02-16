@@ -8,7 +8,6 @@ import Item, { type ItemNew } from '@/components/games/Item.vue'
 import Payment from '@/components/games/Payment.vue'
 import { ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
-import { data } from '@/components/games/data'
 import { useRoute } from 'vue-router'
 import { checkoutSchema, type CheckoutInput } from '@/schema/checkout.schema'
 import { toast } from 'vue-sonner'
@@ -23,7 +22,7 @@ const column2 = ref<undefined | string>()
 const selectedPayment = ref<undefined | string>()
 const selectedItem = ref<undefined | ItemNew>()
 const form = computed<CheckoutInput>(() => {
-  if (data.column2) {
+  if (category.value?.data?.column_2) {
     const destination = column2.value ? `${column1.value}(${column2.value})` : ''
     return {
       destination: destination,
@@ -93,15 +92,19 @@ const handleChangeItem = (value: ItemNew | undefined) => {
   <Content class="space-y-4">
     <Header
       :title="category?.data?.title || ''"
-      :studio="data.studio"
+      :studio="category?.data?.studio || ''"
       :cover-url="category?.data?.cover_url || ''"
       :image-url="category?.data?.image_url || ''"
     />
     <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
       <section class="space-y-4 lg:col-span-2">
         <Info
-          @change-column1="handleChangeColumn1"
-          @change-column2="handleChangeColumn2"
+          :column_1="category?.data?.column_1 || false"
+          :column_2="category?.data?.column_2 || false"
+          :column_1_title="category?.data?.column_1_title || ''"
+          :column_2_title="category?.data?.column_2_title || ''"
+          @changeColumn1="handleChangeColumn1"
+          @changeColumn2="handleChangeColumn2"
           :error="formError.destination"
         />
         <Item @change-item="handleChangeItem" :error="formError.item_id" />

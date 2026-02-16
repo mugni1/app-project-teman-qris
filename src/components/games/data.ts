@@ -6,7 +6,7 @@ export const data = {
   title: 'Mobile Legend Bang Bang',
   studio: 'Moontoon',
   column1: true,
-  column2: true,
+  column2: false,
   column1_title: 'ID',
   column2_title: 'Server',
   paymentMethods: [{ value: 'qris', label: 'QRIS', description: 'Bayar instan via scan QR' }],

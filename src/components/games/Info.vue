@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { data } from './data'
 import { XCircleIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   error: string | null
+  column_1: boolean
+  column_2: boolean
+  column_1_title: string
+  column_2_title: string
 }>()
 const emits = defineEmits<{
   (e: 'changeColumn1', value: string | undefined): void
@@ -13,38 +16,34 @@ const emits = defineEmits<{
 const column1 = ref<undefined | string>()
 const column2 = ref<undefined | string>()
 
-if (data.column1) {
-  watch(column1, (newValue) => {
-    emits('changeColumn1', newValue)
-  })
-}
-if (data.column2) {
-  watch(column2, (newValue) => {
-    emits('changeColumn2', newValue)
-  })
-}
+watch(column1, (newValue) => {
+  emits('changeColumn1', newValue)
+})
+watch(column2, (newValue) => {
+  emits('changeColumn2', newValue)
+})
 </script>
 
 <template>
   <div class="card-item">
     <h3 class="card-title text-primary">1. Masukan Data Akun</h3>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
-      <fieldset class="fieldset" v-if="data.column1">
-        <legend class="fieldset-legend">{{ data.column1_title }}</legend>
+      <fieldset class="fieldset" v-if="column_1">
+        <legend class="fieldset-legend">{{ column_1_title }}</legend>
         <input
           type="text"
           v-model="column1"
           class="input focus:outline-none focus:border-primary w-full"
-          :placeholder="`Masukan ${data.column1_title}`"
+          :placeholder="`Masukan ${column_1_title}`"
         />
       </fieldset>
-      <fieldset class="fieldset" v-if="data.column2">
-        <legend class="fieldset-legend">{{ data.column2_title }}</legend>
+      <fieldset class="fieldset" v-if="column_2">
+        <legend class="fieldset-legend">{{ column_2_title }}</legend>
         <input
           type="text"
           v-model="column2"
           class="input focus:outline-none focus:border-primary w-full"
-          :placeholder="`Masukan ${data.column2_title}`"
+          :placeholder="`Masukan ${column_2_title}`"
         />
       </fieldset>
     </div>
