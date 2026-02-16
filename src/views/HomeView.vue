@@ -5,7 +5,7 @@ import Content from '@/components/content/Content.vue'
 import Description from '@/components/description/Description.vue'
 import Games from '@/components/home/Games.vue'
 import { useGetCategories } from '@/hooks/useGetCategories'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import type { Category } from '@/types/category'
 import SimCard from '@/components/home/SimCard.vue'
 
@@ -22,6 +22,12 @@ watch(
     }
   },
 )
+onMounted(() => {
+  if (data.value && data.value.data) {
+    games.value = data.value.data.filter((item) => item.type == 'games')
+    simCard.value = data.value.data.filter((item) => item.type == 'credit')
+  }
+})
 </script>
 
 <template>
