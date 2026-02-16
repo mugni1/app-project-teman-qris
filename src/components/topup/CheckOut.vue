@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
-import type { Item } from '@/types/item'
+import type { Item } from '@/types/item.type'
 import type { CreateOrderResponse } from '@/types/order.type'
 import { HttpStatusCode } from 'axios'
 import { CheckCircle2, Loader2, ShoppingBag, XCircleIcon } from 'lucide-vue-next'
@@ -80,7 +80,7 @@ const handleSubmit = async () => {
   <div class="card bg-base-200 p-4 border border-base-content/20 gap-2 grid grid-cols-1 lg:grid-cols-2">
     <div class="col-span-1">
       <p class="text-sm text-base-content/80 capitalize">
-        {{ selectedItem?.title || '' }} - {{ selectedItem?.type_status || '' }}
+        {{ selectedItem?.title || '' }}
       </p>
       <b>Rp {{ selectedItem?.price.toLocaleString('id-ID') || 0 }}</b>
     </div>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { GetItemParams, Item } from '@/types/item'
 import Content from '@/components/content/Content.vue'
 import ListProduct from '@/components/topup/ListProduct.vue'
 import CheckOut from '@/components/topup/CheckOut.vue'
@@ -11,6 +10,8 @@ import { useRoute } from 'vue-router'
 import PendingListProduct from '@/components/topup/PendingListProduct.vue'
 import ErrorListProduct from '@/components/topup/ErrorListProduct.vue'
 import { Grid2x2CheckIcon, Phone } from 'lucide-vue-next'
+import type { Item } from '@/types/item.type'
+import type { Params } from '@/types/global.type'
 
 // state
 const route = useRoute()
@@ -19,7 +20,7 @@ const phone = ref('')
 const selectedItem = ref<null | Item>(null)
 const selectedPayment = ref<null | string>(null)
 const selectedTab = ref<'credit' | 'quota'>('credit')
-const params = computed<GetItemParams>(() => ({
+const params = computed<Params>(() => ({
   filter_by_provider: provider,
   filter_by_credit: selectedTab.value,
   limit: '1000',

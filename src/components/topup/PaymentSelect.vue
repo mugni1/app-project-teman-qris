@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Item } from '@/types/item'
+import type { Item } from '@/types/item.type'
 import { ScanBarcode } from 'lucide-vue-next'
 
 const emits = defineEmits<{
