@@ -9,10 +9,12 @@ import { onMounted, ref, watch } from 'vue'
 import type { Category } from '@/types/category'
 import SimCard from '@/components/home/SimCard.vue'
 
-const { data, refetch, isPending } = useGetCategories()
+// state
+const { data, refetch, isPending, isRefetching } = useGetCategories()
 const simCard = ref<Category[] | undefined>()
 const games = ref<Category[] | undefined>()
 
+// watcher
 watch(
   () => data.value,
   (newValue) => {
@@ -22,6 +24,8 @@ watch(
     }
   },
 )
+
+// onMounted
 onMounted(() => {
   if (data.value && data.value.data) {
     games.value = data.value.data.filter((item) => item.type == 'games')
@@ -33,8 +37,22 @@ onMounted(() => {
 <template>
   <Content class="space-y-8">
     <Carousel />
-    <SimCard :data="simCard" :is-pending="isPending" />
-    <Games :data="games" :is-pending="isPending" />
+    <SimCard
+      @refetch="refetch"
+      :data="simCard"
+      :is-pending="isPending"
+      :is-refetching="isRefetching"
+      :status="data?.status || 500"
+      :message="data?.message || 'Internal server error'"
+    />
+    <Games
+      @refetch="refetch"
+      :data="games"
+      :is-pending="isPending"
+      :is-refetching="isRefetching"
+      :status="data?.status || 500"
+      :message="data?.message || 'Internal server error'"
+    />
     <Blog />
     <Description />
   </Content>
