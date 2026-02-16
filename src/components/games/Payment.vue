@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import IconQris from '@/icons/IconQris.vue'
+import { ref, watch } from 'vue'
 import { data } from './data'
 import { XCircleIcon } from 'lucide-vue-next'
 
@@ -42,7 +42,7 @@ watch(selectedPayment, (newValue) => {
         </div>
       </label>
     </div>
-    <p v-show="error" class="text-xs label text-error"><XCircleIcon class="size-3" /> {{ error }}</p>
+    <p v-if="error" class="text-xs label text-error"><XCircleIcon class="size-3" /> {{ error }}</p>
   </div>
 </template>
 
@@ -54,6 +54,6 @@ watch(selectedPayment, (newValue) => {
 }
 
 .card-payment {
-  @apply flex items-center justify-between rounded-xl border border-base-300 bg-base-100 p-4 peer-checked:border-primary peer-checked:bg-primary/10;
+  @apply flex items-center justify-between rounded-xl border border-base-content/20 bg-base-100 p-4 peer-checked:border-primary peer-checked:bg-primary/10;
 }
 </style>

@@ -4,7 +4,7 @@ import Checkout from '@/components/games/Checkout.vue'
 import CS from '@/components/games/CS.vue'
 import Header from '@/components/games/Header.vue'
 import Info from '@/components/games/Info.vue'
-import Item, { type ItemNew } from '@/components/games/Item.vue'
+import Items from '@/components/games/Items.vue'
 import Payment from '@/components/games/Payment.vue'
 import { ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router'
 import { checkoutSchema, type CheckoutInput } from '@/schema/checkout.schema'
 import { toast } from 'vue-sonner'
 import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
+import type { Item } from '@/types/item.type'
 
 // state
 const route = useRoute()
@@ -20,7 +21,9 @@ const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetai
 const column1 = ref<undefined | string>()
 const column2 = ref<undefined | string>()
 const selectedPayment = ref<undefined | string>()
-const selectedItem = ref<undefined | ItemNew>()
+const selectedItem = ref<undefined | Item>()
+
+// form
 const form = computed<CheckoutInput>(() => {
   if (category.value?.data?.column_2) {
     const destination = column2.value ? `${column1.value}(${column2.value})` : ''
@@ -82,7 +85,7 @@ const handleChangePayment = (value: string | undefined) => {
   selectedPayment.value = value
   validate()
 }
-const handleChangeItem = (value: ItemNew | undefined) => {
+const handleChangeItem = (value: Item | undefined) => {
   selectedItem.value = value
   validate()
 }
@@ -107,7 +110,16 @@ const handleChangeItem = (value: ItemNew | undefined) => {
           @changeColumn2="handleChangeColumn2"
           :error="formError.destination"
         />
-        <Item @change-item="handleChangeItem" :error="formError.item_id" />
+        <Items
+          @refetch="refetch()"
+          @change-item="handleChangeItem"
+          :error-message="category?.message || 'Internal server error'"
+          :error="formError.item_id"
+          :data="category?.data?.items || []"
+          :is-pending="isPending"
+          :is-refetching="isRefetching"
+          :status="category?.status || 500"
+        />
         <Payment @change-payment="handleChangePayment" :error="formError.payment_method" />
       </section>
       <section class="space-y-4">

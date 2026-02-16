@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { InfoIcon } from 'lucide-vue-next'
-import type { ItemNew } from './Item.vue'
 import { data } from './data'
+import type { Item } from '@/types/item.type'
 
 // state
 const props = defineProps<{
-  item: undefined | ItemNew
+  item: undefined | Item
 }>()
 </script>
 

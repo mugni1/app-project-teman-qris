@@ -47,7 +47,7 @@ watch(column2, (newValue) => {
         />
       </fieldset>
     </div>
-    <p v-show="error" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error }}</p>
+    <p v-if="error" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error }}</p>
   </div>
 </template>
 
