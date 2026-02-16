@@ -4,4 +4,5 @@ export const ENDPOINT = {
   REGISTER: `/auth/register`,
   ME: `/auth/me`,
   ITEM: `/item`,
+  CATEGORY: `/category`,
 }

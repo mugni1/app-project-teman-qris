@@ -19,6 +19,8 @@ import type {
   RegisterResponse,
 } from '@/types/auth.type'
 import type { GetItemParams, GetItemResponse } from '@/types/item'
+import type { Params } from '@/types/global.type'
+import type { GetCategoriesResponse } from '@/types/category'
 
 export const createPaymentQrisPwService = async (
   payload: CreateOrderPayload,
@@ -56,4 +58,8 @@ export const getOrderByUserLoginService = async (
   params?: GetOrderByUserLoginParams,
 ): Promise<AxiosResponse<GetOrderByUserLoginResponse>> => {
   return httpClient.get(ENDPOINT.ORDER, { params })
+}
+
+export const getCategoriesService = async (params?: Params): Promise<AxiosResponse<GetCategoriesResponse>> => {
+  return httpClient.get(ENDPOINT.CATEGORY, { params })
 }

@@ -13,43 +13,41 @@ const navigation = {
 </script>
 
 <template>
-  <section class="x-auto container pb-4">
-    <Swiper
-      direction="horizontal"
-      :navigation="navigation"
-      :mousewheel="true"
-      :keyboard="true"
-      :modules="modules"
-      :space-between="0"
-      :autoplay="{
-        delay: 5000,
-        disableOnInteraction: false,
-      }"
-      loop
-      class="card overflow-hidden shadow-md border border-base-300"
-    >
-      <!-- SLIDE  -->
-      <SwiperSlide v-for="(image, index) in data.images" :key="index">
-        <img
-          class="w-full aspect-[9/4] object-cover object-center"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-          :src="image.url"
-          :alt="'image' + index"
-        />
-      </SwiperSlide>
+  <Swiper
+    direction="horizontal"
+    :navigation="navigation"
+    :mousewheel="true"
+    :keyboard="true"
+    :modules="modules"
+    :space-between="0"
+    :autoplay="{
+      delay: 5000,
+      disableOnInteraction: false,
+    }"
+    loop
+    class="card overflow-hidden shadow-md border border-base-300"
+  >
+    <!-- SLIDE  -->
+    <SwiperSlide v-for="(image, index) in data.images" :key="index">
+      <img
+        class="w-full aspect-9/4 object-cover object-center"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        :src="image.url"
+        :alt="'image' + index"
+      />
+    </SwiperSlide>
 
-      <!-- CHEVRON PREV -->
-      <button class="swiper-button-prev-custom">
-        <ChevronLeft />
-      </button>
-      <!-- CHEVRON NEXT -->
-      <button class="swiper-button-next-custom">
-        <ChevronRight />
-      </button>
-    </Swiper>
-  </section>
+    <!-- CHEVRON PREV -->
+    <button class="swiper-button-prev-custom">
+      <ChevronLeft />
+    </button>
+    <!-- CHEVRON NEXT -->
+    <button class="swiper-button-next-custom">
+      <ChevronRight />
+    </button>
+  </Swiper>
 </template>
 
 <style scoped>
