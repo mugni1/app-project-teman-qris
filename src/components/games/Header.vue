@@ -11,7 +11,7 @@ const props = defineProps<{
 
 <template>
   <section class="relative card overflow-hidden bg-base-200 border border-base-300">
-    <img :src="coverUrl" alt="banner" loading="lazy" class="h-45 lg:h-80 object-cover object-center" />
+    <img :src="coverUrl" alt="banner" loading="lazy" class="aspect-12/6 lg:aspect-18/6 object-cover object-center" />
     <div class="gap-12 flex items-center p-4 lg:p-8">
       <div class="ms-auto w-7/12 md:w-8/12 lg:w-10/12 lg:ps-10">
         <h1 class="card-title text-base lg:text-xl line-clamp-1 truncate">{{ title }}</h1>
