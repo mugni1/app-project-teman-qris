@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { Category } from '@/types/category'
 import type { HttpStatusCode } from 'axios'
-import { Gamepad2, InfoIcon, Loader } from 'lucide-vue-next'
+import {  InfoIcon, Loader, TabletSmartphoneIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   data: Category[] | undefined
@@ -26,7 +26,7 @@ const handleRefetch = () => {
 
 <template>
   <h1 class="font-bold text-base lg:text-2xl flex items-center gap-2 mb-2">
-    <Gamepad2 class="size-5 lg:size-7" />
+    <TabletSmartphoneIcon class="size-5 lg:size-7" />
     TOPUP PULSA & KUOTA
   </h1>
   <div v-if="isPending" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
