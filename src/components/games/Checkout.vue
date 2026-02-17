@@ -23,7 +23,7 @@ const props = defineProps<{
         <p class="card-title text-sm text-base-content/80">{{ item.title }}</p>
       </div>
     </div>
-    <div class="space-y-2 text-sm">
+    <div class="space-y-2 text-sm text-base-content/80">
       <div class="flex justify-between">
         <p>Harga</p>
         <p>Rp {{ item.price.toLocaleString('id-ID') }}</p>
@@ -38,8 +38,8 @@ const props = defineProps<{
       </div>
       <div class="h-px w-full bg-base-content/20"></div>
       <div class="flex justify-between">
-        <p class="card-title">Total</p>
-        <p class="card-title text-primary">Rp {{ item.price.toLocaleString('id-ID') }}</p>
+        <p class="card-title text-base">Total</p>
+        <p class="card-title text-base text-primary">Rp {{ item.price.toLocaleString('id-ID') }}</p>
       </div>
     </div>
   </div>
