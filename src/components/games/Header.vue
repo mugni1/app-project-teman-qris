@@ -6,12 +6,20 @@ const props = defineProps<{
   studio: string
   coverUrl: string
   imageUrl: string
+  isPending: boolean
 }>()
 </script>
 
 <template>
   <section class="relative card overflow-hidden bg-base-200 border border-base-300">
-    <img :src="coverUrl" alt="banner" loading="lazy" class="aspect-12/6 lg:aspect-18/6 object-cover object-center" />
+    <img
+      v-if="!isPending"
+      :src="coverUrl"
+      alt="banner"
+      loading="lazy"
+      class="aspect-12/6 lg:aspect-18/6 object-cover object-center"
+    />
+    <div v-else class="aspect-12/6 lg:aspect-18/6 object-cover object-center skeleton rounded-none" />
     <div class="gap-12 flex items-center p-4 lg:p-8">
       <div class="ms-auto w-7/12 md:w-8/12 lg:w-10/12 lg:ps-10">
         <h1 class="card-title text-base lg:text-xl line-clamp-1 truncate">{{ title }}</h1>
@@ -28,7 +36,10 @@ const props = defineProps<{
       <span class="flex items-center gap-2"><ScanTextIcon class="size-4" /> Mudah</span>
       <span class="flex items-center gap-2"><Headphones class="size-4" /> CS 24 Jam</span>
     </div>
-    <div class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square">
+    <div
+      v-if="!isPending"
+      class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square"
+    >
       <img
         :src="imageUrl"
         alt="image"
@@ -36,5 +47,9 @@ const props = defineProps<{
         class="card border border-base-300 w-full h-full object-cover object-center"
       />
     </div>
+    <div
+      v-else
+      class="skeleton w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square"
+    ></div>
   </section>
 </template>

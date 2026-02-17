@@ -94,6 +94,7 @@ const handleChangeItem = (value: Item | undefined) => {
 <template>
   <Content class="space-y-4">
     <Header
+      :is-pending="isPending"
       :title="category?.data?.title || ''"
       :studio="category?.data?.studio || ''"
       :cover-url="category?.data?.cover_url || ''"
@@ -102,6 +103,7 @@ const handleChangeItem = (value: Item | undefined) => {
     <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
       <section class="space-y-4 lg:col-span-2">
         <Info
+          :is-pending="isPending"
           :column_1="category?.data?.column_1 || false"
           :column_2="category?.data?.column_2 || false"
           :column_1_title="category?.data?.column_1_title || ''"

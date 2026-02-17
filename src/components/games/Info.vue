@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { XCircleIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
+  isPending: boolean
   error: string | null
   column_1: boolean
   column_2: boolean
@@ -27,7 +28,7 @@ watch(column2, (newValue) => {
 <template>
   <div class="card-item">
     <h3 class="card-title text-primary">1. Masukan Data Akun</h3>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
+    <div v-if="!isPending" class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
       <fieldset class="fieldset" v-if="column_1">
         <legend class="fieldset-legend">{{ column_1_title }}</legend>
         <input
@@ -45,6 +46,16 @@ watch(column2, (newValue) => {
           class="input focus:outline-none focus:border-primary w-full"
           :placeholder="`Masukan ${column_2_title}`"
         />
+      </fieldset>
+    </div>
+    <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
+      <fieldset class="fieldset">
+        <span class="w-30 h-5 skeleton"></span>
+        <input type="text" class="border-none input focus:outline-none focus:border-primary w-full skeleton" />
+      </fieldset>
+      <fieldset class="fieldset">
+        <span class="w-30 h-5 skeleton"></span>
+        <input type="text" class="border-none input focus:outline-none focus:border-primary w-full skeleton" />
       </fieldset>
     </div>
     <p v-if="error" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error }}</p>
