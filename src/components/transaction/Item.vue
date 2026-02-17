@@ -2,23 +2,17 @@
 import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
+  imageUrl: string
   title: string
   status: string
   trxId: string
   phone: string
-  provider: string
 }>()
 </script>
 <template>
   <RouterLink :to="'/detail/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
-    <div class="col-span-3 md:col-span-2 aspect-square bg-white card overflow-hidden">
-      <img v-if="provider == 'axis'" src="/images/axis.webp" alt="image" />
-      <img v-if="provider == 'byu'" src="/images/byu.webp" alt="image" />
-      <img v-if="provider == 'telkomsel'" src="/images/telkomsel.webp" alt="image" />
-      <img v-if="provider == 'xl'" src="/images/xl.webp" alt="image" />
-      <img v-if="provider == 'indosat'" src="/images/indosat.webp" alt="image" />
-      <img v-if="provider == 'three'" src="/images/three.webp" alt="image" />
-      <img v-if="provider == 'smartfren'" src="/images/smartfren.webp" alt="image" />
+    <div class="col-span-3 md:col-span-2 aspect-square bg-base-300 card overflow-hidden">
+      <img :src="imageUrl" alt="image" />
     </div>
     <div class="col-span-9 md:col-span-10 text-base flex flex-col justify-between">
       <div class="md:space-y-1">

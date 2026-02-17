@@ -15,7 +15,7 @@ const fetch = async (params?: GetOrderByUserLoginParams): Promise<GetOrderByUser
 
 export const useGetOrderByUserLogin = (params?: Ref<GetOrderByUserLoginParams>) => {
   return useQuery({
-    queryKey: ['order_by_user_login', params],
+    queryKey: ['ORDER_BY_USER_LOGIN', params],
     queryFn: (): Promise<GetOrderByUserLoginResponse> => fetch(unref(params)),
   })
 }

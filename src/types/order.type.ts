@@ -117,8 +117,13 @@ export interface OrderByUserLogin {
   created_at: string
   item_id: string
   item: {
+    id: string
     title: string
-    provider: string
+    category_id: string
+    category: {
+      image_url: string
+      title: string
+    }
   }
 }
 

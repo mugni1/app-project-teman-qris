@@ -21,7 +21,7 @@ const { data, isPending } = useGetOrderByUserLogin()
       <Item
         v-else-if="!isPending && data && data.data && data.data.length > 1"
         v-for="item in data.data"
-        :provider="item.item.provider"
+        :image-url="item.item.category.image_url"
         :title="item.item.title"
         :status="item.status"
         :phone="item.phone_number"
