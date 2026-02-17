@@ -22,8 +22,12 @@ const props = defineProps<{
     <div v-else class="aspect-12/6 lg:aspect-18/6 object-cover object-center skeleton rounded-none" />
     <div class="gap-12 flex items-center p-4 lg:p-8">
       <div class="ms-auto w-7/12 md:w-8/12 lg:w-10/12 lg:ps-10">
-        <h1 class="card-title text-base lg:text-xl line-clamp-1 truncate">{{ title }}</h1>
-        <p class="stat-title lg:text-base">{{ studio }}</p>
+        <h1 v-if="!isPending" class="card-title text-base lg:text-xl line-clamp-1 truncate mb-1">{{ title }}</h1>
+        <h1 v-else class="card-title text-base lg:text-xl line-clamp-1 truncate skeleton text-transparent mb-1">
+          This Is Title
+        </h1>
+        <p v-if="!isPending" class="stat-title lg:text-base">{{ studio }}</p>
+        <p v-else class="stat-title lg:text-base text-transparent skeleton">This is Studio</p>
         <div class="hidden lg:flex items-center gap-4 mt-4 card-title text-xs lg:text-sm">
           <span class="flex items-center gap-2"><CloudLightning class="size-5" /> Proses Cepat</span>
           <span class="flex items-center gap-2"><ScanTextIcon class="size-5" /> Pembayaran Mudah</span>
