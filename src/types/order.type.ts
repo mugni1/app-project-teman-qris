@@ -65,6 +65,12 @@ export interface GetOrderDetailResponse {
       type_credit: string
       type_status: string
       provider: string
+      category: {
+        column_1_title: string
+        image_url: string
+        title: string
+        studio: string
+      }
     }
     server_time: number
     expired_time: number
