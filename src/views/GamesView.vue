@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Item } from '@/types/item.type'
+import type { CreateOrderResponse } from '@/types/order.type'
 import Content from '@/components/content/Content.vue'
 import Checkout from '@/components/games/Checkout.vue'
 import CS from '@/components/games/CS.vue'
@@ -6,17 +8,20 @@ import Header from '@/components/games/Header.vue'
 import Info from '@/components/games/Info.vue'
 import Items from '@/components/games/Items.vue'
 import Payment from '@/components/games/Payment.vue'
-import { ShoppingBag } from 'lucide-vue-next'
+import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { checkoutSchema, type CheckoutInput } from '@/schema/checkout.schema'
 import { toast } from 'vue-sonner'
 import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
-import type { Item } from '@/types/item.type'
+import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
+import { HttpStatusCode } from 'axios'
 
 // state
+const router = useRouter()
 const route = useRoute()
 const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : route.params.slug
+const { mutateAsync, isPending: mutatePending } = usePostPaymentQrisPw()
 const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetail(slug ?? '')
 const column1 = ref<undefined | string>()
 const column2 = ref<undefined | string>()
@@ -71,7 +76,29 @@ const validate = () => {
 const handleSubmit = async () => {
   const isValid = validate()
   if (!isValid) return
-  toast.success('Sukses checkout')
+  if (selectedItem) {
+    try {
+      const result = await mutateAsync({
+        item_id: selectedItem.value?.id || '',
+        amount: selectedItem.value?.price || 0,
+        customer_phone: form.value.destination || '',
+        destination: form.value.destination || '',
+      })
+      if (result.status == HttpStatusCode.Created) {
+        toast.success(result.message, { action: { label: 'Close' } })
+        router.push('/detail/' + result.data?.id || '')
+      } else {
+        if (result.status == 403 || result.status == 401) {
+          toast.error('Please login to continue', { action: { label: 'Close' } })
+        } else {
+          toast.error(result.message, { action: { label: 'Close' } })
+        }
+      }
+    } catch (err: unknown) {
+      const error = err as CreateOrderResponse
+      toast.error(`${error.message}, try again later`, { action: { label: 'Close' } })
+    }
+  }
 }
 const handleChangeColumn1 = (value: string | undefined) => {
   column1.value = value
@@ -127,7 +154,12 @@ const handleChangeItem = (value: Item | undefined) => {
       <section class="space-y-4">
         <CS />
         <Checkout :item="selectedItem" />
-        <button type="submit" class="btn btn-primary w-full"><ShoppingBag class="size-5" /> Pesan Sekarang</button>
+        <button type="submit" class="btn btn-primary w-full" :disabled="mutatePending">
+          <ShoppingBag class="size-5" v-if="!mutatePending" />
+          <LoaderIcon class="size-5 animate-spin" v-if="mutatePending" />
+          <span v-if="!mutatePending">Pesan Sekarang</span>
+          <span v-if="mutatePending">Harap tunggu..</span>
+        </button>
       </section>
     </form>
   </Content>
