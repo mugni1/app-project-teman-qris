@@ -40,10 +40,13 @@ watch(selectedItem, (newValue) => {
       <label class="block cursor-pointer" v-for="item in data" :key="item.id">
         <input type="radio" v-model="selectedItem" name="item" :value="item" class="sr-only peer" />
         <div class="card-product">
-          <div class="p-4">
-            <p class="stat-title text-base-content truncate">{{ item.title }}</p>
-            <div class="flex gap-2">
-              <p class="text-primary text-base font-semibold truncate">Rp {{ item.price.toLocaleString('id-ID') }}</p>
+          <div class="p-4 flex flex-col md:flex-row gap-2 md:gap-4">
+            <img :src="item.image_url" alt="icon" class="size-10 object-cover" />
+            <div>
+              <p class="stat-title text-base-content truncate">{{ item.title }}</p>
+              <div class="flex gap-2">
+                <p class="text-primary text-base font-semibold truncate">Rp {{ item.price.toLocaleString('id-ID') }}</p>
+              </div>
             </div>
           </div>
           <div class="bg-base-content/20 p-2 flex justify-end">
@@ -80,10 +83,10 @@ watch(selectedItem, (newValue) => {
   @apply w-full card peer-checked:border-primary peer-checked:bg-primary/10 overflow-hidden;
 }
 .container-data {
-  @apply grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4;
 }
 .container-pending {
-  @apply grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4;
 }
 .container-empty {
   @apply card flex py-8 bg-base-100 border border-base-content/20 justify-center items-center;
