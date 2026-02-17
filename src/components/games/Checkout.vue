@@ -19,11 +19,11 @@ const props = defineProps<{
     <div class="flex items-center gap-4">
       <img :src="data.image_url" alt="image" class="w-2/12 aspect-square card" />
       <div class="w-10/12 pe-4">
-        <p class="card-title line-clamp-1 truncate">{{ data.title }}</p>
-        <p>{{ item.title }}</p>
+        <p class="card-title text-base line-clamp-1 truncate">{{ data.title }}</p>
+        <p class="card-title text-sm text-base-content/80">{{ item.title }}</p>
       </div>
     </div>
-    <div class="space-y-2">
+    <div class="space-y-2 text-sm">
       <div class="flex justify-between">
         <p>Harga</p>
         <p>Rp {{ item.price.toLocaleString('id-ID') }}</p>

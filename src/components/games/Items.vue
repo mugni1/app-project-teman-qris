@@ -34,7 +34,7 @@ watch(selectedItem, (newValue) => {
   <div class="card-item">
     <h3 class="card-title text-primary">2. Pilih Item</h3>
     <div v-if="isPending" class="container-pending">
-      <div v-for="_ in 6" class="card-product-pending aspect-video skeleton"></div>
+      <div v-for="_ in 6" class="card-product-pending aspect-square md:aspect-video skeleton"></div>
     </div>
     <div v-else-if="hasData" class="container-data">
       <label class="block cursor-pointer" v-for="item in data" :key="item.id">
