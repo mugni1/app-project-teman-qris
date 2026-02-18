@@ -26,7 +26,18 @@ const handleLogout = () => {
         <div class="h-8 lg:h-10 w-full skeleton" />
       </div>
       <div v-else class="w-full col-span-12 lg:col-span-4 space-y-4 card bg-base-200 p-8">
-        <img src="/images/no-image.jpg" alt="image" class="w-8/12 mx-auto lg:w-full aspect-square rounded-full" />
+        <img
+          v-if="data?.data?.avatar"
+          :src="data.data.avatar"
+          alt="image"
+          class="w-8/12 mx-auto lg:w-full aspect-square rounded-full"
+        />
+        <img
+          v-else
+          src="/images/no-image.jpg"
+          alt="image"
+          class="w-8/12 mx-auto lg:w-full aspect-square rounded-full"
+        />
         <h1 class="text-center text-2xl lg:text-3xl font-bold">{{ data?.data?.fullname || '' }}</h1>
       </div>
       <div class="w-full col-span-12 lg:col-span-8 card bg-base-200 p-4 lg:p-8 space-y-2">
