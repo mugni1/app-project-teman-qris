@@ -47,7 +47,6 @@ export const getItems = async (params?: Params): Promise<AxiosResponse<GetItemRe
 export const getOrderDetail = async (params: GetOrderDetailParams): Promise<AxiosResponse<GetOrderDetailResponse>> => {
   return httpClient.get(`${ENDPOINT.ORDER}/${params.id}`)
 }
-
 export const updateOrderDetail = async (
   params: UpdateOrderDetailParams,
 ): Promise<AxiosResponse<UpdateOderDetailResponse>> => {

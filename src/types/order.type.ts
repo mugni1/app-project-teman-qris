@@ -24,7 +24,6 @@ export interface CreateOrderResponse {
 
 export interface CreateOrderPayload {
   destination: string
-  customer_phone: string
   amount: number
   item_id: string
 }
@@ -39,7 +38,7 @@ export interface GetOrderDetailResponse {
   data: {
     id: string
     transaction_id: string
-    phone_number: string
+    destination: string
     amount: number
     status: string
     qris_url: string
@@ -90,8 +89,8 @@ export interface UpdateOderDetailResponse {
     id: string
     transaction_id: string
     amount: number
-    phone_number: string
-    status: string
+    destination: string
+    status: 'expired' | 'cancelled' | 'paid' | 'pending' | 'failed'
     qris_url: string
     qris_string: string
     expires_at: string
@@ -110,7 +109,7 @@ export interface OrderByUserLogin {
   id: string
   transaction_id: string
   amount: number
-  phone_number: string
+  destination: string
   status: 'expired' | 'cancelled' | 'paid' | 'pending' | 'failed'
   expires_at: string
   paid_at: string | null

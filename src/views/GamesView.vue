@@ -81,7 +81,6 @@ const handleSubmit = async () => {
       const result = await mutateAsync({
         item_id: selectedItem.value?.id || '',
         amount: selectedItem.value?.price || 0,
-        customer_phone: form.value.destination || '',
         destination: form.value.destination || '',
       })
       if (result.status == HttpStatusCode.Created) {

@@ -19,12 +19,12 @@ const { data, isPending } = useGetOrderByUserLogin()
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <ItemSkeleton v-if="isPending" v-for="_ in 10" />
       <Item
-        v-else-if="!isPending && data && data.data && data.data.length > 1"
+        v-else-if="!isPending && data && data.data && data.data.length > 0"
         v-for="item in data.data"
         :image-url="item.item.category.image_url"
         :title="item.item.title"
         :status="item.status"
-        :phone="item.phone_number"
+        :phone="item.destination"
         :trx-id="item.transaction_id"
       />
       <ItemNotFound v-else />
