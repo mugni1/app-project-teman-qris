@@ -30,7 +30,7 @@ const props = defineProps<{
           <p>{{ title }} :</p>
           <p>
             <span>{{ destination ?? '' }}</span>
-            <span> ({{ destination_second ?? '' }})</span>
+            <span v-if="destination_second"> ({{ destination_second ?? '' }})</span>
           </p>
         </div>
         <div class="w-full flex justify-between">
