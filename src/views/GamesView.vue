@@ -11,108 +11,110 @@ import Payment from '@/components/games/Payment.vue'
 import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { checkoutSchema, type CheckoutInput } from '@/schema/checkout.schema'
+import { checkoutSchema, checkoutSchemaSecond } from '@/schema/checkout.schema'
 import { toast } from 'vue-sonner'
 import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
 import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
 import { HttpStatusCode } from 'axios'
 
-// state
+/* ================= STATE ================= */
 const router = useRouter()
 const route = useRoute()
-const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : route.params.slug
+const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : (route.params.slug ?? '')
 const { mutateAsync, isPending: mutatePending } = usePostPaymentQrisPw()
-const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetail(slug ?? '')
-const column1 = ref<undefined | string>()
-const column2 = ref<undefined | string>()
-const selectedPayment = ref<undefined | string>()
-const selectedItem = ref<undefined | Item>()
+const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetail(slug)
+const isSecondColumnActive = computed(() => !!category.value?.data?.column_2)
+const column1 = ref<string>()
+const column2 = ref<string>()
+const selectedPayment = ref<string>()
+const selectedItem = ref<Item>()
 
-// form
-const form = computed<CheckoutInput>(() => {
-  if (category.value?.data?.column_2) {
-    const destination = column2.value ? `${column1.value}(${column2.value})` : ''
-    return {
-      destination: destination,
-      item_id: selectedItem.value?.id ?? '',
-      payment_method: selectedPayment.value ?? '',
-    }
-  } else {
-    const destination = column1.value ?? ''
-    return {
-      destination: destination,
-      item_id: selectedItem.value?.id ?? '',
-      payment_method: selectedPayment.value ?? '',
-    }
-  }
-})
-const formError = reactive<Record<keyof CheckoutInput, string | null>>({
+/* ================= FORM ================= */
+const form = computed(() => ({
+  destination: column1.value ?? '',
+  destination_second: column2.value ?? '',
+  item_id: selectedItem.value?.id ?? '',
+  payment_method: selectedPayment.value ?? '',
+}))
+
+const formError = reactive<Record<string, string | null>>({
   destination: null,
+  destination_second: null,
   item_id: null,
   payment_method: null,
 })
 
-// methods
-const resetFormError = () => {
-  formError.destination = null
-  formError.item_id = null
-  formError.payment_method = null
+/* ================= HELPERS ================= */
+const resetErrors = () => {
+  Object.keys(formError).forEach((key) => {
+    formError[key] = null
+  })
 }
 const validate = () => {
-  resetFormError()
-  const result = checkoutSchema.safeParse(form.value)
-  if (!result.success) {
-    result.error.issues.map((err) => {
-      const field = err.path.join('_') as keyof typeof formError
-      if (field in formError) {
-        formError[field] = err.message
-      }
-    })
-    return false
-  } else {
-    return true
-  }
+  resetErrors()
+  const schema = isSecondColumnActive.value ? checkoutSchemaSecond : checkoutSchema
+  const { success, error } = schema.safeParse(form.value)
+  if (success) return true
+  error.issues.forEach((err) => {
+    const field = err.path.join('_')
+    if (field in formError) {
+      formError[field] = err.message
+    }
+  })
+  return false
 }
-const handleSubmit = async () => {
-  const isValid = validate()
-  if (!isValid) return
-  if (selectedItem) {
-    try {
-      const result = await mutateAsync({
-        item_id: selectedItem.value?.id || '',
-        amount: selectedItem.value?.price || 0,
-        destination: form.value.destination || '',
-      })
-      if (result.status == HttpStatusCode.Created) {
-        toast.success(result.message, { action: { label: 'Close' } })
-        router.push('/detail/' + result.data?.id || '')
-      } else {
-        if (result.status == 403 || result.status == 401) {
-          toast.error('Please login to continue', { action: { label: 'Close' } })
-        } else {
-          toast.error(result.message, { action: { label: 'Close' } })
-        }
-      }
-    } catch (err: unknown) {
-      const error = err as CreateOrderResponse
-      toast.error(`${error.message}, try again later`, { action: { label: 'Close' } })
+const buildPayload = () => {
+  const base = {
+    item_id: selectedItem.value?.id ?? '',
+    amount: selectedItem.value?.price ?? 0,
+    destination: form.value.destination,
+  }
+  if (isSecondColumnActive.value) {
+    return {
+      ...base,
+      destination_second: form.value.destination_second,
     }
   }
+  return base
 }
-const handleChangeColumn1 = (value: string | undefined) => {
-  column1.value = value
+
+/* ================= SUBMIT ================= */
+const handleSubmit = async () => {
+  if (!validate()) return
+  if (!selectedItem.value) return
+  try {
+    const result = await mutateAsync(buildPayload())
+    if (result.status === HttpStatusCode.Created) {
+      toast.success(result.message)
+      router.push(`/detail/${result.data?.id ?? ''}`)
+      return
+    }
+    if ([401, 403].includes(result.status)) {
+      toast.error('Please login to continue')
+    } else {
+      toast.error(result.message)
+    }
+  } catch (err) {
+    const error = err as CreateOrderResponse
+    toast.error(`${error.message}, try again later`)
+  }
+}
+
+/* ================= EVENTS ================= */
+const handleChangeColumn1 = (val?: string) => {
+  column1.value = val
   validate()
 }
-const handleChangeColumn2 = (value: string | undefined) => {
-  column2.value = value
+const handleChangeColumn2 = (val?: string) => {
+  column2.value = val
   validate()
 }
-const handleChangePayment = (value: string | undefined) => {
-  selectedPayment.value = value
+const handleChangePayment = (val?: string) => {
+  selectedPayment.value = val
   validate()
 }
-const handleChangeItem = (value: Item | undefined) => {
-  selectedItem.value = value
+const handleChangeItem = (val?: Item) => {
+  selectedItem.value = val
   validate()
 }
 </script>
@@ -136,7 +138,8 @@ const handleChangeItem = (value: Item | undefined) => {
           :column_2_title="category?.data?.column_2_title || ''"
           @changeColumn1="handleChangeColumn1"
           @changeColumn2="handleChangeColumn2"
-          :error="formError.destination"
+          :error_1="formError.destination"
+          :error_2="formError.destination_second"
         />
         <Items
           @refetch="refetch()"

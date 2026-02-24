@@ -4,6 +4,7 @@ const props = defineProps<{
   image_url: string
   name: string | undefined
   destination: string | undefined
+  destination_second: string | null | undefined
   pending: boolean
   product: string | undefined
 }>()
@@ -27,7 +28,10 @@ const props = defineProps<{
         </div>
         <div class="w-full flex justify-between">
           <p>{{ title }} :</p>
-          <p>{{ destination ?? '' }}</p>
+          <p>
+            <span>{{ destination ?? '' }}</span>
+            <span> ({{ destination_second ?? '' }})</span>
+          </p>
         </div>
         <div class="w-full flex justify-between">
           <p>Nama :</p>

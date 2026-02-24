@@ -4,7 +4,8 @@ import { XCircleIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   isPending: boolean
-  error: string | null
+  error_1: string | null | undefined
+  error_2: string | null | undefined
   column_1: boolean
   column_2: boolean
   column_1_title: string
@@ -37,6 +38,7 @@ watch(column2, (newValue) => {
           class="input focus:outline-none focus:border-primary w-full"
           :placeholder="`Masukan ${column_1_title}`"
         />
+        <p v-if="error_1" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error_1 }}</p>
       </fieldset>
       <fieldset class="fieldset" v-if="column_2">
         <legend class="fieldset-legend">{{ column_2_title }}</legend>
@@ -46,6 +48,7 @@ watch(column2, (newValue) => {
           class="input focus:outline-none focus:border-primary w-full"
           :placeholder="`Masukan ${column_2_title}`"
         />
+        <p v-if="error_2" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error_2 }}</p>
       </fieldset>
     </div>
     <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
@@ -58,7 +61,6 @@ watch(column2, (newValue) => {
         <input type="text" class="border-none input focus:outline-none focus:border-primary w-full skeleton" />
       </fieldset>
     </div>
-    <p v-if="error" class="label text-error text-xs"><XCircleIcon class="size-3" /> {{ error }}</p>
   </div>
 </template>
 

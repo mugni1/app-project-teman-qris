@@ -24,6 +24,7 @@ export interface CreateOrderResponse {
 
 export interface CreateOrderPayload {
   destination: string
+  destination_second?: string
   amount: number
   item_id: string
 }
@@ -39,6 +40,7 @@ export interface GetOrderDetailResponse {
     id: string
     transaction_id: string
     destination: string
+    destination_second: string | null
     amount: number
     status: string
     qris_url: string

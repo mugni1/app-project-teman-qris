@@ -6,7 +6,7 @@ import { XCircleIcon } from 'lucide-vue-next'
 
 // state
 const props = defineProps<{
-  error: string | null
+  error: string | null | undefined
 }>()
 const emits = defineEmits<{
   (e: 'changePayment', value: undefined | string): void

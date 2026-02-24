@@ -113,6 +113,7 @@ watch(data, (value) => {
               :pending="isPendingGetOrder"
               :product="data?.data?.item.title"
               :destination="data?.data?.destination"
+              :destination_second="data?.data?.destination_second"
               :name="data?.data?.user.fullname"
             />
             <PaymentDetails

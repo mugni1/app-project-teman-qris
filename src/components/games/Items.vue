@@ -8,7 +8,7 @@ import { computed } from 'vue'
 
 // state
 const props = defineProps<{
-  error: string | null
+  error: string | null | undefined
   data: Item[]
   errorMessage: string
   isPending: boolean
