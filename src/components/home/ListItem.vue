@@ -28,8 +28,8 @@ const handleRefetch = () => {
 </script>
 
 <template>
-  <h1 class="font-bold text-base lg:text-2xl flex items-center gap-2 mb-2">
-    <component :is="icon" class="size-5 lg:size-7" />
+  <h1 class="font-bold text-base lg:text-xl flex items-center gap-2 mb-2">
+    <component :is="icon" class="size-5 lg:size-6" />
     {{ title }}
   </h1>
   <div v-if="isPending" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">

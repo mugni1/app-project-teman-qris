@@ -58,6 +58,5 @@ onMounted(() => {
       :message="data?.message || 'Internal server error'"
     />
     <Blog />
-    <Description />
   </Content>
 </template>
