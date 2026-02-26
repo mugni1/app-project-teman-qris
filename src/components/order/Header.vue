@@ -20,6 +20,16 @@ const props = defineProps<{
     </p>
   </div>
   <div
+    v-if="(!pending && status == 'waiting') || (!pending && status == 'processing')"
+    class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-info mb-4 flex flex-col items-center justify-center"
+  >
+    <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />
+    <h1 class="text-center text-white font-bold text-xl md:text-3xl lg:text-4xl">Pesanan Sedang Diproses</h1>
+    <p class="text-center text-white md:text-base text-sm">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, pariatur?
+    </p>
+  </div>
+  <div
     v-if="!pending && status == 'paid'"
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-success mb-4 flex flex-col items-center justify-center"
   >
@@ -50,7 +60,7 @@ const props = defineProps<{
     </p>
   </div>
   <div
-    v-if="!pending && status == 'failed'"
+    v-if="(!pending && status == 'failed') || (!pending && status == 'error')"
     class="w-full min-h-[30vh] md:min-h-[40vh] px-4 bg-error mb-4 flex flex-col items-center justify-center"
   >
     <IconCreditCard class="w-3/12 md:w-2/12 lg:w-1/12" />

@@ -31,7 +31,7 @@ const props = defineProps<{
       </div>
     </li>
     <li
-      v-if="status != 'cancelled' && status != 'failed' && status != 'expired'"
+      v-if="status != 'cancelled' && status != 'failed' && status != 'expired' && status != 'error'"
       :class="['step', status == 'paid' && 'step-primary']"
     >
       <span class="step-icon"><CheckCircle class="size-4" /> </span>
@@ -47,7 +47,7 @@ const props = defineProps<{
         <p class="text-xs">Transaksi dibatalkan oleh sistem</p>
       </div>
     </li>
-    <li v-if="status == 'failed'" :class="['step', status == 'failed' && 'step-primary']">
+    <li v-if="status == 'failed' || status == 'error'" :class="['step', status == 'failed' && 'step-primary']">
       <span class="step-icon"><XCircle class="size-4" /> </span>
       <div class="hidden md:block">
         <p class="font-semibold text-base">Transaksi Gagal</p>

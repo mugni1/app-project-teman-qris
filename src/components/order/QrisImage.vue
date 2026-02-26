@@ -13,6 +13,9 @@ const props = defineProps<{
     v-if="
       !pending &&
       status != 'expired' &&
+      status != 'waiting' &&
+      status != 'processing' &&
+      status != 'error' &&
       status != 'failed' &&
       status != 'cancelled' &&
       status != 'paid'
