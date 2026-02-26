@@ -2,15 +2,17 @@
 import Blog from '@/components/blog/Blog.vue'
 import Carousel from '@/components/carousel/Carousel.vue'
 import Content from '@/components/content/Content.vue'
-import Description from '@/components/description/Description.vue'
 import ListItem from '@/components/home/ListItem.vue'
 import { useGetCategories } from '@/hooks/useGetCategories'
 import { onMounted, ref, watch } from 'vue'
-import { JoystickIcon, SmartphoneChargingIcon } from 'lucide-vue-next'
 import type { Category } from '@/types/category'
+import type { Params } from '@/types/global.type'
+import IconSmartPhone from '@/icons/IconSmartPhone.vue'
+import IconGamepad from '@/icons/IconGamepad.vue'
 
 // state
-const { data, refetch, isPending, isRefetching } = useGetCategories()
+const params: Params = { limit: '2000' }
+const { data, refetch, isPending, isRefetching } = useGetCategories(params)
 const simCard = ref<Category[] | undefined>()
 const games = ref<Category[] | undefined>()
 
@@ -18,6 +20,7 @@ const games = ref<Category[] | undefined>()
 watch(
   () => data.value,
   (newValue) => {
+    console.log(newValue?.data)
     if (newValue && newValue.data) {
       games.value = newValue.data.filter((item) => item.type == 'games')
       simCard.value = newValue.data.filter((item) => item.type == 'credit')
@@ -39,7 +42,7 @@ onMounted(() => {
     <Carousel />
     <ListItem
       title="TOPUP PULSA & KUOTA"
-      :icon="SmartphoneChargingIcon"
+      :icon="IconSmartPhone"
       @refetch="refetch"
       :data="simCard"
       :is-pending="isPending"
@@ -49,7 +52,7 @@ onMounted(() => {
     />
     <ListItem
       title="TOPUP GAMES"
-      :icon="JoystickIcon"
+      :icon="IconGamepad"
       @refetch="refetch"
       :data="games"
       :is-pending="isPending"

@@ -14,7 +14,7 @@ const fetch = async (params?: Params): Promise<GetCategoriesResponse> => {
   }
 }
 
-export const useGetCategories = (params?: Ref<Params>) => {
+export const useGetCategories = (params?: Ref<Params> | Params) => {
   return useQuery({
     queryKey: ['get-categories', params],
     queryFn: (): Promise<GetCategoriesResponse> => fetch(unref(params)),

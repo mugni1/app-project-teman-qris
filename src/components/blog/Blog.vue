@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { Loader, NewspaperIcon } from 'lucide-vue-next'
+import { Loader } from 'lucide-vue-next'
 import { data } from './data'
+import IconNewspapper from '@/icons/IconNewspapper.vue'
 </script>
 
 <template>
   <h1 class="font-bold text-base lg:text-xl flex items-center gap-2 mb-2">
-    <NewspaperIcon class="size-5 lg:size-6" />
+    <IconNewspapper class="size-5 lg:size-6" />
     BERITA & BLOG
   </h1>
   <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
