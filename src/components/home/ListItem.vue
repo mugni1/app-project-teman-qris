@@ -48,7 +48,7 @@ const handleRefetch = () => {
   </div>
   <div v-else-if="hasData" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
     <div v-for="item in data" :key="item.id">
-      <RouterLink :to="`/games/${item.id}`">
+      <RouterLink :to="`/top-up/${item.id}`">
         <img
           :src="item.image_url"
           alt="image"

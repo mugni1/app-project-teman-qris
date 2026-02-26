@@ -1,98 +1,168 @@
 <script setup lang="ts">
-import Content from '@/components/content/Content.vue'
-import ListProduct from '@/components/topup/ListProduct.vue'
-import CheckOut from '@/components/topup/CheckOut.vue'
-import Header from '@/components/topup/Header.vue'
-import PaymentSelect from '@/components/topup/PaymentSelect.vue'
-import { computed, ref } from 'vue'
-import { useGetItem } from '@/hooks/useGetItems'
-import { useRoute } from 'vue-router'
-import PendingListProduct from '@/components/topup/PendingListProduct.vue'
-import ErrorListProduct from '@/components/topup/ErrorListProduct.vue'
-import { Grid2x2CheckIcon, Phone } from 'lucide-vue-next'
 import type { Item } from '@/types/item.type'
-import type { Params } from '@/types/global.type'
+import type { CreateOrderResponse } from '@/types/order.type'
+import Content from '@/components/content/Content.vue'
+import Checkout from '@/components/games/Checkout.vue'
+import CS from '@/components/games/CS.vue'
+import Header from '@/components/games/Header.vue'
+import Info from '@/components/games/Info.vue'
+import Items from '@/components/games/Items.vue'
+import Payment from '@/components/games/Payment.vue'
+import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
+import { computed, reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { checkoutSchema, checkoutSchemaSecond } from '@/schema/checkout.schema'
+import { toast } from 'vue-sonner'
+import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
+import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
+import { HttpStatusCode } from 'axios'
 
-// state
+/* ================= STATE ================= */
+const router = useRouter()
 const route = useRoute()
-const provider = Array.isArray(route.params.slug) ? route.params.slug.join('') : route.params.slug
-const phone = ref('')
-const selectedItem = ref<null | Item>(null)
-const selectedPayment = ref<null | string>(null)
-const selectedTab = ref<'credit' | 'quota'>('credit')
-const params = computed<Params>(() => ({
-  filter_by_provider: provider,
-  filter_by_credit: selectedTab.value,
-  limit: '1000',
-}))
-const { data, isPending, isError, error, isFetching, refetch } = useGetItem(params)
-console.log(data)
-console.log(params.value)
+const slug = Array.isArray(route.params.slug) ? route.params.slug.join('') : (route.params.slug ?? '')
+const { mutateAsync, isPending: mutatePending } = usePostPaymentQrisPw()
+const { data: category, isPending, refetch, isRefetching } = useGetCategoryDetail(slug)
+const isSecondColumnActive = computed(() => !!category.value?.data?.column_2)
+const column1 = ref<string>()
+const column2 = ref<string>()
+const selectedPayment = ref<string>()
+const selectedItem = ref<Item>()
 
-// methods
-const handleSelectItem = (value: Item) => {
-  selectedItem.value = value
+/* ================= FORM ================= */
+const form = computed(() => ({
+  destination: column1.value ?? '',
+  destination_second: column2.value ?? '',
+  item_id: selectedItem.value?.id ?? '',
+  payment_method: selectedPayment.value ?? '',
+}))
+
+const formError = reactive<Record<string, string | null>>({
+  destination: null,
+  destination_second: null,
+  item_id: null,
+  payment_method: null,
+})
+
+/* ================= HELPERS ================= */
+const resetErrors = () => {
+  Object.keys(formError).forEach((key) => {
+    formError[key] = null
+  })
 }
-const handleSelectPayment = (value: string) => {
-  selectedPayment.value = value
+const validate = () => {
+  resetErrors()
+  const schema = isSecondColumnActive.value ? checkoutSchemaSecond : checkoutSchema
+  const { success, error } = schema.safeParse(form.value)
+  if (success) return true
+  error.issues.forEach((err) => {
+    const field = err.path.join('_')
+    if (field in formError) {
+      formError[field] = err.message
+    }
+  })
+  return false
 }
-const handleChangeTab = (value: 'credit' | 'quota') => {
-  selectedTab.value = value
+const buildPayload = () => {
+  const base = {
+    item_id: selectedItem.value?.id ?? '',
+    amount: selectedItem.value?.price ?? 0,
+    destination: form.value.destination,
+  }
+  if (isSecondColumnActive.value) {
+    return {
+      ...base,
+      destination_second: form.value.destination_second,
+    }
+  }
+  return base
+}
+
+/* ================= SUBMIT ================= */
+const handleSubmit = async () => {
+  if (!validate()) return
+  if (!selectedItem.value) return
+  try {
+    const result = await mutateAsync(buildPayload())
+    if (result.status === HttpStatusCode.Created) {
+      toast.success(result.message)
+      router.push(`/detail/${result.data?.id ?? ''}`)
+      return
+    }
+    if ([401, 403].includes(result.status)) {
+      toast.error('Silahkan login terlebih dahulu untuk melakukan transaksi.')
+    } else {
+      toast.error(result.message)
+    }
+  } catch (err) {
+    const error = err as CreateOrderResponse
+    toast.error(`${error.message}, try again later`)
+  }
+}
+
+/* ================= EVENTS ================= */
+const handleChangeColumn1 = (val?: string) => {
+  column1.value = val
+  validate()
+}
+const handleChangeColumn2 = (val?: string) => {
+  column2.value = val
+  validate()
+}
+const handleChangePayment = (val?: string) => {
+  selectedPayment.value = val
+  validate()
+}
+const handleChangeItem = (val?: Item) => {
+  selectedItem.value = val
+  validate()
 }
 </script>
 
 <template>
-  <Content>
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <Header />
-      <div class="col-span-1 lg:col-span-2 space-y-4">
-        <div class="card p-4 bg-base-200 border border-base-content/20">
-          <div class="space-y-2">
-            <label for="phone" class="card-title"><Phone class="size-6" /> Masukan Nomer Ponsel</label>
-            <input
-              type="text"
-              id="phone"
-              class="input outline-none focus:border-primary w-full md:max-w-sm"
-              v-model="phone"
-              placeholder="088800077887"
-            />
-          </div>
-        </div>
-        <div class="card p-4 bg-base-200 border border-base-content/20 space-y-2">
-          <h3 class="card-title"><Grid2x2CheckIcon class="size-6" />Pilih Produk</h3>
-          <div class="space-x-4 mb-4">
-            <button
-              @click="handleChangeTab('credit')"
-              class="btn btn-soft btn-primary"
-              :class="[selectedTab == 'credit' && 'btn-active']"
-            >
-              Pulsa
-            </button>
-            <button
-              @click="handleChangeTab('quota')"
-              class="btn btn-soft btn-primary"
-              :class="[selectedTab == 'quota' && 'btn-active']"
-            >
-              Kuota
-            </button>
-          </div>
-          <PendingListProduct v-if="isPending" />
-          <ErrorListProduct
-            v-else-if="isError || data?.status != 200"
-            :error="error"
-            :is-fetching="isFetching"
-            :refetch="refetch"
-          />
-          <ListProduct
-            v-if="!isPending && !isError && data?.status == 200"
-            :items="data?.data || []"
-            :selected-item="selectedItem"
-            @on-select="handleSelectItem"
-          />
-        </div>
-        <PaymentSelect @on-select="handleSelectPayment" :item="selectedItem" :payment="selectedPayment" />
-        <CheckOut :phone-number="phone" :selected-payment="selectedPayment" :selected-item="selectedItem" />
-      </div>
-    </section>
+  <Content class="space-y-4">
+    <Header
+      :is-pending="isPending"
+      :title="category?.data?.title || ''"
+      :studio="category?.data?.studio || ''"
+      :cover-url="category?.data?.cover_url || ''"
+      :image-url="category?.data?.image_url || ''"
+    />
+    <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
+      <section class="space-y-4 lg:col-span-2">
+        <Info
+          :is-pending="isPending"
+          :column_1="category?.data?.column_1 || false"
+          :column_2="category?.data?.column_2 || false"
+          :column_1_title="category?.data?.column_1_title || ''"
+          :column_2_title="category?.data?.column_2_title || ''"
+          @changeColumn1="handleChangeColumn1"
+          @changeColumn2="handleChangeColumn2"
+          :error_1="formError.destination"
+          :error_2="formError.destination_second"
+        />
+        <Items
+          @refetch="refetch()"
+          @change-item="handleChangeItem"
+          :error-message="category?.message || 'Internal server error'"
+          :error="formError.item_id"
+          :data="category?.data?.items || []"
+          :is-pending="isPending"
+          :is-refetching="isRefetching"
+          :status="category?.status || 500"
+        />
+        <Payment @change-payment="handleChangePayment" :error="formError.payment_method" />
+      </section>
+      <section class="space-y-4">
+        <CS />
+        <Checkout :item="selectedItem" />
+        <button type="submit" class="btn btn-primary w-full" :disabled="mutatePending">
+          <ShoppingBag class="size-5" v-if="!mutatePending" />
+          <LoaderIcon class="size-5 animate-spin" v-if="mutatePending" />
+          <span v-if="!mutatePending">Pesan Sekarang</span>
+          <span v-if="mutatePending">Harap tunggu..</span>
+        </button>
+      </section>
+    </form>
   </Content>
 </template>

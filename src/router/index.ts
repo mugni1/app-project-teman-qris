@@ -10,7 +10,6 @@ import Cookies from 'js-cookie'
 import ProfileView from '@/views/ProfileView.vue'
 import TransactionView from '@/views/TransactionView.vue'
 import NewsView from '@/views/NewsView.vue'
-import GamesView from '@/views/GamesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +24,6 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomeView },
     { path: '/top-up/:slug', name: 'top_up', component: TopUpView },
-    { path: '/games/:slug', name: 'games', component: GamesView },
     { path: '/login', name: 'auth_login', component: LoginView },
     { path: '/register', name: 'auth_register', component: RegisterView },
     { path: '/redirect', name: 'auth_redirect', component: RedirectView },
