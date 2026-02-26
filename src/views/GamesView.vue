@@ -90,7 +90,7 @@ const handleSubmit = async () => {
       return
     }
     if ([401, 403].includes(result.status)) {
-      toast.error('Please login to continue')
+      toast.error('Silahkan login terlebih dahulu untuk melakukan transaksi.')
     } else {
       toast.error(result.message)
     }
