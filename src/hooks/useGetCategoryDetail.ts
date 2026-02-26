@@ -1,10 +1,7 @@
 import { getCategoryDetailService, getItems } from '@/api/services'
 import { handleErrorResponse } from '@/libs/response'
 import type { GetCategoryDetailResponse } from '@/types/category'
-import type { Params } from '@/types/global.type'
-import type { GetItemResponse } from '@/types/item.type'
 import { useQuery } from '@tanstack/vue-query'
-import { unref, type Ref } from 'vue'
 
 const fetch = async (id: string): Promise<GetCategoryDetailResponse> => {
   try {
