@@ -5,7 +5,7 @@ import IconNewspapper from '@/icons/IconNewspapper.vue'
 </script>
 
 <template>
-  <h1 class="font-bold text-base lg:text-xl flex items-center gap-2 mb-2">
+  <h1 class="font-bold text-base lg:text-xl flex items-center gap-2 mb-3">
     <IconNewspapper class="size-5 lg:size-6" />
     BERITA & BLOG
   </h1>
