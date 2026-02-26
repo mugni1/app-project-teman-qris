@@ -5,7 +5,7 @@ export const useAppStore = defineStore(
   'app',
   () => {
     // state
-    const theme = ref('abyss')
+    const theme = ref('dim')
 
     // methods
     const setTheme = (value: string) => {
