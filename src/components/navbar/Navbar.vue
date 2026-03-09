@@ -2,24 +2,36 @@
 import { ref } from 'vue'
 import Thema from './Thema.vue'
 import Brand from './Brand.vue'
-import BurgerMenu from './BurgerMenu.vue'
+import BtnBurger from './BtnBurger.vue'
 import NavLinkLarge from './NavLinkLarge.vue'
 import NavLinkSmall from './NavLinkSmall.vue'
-import SearchMenu from './SearchMenu.vue'
+import BtnSearch from './BtnSearch.vue'
 import SearchSmall from './SearchSmall.vue'
+import BtnThema from './BtnThema.vue'
+import ThemaSmall from './ThemaSmall.vue'
 
 const burgerActive = ref(false)
 const searchActive = ref(false)
+const themaActive = ref(false)
 const handleChangeBurgerActive = (value: boolean) => {
   burgerActive.value = value
   if (burgerActive.value) {
     searchActive.value = false
+    themaActive.value = false
   }
 }
 const handleChangeSearchActive = (value: boolean) => {
   searchActive.value = value
   if (searchActive.value) {
     burgerActive.value = false
+    themaActive.value = false
+  }
+}
+const handleChangeThemaActive = (value: boolean) => {
+  themaActive.value = value
+  if (themaActive.value) {
+    burgerActive.value = false
+    searchActive.value = false
   }
 }
 </script>
@@ -30,12 +42,13 @@ const handleChangeSearchActive = (value: boolean) => {
       <Brand />
       <NavLinkLarge />
       <div class="col-span-6 md:col-span-2 flex justify-end gap-2">
-        <Thema />
-        <SearchMenu @change-active="handleChangeSearchActive" :active="searchActive" />
-        <BurgerMenu @change-active="handleChangeBurgerActive" :active="burgerActive" />
+        <BtnThema @change-active="handleChangeThemaActive" :active="themaActive" />
+        <BtnSearch @change-active="handleChangeSearchActive" :active="searchActive" />
+        <BtnBurger @change-active="handleChangeBurgerActive" :active="burgerActive" />
       </div>
     </nav>
   </header>
   <NavLinkSmall :active="burgerActive" @change-active="handleChangeBurgerActive" />
   <SearchSmall :active="searchActive" @change-active="handleChangeSearchActive" />
+  <ThemaSmall :active="themaActive" @change-active="handleChangeThemaActive" />
 </template>
