@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Thema from '../thema/Thema.vue'
+import Thema from './Thema.vue'
 import Brand from './Brand.vue'
 import BurgerMenu from './BurgerMenu.vue'
 import NavLinkLarge from './NavLinkLarge.vue'
