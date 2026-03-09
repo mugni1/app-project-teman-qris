@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/app'
 import { motion } from 'motion-v'
+import { themes } from '@/components/navbar/data'
 
 const props = defineProps<{
   active: boolean
@@ -11,35 +12,6 @@ const emits = defineEmits<{
 
 // state
 const { setTheme, theme } = useAppStore()
-const themes = [
-  'light',
-  'dark',
-  'bumblebee',
-  'emerald',
-  'corporate',
-  'synthwave',
-  'valentine',
-  'halloween',
-  'garden',
-  'forest',
-  'lofi',
-  'fantasy',
-  'dracula',
-  'cmyk',
-  'autumn',
-  'business',
-  'acid',
-  'lemonade',
-  'night',
-  'coffee',
-  'winter',
-  'dim',
-  'nord',
-  'sunset',
-  'caramellatte',
-  'abyss',
-  'silk',
-]
 
 // methods
 const handleChange = () => {

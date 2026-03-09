@@ -9,6 +9,7 @@ import SearchSmall from './SearchSmall.vue'
 import BtnThema from './BtnThema.vue'
 import ThemaSmall from './ThemaSmall.vue'
 import Thema from './Thema.vue'
+import { SearchIcon } from 'lucide-vue-next'
 
 const burgerActive = ref(false)
 const searchActive = ref(false)
@@ -38,15 +39,19 @@ const handleChangeThemaActive = (value: boolean) => {
 
 <template>
   <header class="w-full border-b border-base-300 py-4 bg-base-100 sticky top-0 z-50 shadow-md">
-    <nav class="container mx-auto px-4 grid grid-cols-12">
+    <nav class="container mx-auto px-4 grid grid-cols-12 gap-y-4">
       <Brand />
-      <NavLinkLarge />
+      <label class="input input-sm w-full outline-none col-span-8 hidden md:flex">
+        <SearchIcon class="size-4" />
+        <input type="email" placeholder="Cari Produk..." required />
+      </label>
       <div class="col-span-6 md:col-span-2 flex justify-end gap-2">
         <Thema />
         <BtnThema @change-active="handleChangeThemaActive" :active="themaActive" />
         <BtnSearch @change-active="handleChangeSearchActive" :active="searchActive" />
         <BtnBurger @change-active="handleChangeBurgerActive" :active="burgerActive" />
       </div>
+      <NavLinkLarge />
     </nav>
   </header>
   <NavLinkSmall :active="burgerActive" @change-active="handleChangeBurgerActive" />

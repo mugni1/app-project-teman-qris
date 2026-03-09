@@ -1,4 +1,4 @@
-import { DicesIcon, Home, LogIn, LogOut, Newspaper, UserCircle2 } from 'lucide-vue-next'
+import { DicesIcon, Home, LogIn, Newspaper, UserCircle2 } from 'lucide-vue-next'
 
 export const data = [
   {
@@ -36,4 +36,34 @@ export const data = [
     name: 'profile',
     icon: UserCircle2,
   },
+]
+
+export const themes = [
+  'light',
+  'dark',
+  'bumblebee',
+  'emerald',
+  'corporate',
+  'synthwave',
+  'valentine',
+  'halloween',
+  'garden',
+  'forest',
+  'lofi',
+  'fantasy',
+  'dracula',
+  'cmyk',
+  'autumn',
+  'business',
+  'acid',
+  'lemonade',
+  'night',
+  'coffee',
+  'winter',
+  'dim',
+  'nord',
+  'sunset',
+  'caramellatte',
+  'abyss',
+  'silk',
 ]
