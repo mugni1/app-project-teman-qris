@@ -34,7 +34,7 @@ const handleChange = () => {
         <search-icon class="size-6" />
         <input type="email" placeholder="Cari Produk..." required />
       </label>
-      <div role="alert" class="alert alert-vertical gap-2 sm:alert-horizontal">
+      <div role="alert" class="alert alert-vertical gap-2 py-4 sm:alert-horizontal">
         <InfoIcon />
         <div>
           <h3 class="font-bold">Tidak ada hasil!</h3>
