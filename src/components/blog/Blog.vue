@@ -10,15 +10,11 @@ import IconNewspapper from '@/icons/IconNewspapper.vue'
     BERITA & BLOG
   </h1>
   <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
-    <div v-for="item in data" class="card overflow-hidden border border-base-300 shadow-md">
-      <img
-        :src="item.image"
-        alt="image"
-        class="w-full h-full aspect-auto-5/6 lg:aspect-video object-cover object-center"
-      />
+    <div v-for="item in data" class="card overflow-hidden border border-base-300 bg-base-200 shadow-md">
+      <img :src="item.image" alt="image" class="w-full h-full aspect-6/4 lg:aspect-video object-cover object-center" />
       <div class="p-4">
         <span class="text-xs lg:text-base text-base-content/80">23 Jan 2026</span>
-        <h1 class="font-medium text-sm lg:text-lg line-clamp-2">
+        <h1 class="font-medium text-xs md:text-sm lg:text-lg line-clamp-2">
           {{ item.title }}
         </h1>
       </div>
