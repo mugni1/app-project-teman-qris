@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import ProfileView from '@/views/ProfileView.vue'
 import TransactionView from '@/views/TransactionView.vue'
 import NewsView from '@/views/NewsView.vue'
+import NewsDetailView from '@/views/NewsDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,7 @@ const router = createRouter({
     { path: '/register', name: 'auth_register', component: RegisterView },
     { path: '/redirect', name: 'auth_redirect', component: RedirectView },
     { path: '/news', name: 'news', component: NewsView },
+    { path: '/news/:id', name: 'news_detail', component: NewsDetailView },
     { path: '/profile', name: 'profile', component: ProfileView, meta: { requiresAuth: true } },
     { path: '/transaction', name: 'transaction', component: TransactionView, meta: { requiresAuth: true } },
     { path: '/detail/:id', name: 'detail_order', component: DetailOrderView, meta: { requiresAuth: true } },
