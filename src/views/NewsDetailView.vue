@@ -33,7 +33,7 @@ const { data, isPending, isRefetching, refetch } = useGetNewsDetail(id)
         :alt="data?.data?.title"
       />
     </div>
-    <div class="ql-editor max-w-full text-sm lg:text-base prose" v-html="data?.data?.content"></div>
+    <div class="ql-editor max-w-full text-sm lg:text-base" v-html="data?.data?.content"></div>
   </Content>
 </template>
 
@@ -78,5 +78,17 @@ p:empty {
   overflow-x: auto;
   padding: 12px;
   border-radius: 6px;
+}
+
+.ql-editor :deep(h1) {
+  font-size: 2em;
+}
+
+.ql-editor :deep(h2) {
+  font-size: 1.5em;
+}
+
+.ql-editor :deep(h3) {
+  font-size: 1.17em;
 }
 </style>
