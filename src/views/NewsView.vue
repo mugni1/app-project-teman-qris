@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Content from '@/components/content/Content.vue'
 import { useGetNews } from '@/hooks/useGetNews'
+import { useRelativeTime } from '@/composables/useRelativeTime'
 import IconNewspapper from '@/icons/IconNewspapper.vue'
 import { LoaderIcon, TriangleAlertIcon } from 'lucide-vue-next'
 
@@ -29,6 +30,10 @@ const { data, isPending, isRefetching, refetch } = useGetNews()
             Aspernatur, obcaecati? Ipsa tempora quae enim odit non unde? Repellendus dicta aspernatur reprehenderit
             tenetur adipisci vel, sint inventore sed quia id consectetur vero, ab earum.
           </p>
+          <div class="flex justify-between">
+            <span class="p-0 text-xs md:text-sm skeleton text-transparent">Lorem, ipsum dolor.</span>
+            <span class="p-0 text-xs md:text-sm skeleton text-transparent">Lorem, ipsum.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -63,7 +68,7 @@ const { data, isPending, isRefetching, refetch } = useGetNews()
                 minute: '2-digit',
               })
             }}</span>
-            <span class="p-0 text-xs md:text-sm">1 Jam lalu</span>
+            <span class="p-0 text-xs md:text-sm">{{ useRelativeTime(news.created_at).value }}</span>
           </div>
         </div>
       </div>
