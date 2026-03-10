@@ -60,8 +60,8 @@ const handleRefetch = () => {
     </div>
   </div>
   <div v-else-if="isEmpty">
-    <div class="w-full card flex justify-center items-center border border-base-300 py-10">
-      <p class="flex items-center gap-2"><InfoIcon class="size-5" /> Belum ada item</p>
+    <div class="w-full card flex justify-center items-center bg-base-200 border border-base-300 py-10">
+      <p class="flex items-center gap-2"><InfoIcon class="size-5" /> Belum ada produk</p>
     </div>
   </div>
 </template>
