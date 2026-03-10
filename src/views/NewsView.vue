@@ -3,7 +3,7 @@ import Content from '@/components/content/Content.vue'
 import { useGetNews } from '@/hooks/useGetNews'
 import { useRelativeTime } from '@/composables/useRelativeTime'
 import IconNewspapper from '@/icons/IconNewspapper.vue'
-import { LoaderIcon, TriangleAlertIcon } from 'lucide-vue-next'
+import { InfoIcon, LoaderIcon, TriangleAlertIcon } from 'lucide-vue-next'
 
 // state
 const { data, isPending, isRefetching, refetch } = useGetNews()
@@ -52,8 +52,17 @@ const { data, isPending, isRefetching, refetch } = useGetNews()
       </div>
     </section>
 
+    <section
+      v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200"
+      class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
+    >
+      <div class="flex justify-center items-center text-center py-8 bg-base-200 card space-y-2 border border-base-300">
+        <p class="capitalize card-title text-sm"><InfoIcon class="size-4" /> Belum Ada Berita.</p>
+      </div>
+    </section>
+
     <section v-else class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div v-for="news in data?.data" class="card bg-base-200 overflow-hidden">
+      <div v-for="news in data?.data" class="card bg-base-200 overflow-hidden border border-base-300 shadow-md">
         <img :src="news.image_url" :alt="news.title" class="w-full aspect-video object-cover" />
         <div class="p-4 space-y-2">
           <h1 class="card-title text-sm md:text-base line-clamp-2">{{ news.title }}</h1>
