@@ -13,7 +13,7 @@ const { data, isPending, isRefetching, refetch } = useGetNewsDetail(id)
 <template>
   <PendingNewsDetail v-if="isPending" />
   <Content v-if="!isPending && data && data.data && data.status == 200" :data="data.data" class="space-y-4">
-    <h1 class="card-title text-lg lg:text-3xl">{{ data?.data?.title }}</h1>
+    <h1 class="card-title text-lg lg:text-3xl text-primary lg:leading-snug">{{ data?.data?.title }}</h1>
     <div class="flex justify-between">
       <span class="card-title text-xs md:text-sm">{{
         new Date(data.data.created_at).toLocaleString('id-ID', {
