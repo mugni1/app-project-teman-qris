@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router'
   <footer class="bg-base-300 w-full">
     <section class="container mx-auto p-4 pb-8 space-y-8">
       <RouterLink to="/">
-        <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-12" />
+        <img src="https://topup.ebelanja.id/logo/logo-color.svg" alt="brand" class="h-10 md:h-12" />
       </RouterLink>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mt-4">
         <div class="space-y-4 col-span-2 md:col-span-3 lg:col-span-2 w-full">
@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router'
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
-          <p class="font-semibold text-lg text-primary">Site Map</p>
+          <p class="font-semibold text-lg text-primary">Peta Situs</p>
           <div class="flex flex-col gap-1 text-sm md:text-base font-normal text-base-content/80">
             <a href="">Contact Us</a>
             <a href="">Reviews</a>
@@ -52,11 +52,12 @@ import { RouterLink } from 'vue-router'
           </div>
         </div>
         <div class="space-y-2 col-span-1 w-full">
-          <p class="font-semibold text-lg text-primary">Support</p>
+          <p class="font-semibold text-lg text-primary">Kerja Sama</p>
           <div class="flex flex-col gap-1 text-sm md:text-base font-normal text-base-content/80">
-            <a href="">Email</a>
-            <a href="">Telegram</a>
-            <a href="">WhatsApp</a>
+            <a href="">Reseller</a>
+            <a href="">Pembuatan Website</a>
+            <a href="">Affialiate</a>
+            <a href="">Karir</a>
           </div>
         </div>
       </div>
