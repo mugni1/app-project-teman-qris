@@ -6,9 +6,26 @@ import PendingNews from '@/components/news/PendingNews.vue'
 import ErrorNews from '@/components/news/ErrorNews.vue'
 import NotHaveNews from '@/components/news/NotHaveNews.vue'
 import ListNews from '@/components/news/ListNews.vue'
+import { computed, ref, type Ref } from 'vue'
+import type { Params } from '@/types/global.type'
 
 // state
-const { data, isPending, isRefetching, refetch } = useGetNews()
+const page = ref('1')
+const limit = ref('6')
+const params: Ref<Params> = computed(() => ({
+  limit: limit.value,
+  page: page.value,
+}))
+const { data, isPending, isRefetching, refetch } = useGetNews(params)
+
+// methods
+const handleChangePage = (v: number) => {
+  page.value = v.toString()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 </script>
 
 <template>
@@ -19,7 +36,13 @@ const { data, isPending, isRefetching, refetch } = useGetNews()
     </h1>
     <PendingNews v-if="isPending" />
     <NotHaveNews v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200" />
-    <ListNews v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200" :data="data.data" />
+    <ListNews
+      v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200"
+      :data="data.data"
+      :page="page"
+      :limit="limit"
+      @changePage="handleChangePage"
+    />
     <ErrorNews
       v-if="!isPending && data && data.status != 200"
       :status="data.status"
