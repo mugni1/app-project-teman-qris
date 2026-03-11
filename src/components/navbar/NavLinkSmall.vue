@@ -44,13 +44,13 @@ const handleLogout = () => {
       :initial="{ opacity: 0, y: 200 }"
       :animate="{ opacity: active ? 1 : 0, y: active ? 0 : 200 }"
       :transition="{ duration: 0.2 }"
-      class="container card bg-base-100 mt-20 border border-base-300 space-y-2 p-4"
+      class="container card bg-base-100 mt-20 border border-base-300 space-y-4 p-4"
     >
       <button
         v-for="item in data"
         v-show="!item.requireAuth && item.name != 'login'"
         @click="handleGo(item.link)"
-        :class="['btn btn-ghost btn-sm', $route.path == item.link && 'btn-active btn-primary ']"
+        :class="['btn btn-ghost btn-sm', $route.name?.toString().startsWith(item.name) && 'btn-active btn-primary ']"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
       </button>
@@ -58,14 +58,14 @@ const handleLogout = () => {
         v-for="item in data"
         v-show="item.requireAuth && token"
         @click="handleGo(item.link)"
-        :class="['btn btn-ghost btn-sm', $route.path == item.link && 'btn-active btn-primary ']"
+        :class="['btn btn-ghost btn-sm', $route.name?.toString().startsWith(item.name) && 'btn-active btn-primary ']"
       >
         <component :is="item.icon" class="size-4" /> {{ item.title }}
       </button>
-      <RouterLink v-show="!token" :to="'/login'" class="btn btn-outline btn-primary btn-sm mt-2">
+      <RouterLink v-show="!token" :to="'/login'" class="btn btn-outline btn-primary btn-sm">
         <log-in-icon class="size-3.5" /> Masuk
       </RouterLink>
-      <button v-show="token" @click="handleLogout" class="btn btn-outline btn-primary btn-sm mt-2">
+      <button v-show="token" @click="handleLogout" class="btn btn-outline btn-primary btn-sm">
         <log-out-icon class="size-3.5" /> Keluar
       </button>
     </motion.div>

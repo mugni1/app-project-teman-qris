@@ -24,7 +24,10 @@ const handleLogout = () => {
         v-for="item in data"
         v-show="!item.requireAuth && item.name != 'login'"
         :to="item.link"
-        :class="['btn btn-ghost btn-outline btn-sm', $route.path == item.link && 'btn-active btn-primary ']"
+        :class="[
+          'btn btn-ghost btn-outline btn-sm',
+          $route.name?.toString().startsWith(item.name) && 'btn-active btn-primary ',
+        ]"
       >
         <component :is="item.icon" class="size-3.5" /> {{ item.title }}
       </RouterLink>
@@ -32,7 +35,10 @@ const handleLogout = () => {
         v-for="item in data"
         v-show="item.requireAuth && token"
         :to="item.link"
-        :class="['btn btn-ghost btn-outline btn-sm', $route.path == item.link && 'btn-active btn-primary ']"
+        :class="[
+          'btn btn-ghost btn-outline btn-sm',
+          $route.name?.toString().startsWith(item.name) && 'btn-active btn-primary ',
+        ]"
       >
         <component :is="item.icon" class="size-3.5" /> {{ item.title }}
       </RouterLink>
