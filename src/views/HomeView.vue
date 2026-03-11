@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { Category } from '@/types/category'
 import type { Params } from '@/types/global.type'
-import Carousel from '@/components/carousel/Carousel.vue'
 import Content from '@/components/content/Content.vue'
 import { useGetCategories } from '@/hooks/useGetCategories'
 import { onMounted, ref, watch } from 'vue'
 import IconSmartPhone from '@/icons/IconSmartPhone.vue'
 import IconGamepad from '@/icons/IconGamepad.vue'
 import HomeBlogAndNews from '@/components/home/HomeBlogAndNews.vue'
-import HomeListItem from '@/components/home/HomeListItem.vue'
+import HomeCategory from '@/components/home/HomeCategory.vue'
+import HomeCarousel from '@/components/home/HomeCarousel.vue'
 
 // state
 const creditParams: Params = { limit: '12', type: 'credit' }
@@ -55,8 +55,8 @@ onMounted(() => {
 
 <template>
   <Content class="space-y-8">
-    <Carousel />
-    <HomeListItem
+    <HomeCarousel />
+    <HomeCategory
       title="TOPUP PULSA & KUOTA"
       :icon="IconSmartPhone"
       :data="credit"
@@ -66,7 +66,7 @@ onMounted(() => {
       :message="dataCredit?.message || 'Internal server error'"
       @refetch="refetchCredit"
     />
-    <HomeListItem
+    <HomeCategory
       title="TOPUP GAMES"
       :icon="IconGamepad"
       :data="games"

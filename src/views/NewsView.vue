@@ -9,7 +9,7 @@ import PendingNews from '@/components/news/PendingNews.vue'
 import ListNews from '@/components/news/ListNews.vue'
 import ErrorCard from '@/components/global/ErrorCard.vue'
 import EmptyCard from '@/components/global/EmptyCard.vue'
-import Title from '@/components/title/title.vue'
+import Title from '@/components/global/Title.vue'
 
 // state
 const page = ref('1')
