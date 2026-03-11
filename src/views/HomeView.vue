@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { Category } from '@/types/category'
 import type { Params } from '@/types/global.type'
-import Blog from '@/components/blog/Blog.vue'
 import Carousel from '@/components/carousel/Carousel.vue'
 import Content from '@/components/content/Content.vue'
-import ListItem from '@/components/home/ListItem.vue'
 import { useGetCategories } from '@/hooks/useGetCategories'
 import { onMounted, ref, watch } from 'vue'
 import IconSmartPhone from '@/icons/IconSmartPhone.vue'
 import IconGamepad from '@/icons/IconGamepad.vue'
+import HomeBlogAndNews from '@/components/home/HomeBlogAndNews.vue'
+import HomeListItem from '@/components/home/HomeListItem.vue'
 
 // state
 const creditParams: Params = { limit: '12', type: 'credit' }
@@ -55,27 +55,27 @@ onMounted(() => {
 
 <template>
   <Content class="space-y-8">
-    <Ca rousel />
-    <ListItem
+    <Carousel />
+    <HomeListItem
       title="TOPUP PULSA & KUOTA"
       :icon="IconSmartPhone"
-      @refetch="refetchCredit"
       :data="credit"
       :is-pending="isPendingCredit"
       :is-refetching="isRefetchingCredit"
       :status="dataCredit?.status || 500"
       :message="dataCredit?.message || 'Internal server error'"
+      @refetch="refetchCredit"
     />
-    <ListItem
+    <HomeListItem
       title="TOPUP GAMES"
       :icon="IconGamepad"
-      @refetch="refetchGames"
       :data="games"
       :is-pending="isPendingGames"
       :is-refetching="isRefetchingGames"
       :status="dataGames?.status || 500"
       :message="dataGames?.message || 'Internal server error'"
+      @refetch="refetchGames"
     />
-    <Blog />
+    <HomeBlogAndNews />
   </Content>
 </template>

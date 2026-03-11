@@ -1,6 +1,12 @@
+<script setup lang="ts">
+const props = defineProps<{
+  count?: number
+}>()
+</script>
+
 <template>
   <section class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div v-for="_ in 6" class="card bg-base-200 overflow-hidden">
+    <div v-for="_ in count ?? 6" class="card bg-base-200 overflow-hidden">
       <div class="w-full aspect-video object-cover skeleton"></div>
       <div class="p-4 space-y-2">
         <h1 class="card-title text-transparent skeleton text-sm md:text-base line-clamp-2">

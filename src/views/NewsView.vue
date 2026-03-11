@@ -3,12 +3,12 @@ import Content from '@/components/content/Content.vue'
 import { useGetNews } from '@/hooks/useGetNews'
 import IconNewspapper from '@/icons/IconNewspapper.vue'
 import PendingNews from '@/components/news/PendingNews.vue'
-import ErrorNews from '@/components/news/ErrorNews.vue'
-import NotHaveNews from '@/components/news/NotHaveNews.vue'
 import ListNews from '@/components/news/ListNews.vue'
 import { computed, ref, type Ref } from 'vue'
 import type { Params } from '@/types/global.type'
 import PaginationNews from '@/components/news/PaginationNews.vue'
+import ErrorCard from '@/components/global/ErrorCard.vue'
+import EmptyCard from '@/components/global/EmptyCard.vue'
 
 // state
 const page = ref('1')
@@ -36,7 +36,6 @@ const handleChangePage = (v: number) => {
       BLOG & BERITA TERKINI
     </h1>
     <PendingNews v-if="isPending" />
-    <NotHaveNews v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200" />
     <ListNews v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200" :data="data.data" />
     <PaginationNews
       v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200"
@@ -45,7 +44,11 @@ const handleChangePage = (v: number) => {
       :limit="limit"
       @changePage="handleChangePage"
     />
-    <ErrorNews
+    <EmptyCard
+      v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200"
+      title="Tidak ada berita."
+    />
+    <ErrorCard
       v-if="!isPending && data && data.status != 200"
       :status="data.status"
       :message="data.message"
