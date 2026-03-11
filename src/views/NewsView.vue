@@ -8,6 +8,7 @@ import NotHaveNews from '@/components/news/NotHaveNews.vue'
 import ListNews from '@/components/news/ListNews.vue'
 import { computed, ref, type Ref } from 'vue'
 import type { Params } from '@/types/global.type'
+import PaginationNews from '@/components/news/PaginationNews.vue'
 
 // state
 const page = ref('1')
@@ -36,7 +37,8 @@ const handleChangePage = (v: number) => {
     </h1>
     <PendingNews v-if="isPending" />
     <NotHaveNews v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200" />
-    <ListNews
+    <ListNews v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200" :data="data.data" />
+    <PaginationNews
       v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200"
       :data="data.data"
       :page="page"
