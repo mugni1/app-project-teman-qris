@@ -13,6 +13,10 @@ import HomeCarousel from '@/components/home/HomeCarousel.vue'
 // state
 const creditParams: Params = { limit: '12', type: 'credit' }
 const gamesParams: Params = { limit: '12', type: 'games' }
+const credit = ref<Category[] | undefined>()
+const games = ref<Category[] | undefined>()
+
+// hooks
 const {
   data: dataCredit,
   refetch: refetchCredit,
@@ -25,8 +29,6 @@ const {
   isPending: isPendingGames,
   isRefetching: isRefetchingGames,
 } = useGetCategories(gamesParams)
-const credit = ref<Category[] | undefined>()
-const games = ref<Category[] | undefined>()
 
 // watcher
 watch(
@@ -56,6 +58,8 @@ onMounted(() => {
 <template>
   <Content class="space-y-8">
     <HomeCarousel />
+
+    <!-- list category credit and quota  -->
     <HomeCategory
       title="TOPUP PULSA & KUOTA"
       :icon="IconSmartPhone"
@@ -66,6 +70,8 @@ onMounted(() => {
       :message="dataCredit?.message || 'Internal server error'"
       @refetch="refetchCredit"
     />
+
+    <!-- list category games -->
     <HomeCategory
       title="TOPUP GAMES"
       :icon="IconGamepad"
@@ -76,6 +82,8 @@ onMounted(() => {
       :message="dataGames?.message || 'Internal server error'"
       @refetch="refetchGames"
     />
+
+    <!-- list blog and news -->
     <HomeBlogAndNews />
   </Content>
 </template>
