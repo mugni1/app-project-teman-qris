@@ -16,7 +16,8 @@ const emits = defineEmits<{
 // state
 const router = useRouter()
 const search = ref('')
-const params = computed(() => ({ limit: '5', search: search.value }))
+const debouncedSearch = ref('')
+const params = computed(() => ({ limit: '5', search: debouncedSearch.value }))
 const categories = ref<Category[]>([])
 
 // hooks
@@ -33,6 +34,13 @@ const handleGo = (id: string) => {
 }
 
 // watchers
+let timeout: ReturnType<typeof setTimeout>
+watch(search, (value) => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    debouncedSearch.value = value
+  }, 500)
+})
 watch(data, (newValue) => {
   if (newValue && newValue.data) {
     categories.value = newValue.data
@@ -60,7 +68,7 @@ watch(data, (newValue) => {
         <input v-model="search" type="email" placeholder="Cari Produk..." required />
       </label>
 
-      <!-- not found  -->
+      <!-- empty  -->
       <div
         v-if="categories.length < 1 || search.length < 1 || isPending"
         role="alert"
@@ -73,7 +81,7 @@ watch(data, (newValue) => {
         </div>
       </div>
 
-      <!-- list categories -->
+      <!-- list -->
       <div v-if="categories.length > 0 && search.length > 0 && !isPending" class="flex flex-col gap-2">
         <div
           class="grid grid-cols-8 items-center p-4 gap-4 bg-base-200 card"
