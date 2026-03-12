@@ -57,6 +57,7 @@ onMounted(() => {
 
 <template>
   <Content class="space-y-8">
+    <!-- list carousel  -->
     <HomeCarousel />
 
     <!-- list category credit and quota  -->

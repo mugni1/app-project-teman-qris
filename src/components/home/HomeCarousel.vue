@@ -6,7 +6,7 @@ import { useGetCarousel } from '@/hooks/useGetCarousel'
 import EmptyCard from '../global/EmptyCard.vue'
 import ErrorCard from '../global/ErrorCard.vue'
 
-// init
+// init carousel
 const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay]
 const navigation = {
   nextEl: '.swiper-button-next-custom',
@@ -18,13 +18,18 @@ const { data, isPending, isRefetching, refetch } = useGetCarousel()
 </script>
 
 <template>
+  <!-- pending  -->
   <div v-if="isPending">
     <div class="w-full aspect-9/4 skeleton"></div>
   </div>
+
+  <!-- empty  -->
   <EmptyCard
     v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200"
     title="Tidak ada banner info."
   />
+
+  <!-- error  -->
   <ErrorCard
     v-if="!isPending && data && data.status != 200"
     :message="data.message"
@@ -32,6 +37,8 @@ const { data, isPending, isRefetching, refetch } = useGetCarousel()
     :is-refetching="isRefetching"
     @refetch="refetch()"
   />
+
+  <!-- list  -->
   <Swiper
     v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200"
     direction="horizontal"

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import IconQris from '@/icons/IconQris.vue'
 import { ref, watch } from 'vue'
-import { data } from './data'
 import { XCircleIcon } from 'lucide-vue-next'
 
-// state
 const props = defineProps<{
   error: string | null | undefined
 }>()
 const emits = defineEmits<{
   (e: 'changePayment', value: undefined | string): void
 }>()
+
+// state
 const selectedPayment = ref<undefined | string>()
 
 // watchers
@@ -23,21 +23,13 @@ watch(selectedPayment, (newValue) => {
   <div class="card-item">
     <h3 class="card-title text-primary">3. Metode Pembayaran</h3>
     <div class="space-y-2">
-      <label v-for="method in data.paymentMethods" :key="method.value" class="block cursor-pointer">
-        <input
-          v-model="selectedPayment"
-          :value="method.value"
-          type="radio"
-          name="payment_method"
-          class="peer sr-only"
-        />
+      <label class="block cursor-pointer">
+        <input v-model="selectedPayment" value="qris" type="radio" name="payment_method" class="peer sr-only" />
         <div class="card-payment">
-          <div class="flex items-center gap-8">
-            <IconQris v-if="method.value === 'qris'" class="size-15 shrink-0 text-base-content" />
-            <div>
-              <p class="card-title">{{ method.label }}</p>
-              <p class="text-xs opacity-70">{{ method.description }}</p>
-            </div>
+          <IconQris class="size-15 shrink-0 text-base-content" />
+          <div>
+            <p class="card-title">QRIS</p>
+            <p class="text-xs opacity-70">Mendukung semua pembayaran.</p>
           </div>
         </div>
       </label>
@@ -54,6 +46,6 @@ watch(selectedPayment, (newValue) => {
 }
 
 .card-payment {
-  @apply flex items-center justify-between rounded-xl border border-base-content/20 bg-base-100 p-4 peer-checked:border-primary peer-checked:bg-primary/10;
+  @apply flex items-center gap-4 rounded-xl border border-base-content/20 bg-base-100 p-4 peer-checked:border-primary peer-checked:bg-primary/10;
 }
 </style>
