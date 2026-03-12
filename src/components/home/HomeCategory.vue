@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Category } from '@/types/category'
 import type { HttpStatusCode } from 'axios'
+import type { Meta } from '@/types/meta.type'
+import { LoaderIcon } from 'lucide-vue-next'
 import ErrorCard from '../global/ErrorCard.vue'
 import EmptyCard from '../global/EmptyCard.vue'
 import Title from '../global/Title.vue'
@@ -10,7 +12,8 @@ import ListCategory from '../cateory/ListCategory.vue'
 const props = defineProps<{
   title: string
   icon: unknown
-  data: Category[] | undefined
+  data: Category[]
+  meta?: Meta
   isPending: boolean
   isRefetching: boolean
   status: HttpStatusCode
@@ -18,6 +21,7 @@ const props = defineProps<{
 }>()
 const emits = defineEmits<{
   (e: 'refetch'): void
+  (e: 'increment'): void
 }>()
 
 // methods
@@ -47,5 +51,14 @@ const handleRefetch = () => {
       :message="message"
       @refetch="handleRefetch"
     />
+
+    <!-- load more  -->
+    <button
+      v-if="meta && data.length < meta.total && !isPending"
+      @click="emits('increment')"
+      class="btn btn-sm md:btn-md btn-primary flex mx-auto md:mx-0"
+    >
+      <LoaderIcon class="size-4 md:size-5" /> Muat Lainnya
+    </button>
   </section>
 </template>
