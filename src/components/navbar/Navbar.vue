@@ -41,11 +41,11 @@ const handleChangeThemaActive = (value: boolean) => {
   <header class="w-full border-b border-base-300 py-4 bg-base-100 sticky top-0 z-50 shadow-md">
     <nav class="container mx-auto px-4 grid grid-cols-12 gap-y-4">
       <Brand />
-      <label class="input input-sm w-full outline-none col-span-8 hidden md:flex">
+      <label class="input input-sm w-full outline-none col-span-8 hidden lg:flex">
         <SearchIcon class="size-4" />
         <input type="email" placeholder="Cari Produk..." required />
       </label>
-      <div class="col-span-6 md:col-span-2 flex justify-end gap-2">
+      <div class="col-span-6 lg:col-span-2 flex justify-end gap-2">
         <Thema />
         <BtnThema @change-active="handleChangeThemaActive" :active="themaActive" />
         <BtnSearch @change-active="handleChangeSearchActive" :active="searchActive" />

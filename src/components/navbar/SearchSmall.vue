@@ -60,7 +60,7 @@ watch(data, (newValue) => {
       :initial="{ opacity: 0, y: 200 }"
       :animate="{ opacity: active ? 1 : 0, y: active ? 0 : 200 }"
       :transition="{ duration: 0.2 }"
-      class="container card bg-base-100 mt-20 border border-base-300 space-y-4 p-4"
+      class="container mx-auto card bg-base-100 mt-20 border border-base-300 space-y-4 p-4"
     >
       <!-- input  -->
       <label class="input w-full outline-none">

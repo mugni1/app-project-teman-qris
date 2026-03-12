@@ -18,7 +18,7 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <div class="hidden md:flex text-sm gap-4 col-span-12 justify-between items-center">
+  <div class="hidden lg:flex text-sm gap-4 col-span-12 justify-between items-center">
     <div class="space-x-2">
       <RouterLink
         v-for="item in data"
