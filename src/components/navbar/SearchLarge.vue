@@ -12,6 +12,7 @@ const emits = defineEmits<{
 
 // state
 const router = useRouter()
+const isFocus = ref(false)
 const search = ref('')
 const debouncedSearch = ref('')
 const params = computed(() => ({ limit: '5', search: debouncedSearch.value }))
@@ -52,13 +53,19 @@ watch(data, (newValue) => {
         placeholder="Cari Produk..."
         v-model="search"
         required
+        @focus="isFocus = true"
+        @blur="isFocus = false"
       />
     </div>
 
     <!-- card  -->
-    <div v-if="search.length > 0" class="absolute w-full top-10 bg-base-100 border border-base-content/20 card p-4">
+    <div v-if="isFocus" class="absolute w-full top-10 bg-base-100 border border-base-content/20 card p-4">
       <!-- empty -->
-      <div v-if="categories.length < 1 || isPending" role="alert" class="alert alert-vertical gap-2 py-4">
+      <div
+        v-if="categories.length < 1 || search.length < 1 || isPending"
+        role="alert"
+        class="alert alert-vertical gap-2 py-4"
+      >
         <InfoIcon />
         <div>
           <h3 class="font-bold">Tidak ada hasil!</h3>
@@ -67,7 +74,7 @@ watch(data, (newValue) => {
       </div>
 
       <!-- list  -->
-      <div v-if="categories.length > 0 && !isPending" class="flex flex-col gap-2">
+      <div v-if="categories.length > 0 && search.length > 0 && !isPending" class="flex flex-col gap-2">
         <div
           v-for="item in categories"
           :key="item.id"
