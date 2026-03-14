@@ -16,6 +16,7 @@ import { toast } from 'vue-sonner'
 import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
 import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
 import { HttpStatusCode } from 'axios'
+import Input from '@/components/topup/input/Input.vue'
 
 // state
 const router = useRouter()
@@ -130,16 +131,17 @@ const handleChangeItem = (val?: Item) => {
     />
     <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
       <section class="space-y-4 lg:col-span-2">
-        <Info
+        <Input
+          :category="category?.data || undefined"
+          :status="category?.status || 500"
+          :message="category?.message || 'Server sedang sibuk'"
           :is-pending="pendingGet"
-          :column_1="category?.data?.column_1 || false"
-          :column_2="category?.data?.column_2 || false"
-          :column_1_title="category?.data?.column_1_title || ''"
-          :column_2_title="category?.data?.column_2_title || ''"
+          :is-refetching="isRefetching"
+          :err-msg1="formError.destination"
+          :err-msg2="formError.destination_second"
+          @refetch="refetch()"
           @changeColumn1="handleChangeColumn1"
           @changeColumn2="handleChangeColumn2"
-          :error_1="formError.destination"
-          :error_2="formError.destination_second"
         />
         <Items
           @refetch="refetch()"
