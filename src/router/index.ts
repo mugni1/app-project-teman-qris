@@ -4,13 +4,13 @@ import TopUpView from '@/views/TopUpView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
-import DetailOrderView from '@/views/DetailOrderView.vue'
 import RedirectView from '@/views/RedirectView.vue'
 import Cookies from 'js-cookie'
 import ProfileView from '@/views/ProfileView.vue'
-import TransactionView from '@/views/TransactionView.vue'
 import NewsView from '@/views/NewsView.vue'
 import NewsDetailView from '@/views/NewsDetailView.vue'
+import OrderView from '@/views/OrderView.vue'
+import OrderDetailView from '@/views/OrderDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,8 +31,8 @@ const router = createRouter({
     { path: '/news', name: 'news', component: NewsView },
     { path: '/news/:id', name: 'news_detail', component: NewsDetailView },
     { path: '/profile', name: 'profile', component: ProfileView, meta: { requiresAuth: true } },
-    { path: '/transaction', name: 'transaction', component: TransactionView, meta: { requiresAuth: true } },
-    { path: '/detail/:id', name: 'detail_order', component: DetailOrderView, meta: { requiresAuth: true } },
+    { path: '/order', name: 'order', component: OrderView, meta: { requiresAuth: true } },
+    { path: '/order/:id', name: 'order_detail', component: OrderDetailView, meta: { requiresAuth: true } },
     { path: '/:pathMatch(.*)*', name: 'not_found', component: NotFoundView },
   ],
 })

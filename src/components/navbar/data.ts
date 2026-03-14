@@ -25,8 +25,8 @@ export const data = [
   {
     requireAuth: true,
     title: 'Transaksi',
-    link: '/transaction',
-    name: 'transaction',
+    link: '/order',
+    name: 'order',
     icon: DicesIcon,
   },
   {

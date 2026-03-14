@@ -10,8 +10,8 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <RouterLink :to="'/detail/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
-    <div class="col-span-3 md:col-span-2 aspect-square bg-base-300 card overflow-hidden">
+  <RouterLink :to="'/order/' + trxId" class="p-4 card w-full bg-base-200 grid grid-cols-12 gap-4" role="button">
+    <div class="col-span-3 md:col-span-2 aspect-square bg-base-300 rounded-md overflow-hidden">
       <img :src="imageUrl" alt="image" />
     </div>
     <div class="col-span-9 md:col-span-10 text-base flex flex-col justify-between">

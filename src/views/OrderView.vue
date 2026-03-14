@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Content from '@/components/global/Content.vue'
+import Title from '@/components/global/Title.vue'
 import Item from '@/components/transaction/Item.vue'
 import ItemNotFound from '@/components/transaction/ItemNotFound.vue'
 import ItemSkeleton from '@/components/transaction/ItemSkeleton.vue'
@@ -11,11 +12,8 @@ const { data, isPending } = useGetOrderByUserLogin()
 </script>
 
 <template>
-  <Content>
-    <h1 class="card-title mb-4">
-      <ListEndIcon class="size-6" />
-      Riwayat Transaksi Anda
-    </h1>
+  <Content class="space-y-4">
+    <Title :icon="ListEndIcon" title="RIWAYAT TRANSAKSI" />
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <ItemSkeleton v-if="isPending" v-for="_ in 10" />
       <Item
