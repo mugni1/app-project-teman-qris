@@ -4,10 +4,10 @@ import type { CreateOrderResponse } from '@/types/order.type'
 import Content from '@/components/global/Content.vue'
 import Checkout from '@/components/topup/Checkout.vue'
 import CS from '@/components/topup/CS.vue'
-import Header from '@/components/topup/Header.vue'
 import Info from '@/components/topup/Info.vue'
 import Items from '@/components/topup/Items.vue'
 import Payment from '@/components/topup/Payment.vue'
+import Header from '@/components/topup/header/Header.vue'
 import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -121,11 +121,12 @@ const handleChangeItem = (val?: Item) => {
 <template>
   <Content class="space-y-4">
     <Header
+      :category="category?.data || undefined"
+      :status="category?.status || 500"
+      :message="category?.message || 'Server sedang sibuk.'"
       :is-pending="pendingGet"
-      :title="category?.data?.title || ''"
-      :studio="category?.data?.studio || ''"
-      :cover-url="category?.data?.cover_url || ''"
-      :image-url="category?.data?.image_url || ''"
+      :is-refetching="isRefetching"
+      @refetch="refetch()"
     />
     <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:col-span-2 lg:grid-cols-3 gap-4">
       <section class="space-y-4 lg:col-span-2">

@@ -1,33 +1,45 @@
 <script setup lang="ts">
+import type { Category } from '@/types/category'
+import type { HttpStatusCode } from 'axios'
 import { CloudLightning, Headphones, ScanTextIcon } from 'lucide-vue-next'
+import HeaderPending from './HeaderPending.vue'
+import ErrorCard from '@/components/global/ErrorCard.vue'
 
 const props = defineProps<{
-  title: string
-  studio: string
-  coverUrl: string
-  imageUrl: string
+  category?: Category
+  status: HttpStatusCode
+  message: string
+  isRefetching: boolean
   isPending: boolean
+}>()
+const emits = defineEmits<{
+  (e: 'refetch'): void
 }>()
 </script>
 
 <template>
-  <section class="relative card overflow-hidden bg-base-200 border border-base-300">
+  <HeaderPending v-if="isPending" />
+  <ErrorCard
+    v-if="!isPending && status != 200"
+    :message="message"
+    :status="status"
+    :is-refetching="isRefetching"
+    @refetch="emits('refetch')"
+  />
+  <section
+    v-if="!isPending && status == 200 && category"
+    class="relative card overflow-hidden bg-base-200 border border-base-300"
+  >
     <img
-      v-if="!isPending"
-      :src="coverUrl"
+      :src="category.cover_url"
       alt="banner"
       loading="lazy"
       class="aspect-12/6 lg:aspect-18/6 object-cover object-center"
     />
-    <div v-else class="aspect-12/6 lg:aspect-18/6 object-cover object-center skeleton rounded-none" />
     <div class="gap-12 flex items-center p-4 lg:p-8">
       <div class="ms-auto w-7/12 md:w-8/12 lg:w-10/12 lg:ps-10">
-        <h1 v-if="!isPending" class="card-title text-base lg:text-xl line-clamp-1 truncate mb-1">{{ title }}</h1>
-        <h1 v-else class="card-title text-base lg:text-xl line-clamp-1 truncate skeleton text-transparent mb-1">
-          This Is Title
-        </h1>
-        <p v-if="!isPending" class="stat-title lg:text-base">{{ studio }}</p>
-        <p v-else class="stat-title lg:text-base text-transparent skeleton">This is Studio</p>
+        <h1 class="card-title text-base lg:text-xl line-clamp-1 truncate mb-1">{{ category.title }}</h1>
+        <p class="stat-title lg:text-base">{{ category.studio }}</p>
         <div class="hidden lg:flex items-center gap-4 mt-4 card-title text-xs lg:text-sm">
           <span class="flex items-center gap-2"><CloudLightning class="size-5" /> Proses Cepat</span>
           <span class="flex items-center gap-2"><ScanTextIcon class="size-5" /> Pembayaran Mudah</span>
@@ -40,20 +52,13 @@ const props = defineProps<{
       <span class="flex items-center gap-2"><ScanTextIcon class="size-4" /> Mudah</span>
       <span class="flex items-center gap-2"><Headphones class="size-4" /> CS 24 Jam</span>
     </div>
-    <div
-      v-if="!isPending"
-      class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square"
-    >
+    <div class="w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square">
       <img
-        :src="imageUrl"
+        :src="category.image_url"
         alt="image"
         loading="lazy"
         class="card border border-base-300 w-full h-full object-cover object-center"
       />
     </div>
-    <div
-      v-else
-      class="skeleton w-4/12 md:w-3/12 lg:w-2/12 absolute bottom-13 lg:bottom-8 left-4 lg:left-8 aspect-square"
-    ></div>
   </section>
 </template>
