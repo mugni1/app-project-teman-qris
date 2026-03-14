@@ -15,7 +15,7 @@ const handleChange = () => {
 </script>
 
 <template>
-  <button @click="handleChange" class="btn btn-sm btn-square lg:hidden overflow-hidden">
+  <button @click="handleChange" class="btn btn-sm btn-square overflow-hidden">
     <motion.div
       class="absolute"
       :initial="{ opacity: 0, y: -20 }"

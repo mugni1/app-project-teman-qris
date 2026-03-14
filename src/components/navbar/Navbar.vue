@@ -6,10 +6,9 @@ import NavLinkLarge from './NavLinkLarge.vue'
 import NavLinkSmall from './NavLinkSmall.vue'
 import BtnSearch from './BtnSearch.vue'
 import SearchSmall from './SearchSmall.vue'
-import BtnThema from './BtnThema.vue'
-import ThemaSmall from './ThemaSmall.vue'
-import Thema from './Thema.vue'
 import SearchLarge from './SearchLarge.vue'
+import BtnThema from './BtnThema.vue'
+import Thema from './Thema.vue'
 
 const burgerActive = ref(false)
 const searchActive = ref(false)
@@ -43,7 +42,6 @@ const handleChangeThemaActive = (value: boolean) => {
       <Brand />
       <SearchLarge />
       <div class="col-span-6 lg:col-span-2 flex justify-end gap-2">
-        <Thema />
         <BtnThema @change-active="handleChangeThemaActive" :active="themaActive" />
         <BtnSearch @change-active="handleChangeSearchActive" :active="searchActive" />
         <BtnBurger @change-active="handleChangeBurgerActive" :active="burgerActive" />
@@ -53,5 +51,5 @@ const handleChangeThemaActive = (value: boolean) => {
   </header>
   <NavLinkSmall :active="burgerActive" @change-active="handleChangeBurgerActive" />
   <SearchSmall :active="searchActive" @change-active="handleChangeSearchActive" />
-  <ThemaSmall :active="themaActive" @change-active="handleChangeThemaActive" />
+  <Thema :active="themaActive" @change-active="handleChangeThemaActive" />
 </template>
