@@ -5,10 +5,10 @@ import { Headphones } from 'lucide-vue-next'
 <template>
   <div class="card-item">
     <div class="flex items-center gap-4">
-      <Headphones class="size-10 text-primary" />
+      <Headphones class="size-10 aspect-square text-primary" />
       <div>
         <h3 class="card-title text-primary">Butuh Bantuan</h3>
-        <p class="stat-title">Kamu bisa hubungi admin disini</p>
+        <p class="stat-title">Kamu bisa hubungi admin disini.</p>
       </div>
     </div>
   </div>
