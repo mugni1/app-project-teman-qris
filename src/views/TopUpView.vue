@@ -4,10 +4,9 @@ import type { CreateOrderResponse } from '@/types/order.type'
 import Content from '@/components/global/Content.vue'
 import Checkout from '@/components/topup/Checkout.vue'
 import CS from '@/components/topup/CS.vue'
-import Info from '@/components/topup/Info.vue'
-import Items from '@/components/topup/Items.vue'
 import Payment from '@/components/topup/Payment.vue'
 import Header from '@/components/topup/header/Header.vue'
+import Input from '@/components/topup/input/Input.vue'
 import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -16,7 +15,7 @@ import { toast } from 'vue-sonner'
 import { useGetCategoryDetail } from '@/hooks/useGetCategoryDetail'
 import { usePostPaymentQrisPw } from '@/hooks/useCreateOrder'
 import { HttpStatusCode } from 'axios'
-import Input from '@/components/topup/input/Input.vue'
+import Items from '@/components/topup/items/Items.vue'
 
 // state
 const router = useRouter()
@@ -144,14 +143,14 @@ const handleChangeItem = (val?: Item) => {
           @changeColumn2="handleChangeColumn2"
         />
         <Items
-          @refetch="refetch()"
-          @change-item="handleChangeItem"
-          :error-message="category?.message || 'Internal server error'"
-          :error="formError.item_id"
-          :data="category?.data?.items || []"
+          :items="category?.data?.items || []"
+          :status="category?.status || 500"
+          :message="category?.message || 'Server sedang sibuk'"
           :is-pending="pendingGet"
           :is-refetching="isRefetching"
-          :status="category?.status || 500"
+          :err-msg="formError.item_id"
+          @refetch="refetch()"
+          @change-item="handleChangeItem"
         />
         <Payment @change-payment="handleChangePayment" :error="formError.payment_method" />
       </section>
