@@ -2,13 +2,13 @@
 import type { Item } from '@/types/item.type'
 import type { CreateOrderResponse } from '@/types/order.type'
 import Content from '@/components/global/Content.vue'
-import Checkout from '@/components/topup/Checkout.vue'
-import CS from '@/components/topup/CS.vue'
-import Payment from '@/components/topup/Payment.vue'
 import Header from '@/components/topup/header/Header.vue'
 import Input from '@/components/topup/input/Input.vue'
 import Items from '@/components/topup/items/Items.vue'
-import { LoaderIcon, ShoppingBag } from 'lucide-vue-next'
+import CustomerService from '@/components/topup/CustomerService.vue'
+import ShippingBag from '@/components/topup/ShippingBag.vue'
+import PaymentMethode from '@/components/topup/PaymentMethode.vue'
+import DialogCheckout from '@/components/topup/DialogCheckout.vue'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { checkoutSchema, checkoutSchemaSecond } from '@/schema/checkout.schema'
@@ -24,6 +24,7 @@ const slug = computed(() => (Array.isArray(route.params.slug) ? route.params.slu
 const { data: category, isPending: pendingGet, refetch, isRefetching } = useGetCategoryDetail(slug)
 const { mutateAsync, isPending: pendingPost } = usePostPaymentQrisPw()
 const isSecondColumnActive = computed(() => !!category.value?.data?.column_2)
+const isValid = ref<boolean>(false)
 const column1 = ref<string>()
 const column2 = ref<string>()
 const selectedPayment = ref<string>()
@@ -53,14 +54,17 @@ const validate = () => {
   resetErrors()
   const schema = isSecondColumnActive.value ? checkoutSchemaSecond : checkoutSchema
   const { success, error } = schema.safeParse(form.value)
-  if (success) return true
-  error.issues.forEach((err) => {
-    const field = err.path.join('_')
-    if (field in formError) {
-      formError[field] = err.message
-    }
-  })
-  return false
+  if (!success) {
+    error.issues.forEach((err) => {
+      const field = err.path.join('_')
+      if (field in formError) {
+        formError[field] = err.message
+      }
+    })
+    return false
+  } else {
+    return true
+  }
 }
 const buildPayload = () => {
   const base = {
@@ -96,6 +100,9 @@ const handleSubmit = async () => {
   } catch (err) {
     const error = err as CreateOrderResponse
     toast.error(`${error.message}, try again later`)
+  } finally {
+    isValid.value = false
+    ;(document.getElementById('dialogCheckout') as HTMLDialogElement).close()
   }
 }
 
@@ -115,6 +122,12 @@ const handleChangePayment = (val?: string) => {
 const handleChangeItem = (val?: Item) => {
   selectedItem.value = val
   validate()
+}
+const handleValidate = () => {
+  isValid.value = validate()
+}
+const handleChangeIsValid = (value: boolean) => {
+  isValid.value = value
 }
 </script>
 
@@ -152,17 +165,21 @@ const handleChangeItem = (val?: Item) => {
           @refetch="refetch()"
           @change-item="handleChangeItem"
         />
-        <Payment @change-payment="handleChangePayment" :error="formError.payment_method" />
+        <PaymentMethode @change-payment="handleChangePayment" :error="formError.payment_method" />
       </section>
       <section class="space-y-4">
-        <CS />
-        <Checkout :item="selectedItem" :category="category?.data || undefined" />
-        <button type="submit" class="btn btn-primary w-full" :disabled="pendingPost">
-          <ShoppingBag class="size-5" v-if="!pendingPost" />
-          <LoaderIcon class="size-5 animate-spin" v-if="pendingPost" />
-          <span v-if="!pendingPost">Pesan Sekarang</span>
-          <span v-if="pendingPost">Harap tunggu..</span>
-        </button>
+        <CustomerService />
+        <DialogCheckout
+          :is-pending="pendingPost"
+          :is-valid="isValid"
+          :total-price="selectedItem?.price || 0"
+          :prduct-name="selectedItem?.title || ''"
+          :destination="form.destination || ''"
+          :destination-second="form.destination_second || ''"
+          @validate="handleValidate"
+          @change-is-valid="handleChangeIsValid"
+        />
+        <ShippingBag :item="selectedItem" :category="category?.data || undefined" />
       </section>
     </form>
   </Content>

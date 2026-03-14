@@ -13,7 +13,7 @@ const props = defineProps<{
 <template>
   <div v-if="!item" class="card-item py-12!">
     <p class="stat-title text-center flex items-center justify-center gap-2">
-      <InfoIcon class="size-4" /> Belum ada produk
+      <InfoIcon class="size-4" /> Belum ada produk ditambahkan.
     </p>
   </div>
   <div v-if="item" class="card-item">
