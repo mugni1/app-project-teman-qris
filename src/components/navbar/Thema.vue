@@ -20,12 +20,12 @@ const handleChange = () => {
 </script>
 
 <template>
-  <section
+  <motion.section
     @click.self="handleChange"
-    :class="[
-      'fixed inset-0 z-40 backdrop-blur-sm transition-all duration-200 px-4 ',
-      props.active ? 'visible' : 'invisible',
-    ]"
+    :initial="{ opacity: 0 }"
+    :animate="{ opacity: active ? 1 : 0 }"
+    :transition="{ duration: 0.2 }"
+    :class="['fixed inset-0 z-40 backdrop-blur-sm transition-all duration-200 px-4 ', active ? 'visible' : 'invisible']"
   >
     <div class="mx-auto mt-20 lg:mt-32 max-w-3xl">
       <motion.div
@@ -57,5 +57,5 @@ const handleChange = () => {
         </ul>
       </motion.div>
     </div>
-  </section>
+  </motion.section>
 </template>
