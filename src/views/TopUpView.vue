@@ -89,7 +89,7 @@ const handleSubmit = async () => {
     const result = await mutateAsync(buildPayload())
     if (result.status === HttpStatusCode.Created) {
       toast.success(result.message)
-      router.push(`/detail/${result.data?.id ?? ''}`)
+      router.push(`/order/${result.data?.id ?? ''}`)
       return
     }
     if ([401, 403].includes(result.status)) {
