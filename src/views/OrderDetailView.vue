@@ -16,13 +16,15 @@ import TotalPayment from '@/components/order-detail/TotalPayment.vue'
 import MethodeHeader from '@/components/order-detail/MethodeHeader.vue'
 import QrisImage from '@/components/order-detail/QrisImage.vue'
 import MethodeFooter from '@/components/order-detail/MethodeFooter.vue'
+import ErrorCard from '@/components/global/ErrorCard.vue'
+import OrderDetailPending from '@/components/order-detail/OrderDetailPending.vue'
 
 // state
 const route = useRoute()
 const router = useRouter()
 const queryClient = useQueryClient()
 const id = route.params.id as string
-const { data, isPending: isPendingGetOrder, refetch, isFetching } = useGetOrderDetail({ id })
+const { data, isPending: isPendingGetOrder, refetch, isRefetching } = useGetOrderDetail({ id })
 const { mutateAsync, isPending: isPendingUpdateOrder } = useUpdateOrderDetail()
 const expiredCount = ref(0)
 const { remaining, start } = useCountdown(expiredCount, {
@@ -77,23 +79,14 @@ watch(data, (value) => {
 </script>
 
 <template>
-  <Content
-    v-if="!isPendingGetOrder && data?.status != 200"
-    class="min-h-dvh flex flex-col justify-center items-center pb-25 gap-8"
-  >
-    <h1 class="text-center capitalize font-bold mb-1 text-xl md:text-2xl">Oops, Sepertinya terjadi kesalahan</h1>
-    <h1 class="text-center capitalize font-semibold mb-4 text-sm md:text-base">
-      {{ data?.message }}
-    </h1>
-    <div class="w-full flex justify-center gap-4">
-      <button class="btn btn-sm md:btn-md btn-success" @click="refetch()">
-        <Loader2 :class="['size-5', isFetching && 'animate-spin']" /> Coba Lagi
-      </button>
-      <button class="btn btn-sm md:btn-md btn-primary" @click="router.push('/')">
-        <Home class="size-5" /> Kembali Ke Beranda
-      </button>
-    </div>
-  </Content>
+  <OrderDetailPending v-if="isPendingGetOrder" />
+  <ErrorCard
+    v-if="!isPendingGetOrder && data && data.status != 200"
+    :status="data.status"
+    :message="data.message"
+    :is-refetching="isRefetching"
+    @refetch="refetch"
+  />
   <section v-else>
     <Header :status="data?.data?.status || ''" :pending="isPendingGetOrder" />
     <Content>
