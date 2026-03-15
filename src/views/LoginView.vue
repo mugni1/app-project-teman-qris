@@ -69,7 +69,7 @@ watch(form, () => {
 })
 onMounted(() => {
   if (route.query && route.query.message) {
-    toast.error(route.query.message.toString().split('_').join(' '), { action: { label: 'Tutup' } })
+    toast.error(route.query.message.toString().split('_').join(' '))
   }
 })
 </script>
