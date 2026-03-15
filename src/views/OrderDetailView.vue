@@ -79,7 +79,10 @@ watch(data, (value) => {
 </script>
 
 <template>
+  <!-- pending  -->
   <OrderDetailPending v-if="isPendingGetOrder" />
+
+  <!-- error  -->
   <ErrorCard
     v-if="!isPendingGetOrder && data && data.status != 200"
     :status="data.status"
@@ -87,6 +90,8 @@ watch(data, (value) => {
     :is-refetching="isRefetching"
     @refetch="refetch"
   />
+
+  <!-- has data  -->
   <section v-if="!isPendingGetOrder && data && data.data && data.status == 200">
     <Header :status="data.data.status" />
     <Content class="space-y-8">
@@ -95,7 +100,7 @@ watch(data, (value) => {
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- content 1  -->
-        <section class="space-y-4">
+        <div class="space-y-4">
           <div class="badge badge-error font-bold">
             <AlarmClock class="size-4" />
             {{ formattedTime }}
@@ -103,30 +108,14 @@ watch(data, (value) => {
           <Information :data="data" />
           <PaymentDetails :data="data" />
           <TotalPayment :data="data" />
-        </section>
+        </div>
 
         <!-- content 2  -->
-        <section class="space-y-4">
-          <MethodeHeader
-            :pending="isPendingGetOrder"
-            :trx-id="data?.data?.transaction_id || ''"
-            :status="data?.data?.status || ''"
-          />
-          <QrisImage
-            :pending="isPendingGetOrder"
-            :status="data?.data?.status || ''"
-            :image-url="data?.data?.qris_url || ''"
-          />
-          <MethodeFooter
-            :id="data?.data?.id || ''"
-            :status="data?.data?.status || ''"
-            :trx_id="data?.data?.transaction_id || ''"
-            :qris_url="data?.data?.qris_url || ''"
-            :get_order_pending="isPendingGetOrder"
-            :update_order_pending="isPendingUpdateOrder"
-            @update="updateOrderDetail"
-          />
-        </section>
+        <div class="space-y-4">
+          <MethodeHeader :data="data" />
+          <QrisImage :data="data" />
+          <MethodeFooter :data="data" :is-pending-update="isPendingUpdateOrder" @update="updateOrderDetail" />
+        </div>
       </div>
     </Content>
   </section>

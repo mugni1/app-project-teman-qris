@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { DownloadCloud, Loader2, SearchCheck } from 'lucide-vue-next'
+import type { GetOrderDetailResponse } from '@/types/order.type'
+import { DownloadCloud, LoaderIcon, SearchCheck } from 'lucide-vue-next'
 
 const props = defineProps<{
-  qris_url: string
-  get_order_pending: boolean
-  update_order_pending: boolean
-  status: string
-  trx_id: string
-  id: string
+  data: GetOrderDetailResponse
+  isPendingUpdate: boolean
 }>()
 
 const emits = defineEmits<{
@@ -20,10 +17,15 @@ const handleUpdate = () => {
 </script>
 
 <template>
-  <div v-if="!get_order_pending" class="card space-y-4">
+  <div class="card space-y-4">
     <a
-      v-if="status != 'cancelled' && status != 'failed' && status != 'expired' && status != 'paid'"
-      :href="qris_url"
+      v-if="
+        data.data?.status != 'cancelled' &&
+        data.data?.status != 'failed' &&
+        data.data?.status != 'expired' &&
+        data.data?.status != 'paid'
+      "
+      :href="data.data?.qris_url"
       target="_blank"
       download="QRIS.png"
       class="btn btn-secondary w-full"
@@ -31,13 +33,10 @@ const handleUpdate = () => {
       <DownloadCloud class="size-5" /> Unduh QRIS
     </a>
     <button class="btn btn-primary w-full" @click="handleUpdate">
-      <Loader2 v-if="update_order_pending" class="size-5 animate-spin" />
-      <SearchCheck v-if="!update_order_pending" class="size-5" />
-      Perbarui Transaksi
+      <LoaderIcon v-if="isPendingUpdate" class="size-5 animate-spin" />
+      <SearchCheck v-if="!isPendingUpdate" class="size-5" />
+      <span v-if="isPendingUpdate">Harap Tunggu..</span>
+      <span v-if="!isPendingUpdate">Perbarui Transaksi</span>
     </button>
-  </div>
-  <div v-else class="card space-y-4">
-    <div class="w-full h-10 skeleton"></div>
-    <div class="w-full h-10 skeleton"></div>
   </div>
 </template>
