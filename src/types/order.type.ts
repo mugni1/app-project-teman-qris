@@ -107,7 +107,6 @@ export interface UpdateOderDetailResponse {
 }
 
 export interface OrderByUserLogin {
-  message: string
   id: string
   transaction_id: string
   amount: number
@@ -130,6 +129,7 @@ export interface OrderByUserLogin {
 
 export interface GetOrderByUserLoginResponse {
   status: HttpStatusCode
+  message: string
   data: OrderByUserLogin[] | null
   meta: Meta | null
   errors: null

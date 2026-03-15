@@ -1,31 +1,41 @@
 <script setup lang="ts">
 import Content from '@/components/global/Content.vue'
+import EmptyCard from '@/components/global/EmptyCard.vue'
+import ErrorCard from '@/components/global/ErrorCard.vue'
 import Title from '@/components/global/Title.vue'
-import Item from '@/components/transaction/Item.vue'
-import ItemNotFound from '@/components/transaction/ItemNotFound.vue'
-import ItemSkeleton from '@/components/transaction/ItemSkeleton.vue'
+import OrderList from '@/components/order/OrderList.vue'
+import OrderPending from '@/components/order/OrderPending.vue'
 import { useGetOrderByUserLogin } from '@/hooks/useGetOrderByUserLogin'
 import { ListEndIcon } from 'lucide-vue-next'
 
 // state
-const { data, isPending } = useGetOrderByUserLogin()
+const { data, isPending, refetch, isRefetching } = useGetOrderByUserLogin()
 </script>
 
 <template>
   <Content class="space-y-4">
+    <!-- title  -->
     <Title :icon="ListEndIcon" title="RIWAYAT TRANSAKSI" />
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <ItemSkeleton v-if="isPending" v-for="_ in 10" />
-      <Item
-        v-else-if="!isPending && data && data.data && data.data.length > 0"
-        v-for="item in data.data"
-        :image-url="item.item.category.image_url"
-        :title="item.item.title"
-        :status="item.status"
-        :phone="item.destination"
-        :trx-id="item.transaction_id"
-      />
-      <ItemNotFound v-else />
-    </div>
+
+    <!-- pending  -->
+    <OrderPending v-if="isPending" />
+
+    <!-- list  -->
+    <OrderList v-if="!isPending && data && data.data && data.data.length > 0 && data.status == 200" :data="data.data" />
+
+    <!-- empty  -->
+    <EmptyCard
+      v-if="!isPending && data && data.data && data.data.length < 1 && data.status == 200"
+      title="Belum ada transaksi."
+    />
+
+    <!-- error  -->
+    <ErrorCard
+      v-if="!isPending && data && data.status != 200"
+      :is-refetching="isRefetching"
+      :message="data.message"
+      :status="data.status"
+      @refetch="refetch"
+    />
   </Content>
 </template>
