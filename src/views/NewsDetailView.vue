@@ -1,17 +1,34 @@
 <script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router'
+import { watch } from 'vue'
 import Content from '@/components/global/Content.vue'
+import ErrorCard from '@/components/global/ErrorCard.vue'
 import PendingNewsDetail from '@/components/news-detail/PendingNewsDetail.vue'
 import { useRelativeTime } from '@/composables/useRelativeTime'
 import { useGetNewsDetail } from '@/hooks/useGetNewsDetail'
-import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id as string
 const { data, isPending, isRefetching, refetch } = useGetNewsDetail(id)
+
+watch(data, (newValue) => {
+  if (data.value?.status == 404) {
+    router.push('/news')
+  }
+})
 </script>
 
 <template>
+  <!-- pending -->
   <PendingNewsDetail v-if="isPending" />
+
+  <!-- error  -->
+  <Content v-if="!isPending && data && data.status != 200">
+    <ErrorCard :is-refetching="isRefetching" :status="data.status" :message="data.message" @refetch="refetch" />
+  </Content>
+
+  <!-- has data  -->
   <Content v-if="!isPending && data && data.data && data.status == 200" :data="data.data" class="space-y-4">
     <h1 class="card-title text-lg md:text-2xl lg:text-4xl text-primary lg:leading-snug">{{ data?.data?.title }}</h1>
     <div class="flex justify-between">
@@ -56,6 +73,23 @@ const { data, isPending, isRefetching, refetch } = useGetNewsDetail(id)
   @apply text-sm lg:text-base py-2;
 }
 
+.ql-editor :deep(a) {
+  color: lightseagreen;
+  text-decoration: underline;
+}
+
+.ql-editor :deep(h1) {
+  @apply text-2xl lg:text-4xl font-bold;
+}
+
+.ql-editor :deep(h2) {
+  @apply text-lg lg:text-2xl font-bold;
+}
+
+.ql-editor :deep(h3) {
+  @apply text-base lg:text-xl font-semibold;
+}
+
 /* .ql-editor :deep(strong) {
   font-weight: 600;
 }
@@ -75,21 +109,4 @@ const { data, isPending, isRefetching, refetch } = useGetNewsDetail(id)
   padding: 12px;
   border-radius: 6px;
 } */
-
-.ql-editor :deep(a) {
-  color: lightseagreen;
-  text-decoration: underline;
-}
-
-.ql-editor :deep(h1) {
-  @apply text-2xl lg:text-4xl font-bold;
-}
-
-.ql-editor :deep(h2) {
-  @apply text-lg lg:text-2xl font-bold;
-}
-
-.ql-editor :deep(h3) {
-  @apply text-base lg:text-xl font-semibold;
-}
 </style>
