@@ -59,8 +59,9 @@ const handleSubmit = async () => {
     toast.error('Terjadi kesalahan pada server.')
   }
 }
+
 const handleAuthGoogle = () => {
-  window.location.href = `${import.meta.env.VITE_BASE_API_URL}/auth/google`
+  window.location.href = `${import.meta.env.VITE_BASE_API_URL}/auth/google?redirect=${import.meta.env.VITE_BASE_ORIGIN_URL}`
 }
 
 // watcher
