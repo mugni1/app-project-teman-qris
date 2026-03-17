@@ -3,5 +3,5 @@ services:
     build: .
     container_name: vue_vite_app
     ports:
-      - '3000:80'
+      - '5173:80'
     restart: always
